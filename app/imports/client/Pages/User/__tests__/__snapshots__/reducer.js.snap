@@ -1,0 +1,59 @@
+exports[`User reducer should handle USER_FETCH_DATA properly 1`] = `
+Object {
+  "error": false,
+  "loading": false,
+  "me": Object {
+    "id": "x",
+    "level": "alchemist",
+    "name": "Edward Elric",
+  },
+  "mutationErrors": Array [],
+  "token": false,
+}
+`;
+
+exports[`User reducer should handle USER_LOGIN_CHECK properly 1`] = `
+Object {
+  "error": false,
+  "loading": true,
+  "mutationErrors": Array [],
+  "routeName": "some_neat_route",
+  "token": "one_token_right_here",
+}
+`;
+
+exports[`User reducer should handle USER_LOGIN_CLEAN properly 1`] = `
+Object {
+  "error": false,
+  "loading": false,
+  "mutationErrors": Array [],
+  "token": false,
+}
+`;
+
+exports[`User reducer should handle USER_LOGIN_INIT properly 1`] = `
+Object {
+  "error": false,
+  "loading": true,
+  "mutationErrors": Array [],
+  "token": false,
+}
+`;
+
+exports[`User reducer should handle USER_LOGIN_SUCCESS properly 1`] = `
+Object {
+  "error": false,
+  "loading": false,
+  "mutationErrors": Array [],
+  "token": "astrocoders_rocks_and_this_is_not_a_secret",
+}
+`;
+
+exports[`User reducer should handle USER_REFRESH_TOKEN properly 1`] = `
+Object {
+  "error": false,
+  "loading": false,
+  "mutationErrors": Array [],
+  "token": "one_new_token_right_here_also",
+}
+`;

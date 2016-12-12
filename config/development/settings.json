@@ -1,0 +1,35 @@
+{
+  "public": {
+    "version": "1.0.0",
+    "env": "development",
+    "reCAPTCHAPublicKey": "",
+    "googleMapsKey": "AIzaSyB0gVceNnHCEgjlRz2GnOfL2zkQ04vs7Z8"
+  },
+  "kadira": {
+    "appId": "appId",
+    "appSecret": "appSecret"
+  },
+  "smtp": {
+    "username": "competipediamail",
+    "password": "LkJ9Vz9Ssx",
+    "server": "smtp.sendgrid.net",
+    "port": "587"
+  },
+  "github": {
+    "clientId": "",
+    "secret": ""
+  },
+  "facebook": {
+    "appId": "",
+    "secret": ""
+  },
+  "twitter": {
+    "consumerKey": "",
+    "secret": ""
+  },
+  "google": {
+    "clientId": "",
+    "secret": ""
+  },
+  "reCAPTCHAPrivateKey": ""
+}

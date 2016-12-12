@@ -1,0 +1,63 @@
+{
+  "parser": "babel-eslint",
+
+  "env": {
+    "node": true,
+    "browser": true,
+    "meteor": true,
+    "mocha": true
+  },
+
+  "globals": {
+    "server": true,
+    "browser": true
+  },
+
+  "extends": [
+    "airbnb",
+    "plugin:meteor/recommended"
+  ],
+
+  "plugins": [
+    "flow-vars",
+    "meteor"
+  ],
+
+  "rules": {
+    "flow-vars/define-flow-type": 1,
+    "flow-vars/use-flow-type": 1,
+    "semi": [1, "never"],
+    "space-in-parens": 0,
+    "space-before-blocks": 0,
+    "no-underscore-dangle": 0,
+    "object-shorthand": [2, "always"],
+    "object-curly-spacing": 0,
+    "space-before-function-paren": 0,
+    "func-names": 0,
+    "keyword-spacing": 0,
+    "global-require": 0,
+    "meteor/audit-argument-checks": 0,
+    "no-use-before-define": 0,
+    "meteor/eventmap-params": [
+      2,
+      {
+        "eventParamName": "event",
+        "templateInstanceParamName": "template"
+      }
+    ],
+    "import/no-extraneous-dependencies": 0,
+    "import/no-unresolved": [
+      2,
+      {
+        "ignore": ["^meteor"]
+      }
+    ],
+    "import/no-absolute-path": 0,
+    "import/extensions": 0
+  },
+
+  "settings": {
+    "import/resolver": "meteor",
+    "import/ignore": ["^meteor"]
+  }
+}

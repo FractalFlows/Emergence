@@ -1,0 +1,6 @@
+exports[`test should find by id 1`] = `
+Object {
+  "id": "a",
+  "thing": "x",
+}
+`;

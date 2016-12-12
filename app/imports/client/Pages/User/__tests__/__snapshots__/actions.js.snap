@@ -1,0 +1,51 @@
+exports[`User actions loginCheck should create a proper action 1`] = `
+Object {
+  "payload": Object {
+    "routeName": "some_neat_route",
+  },
+  "type": "user/USER_LOGIN_CHECK",
+}
+`;
+
+exports[`User actions loginClean should create a proper action 1`] = `
+Object {
+  "type": "user/USER_LOGIN_CLEAN",
+}
+`;
+
+exports[`User actions loginInit should create a proper action 1`] = `
+Object {
+  "type": "user/USER_LOGIN_INIT",
+}
+`;
+
+exports[`User actions loginSuccess should create a proper action 1`] = `
+Object {
+  "payload": Object {
+    "token": "astrocoders_rocks_and_this_is_not_a_secret",
+  },
+  "type": "user/USER_LOGIN_SUCCESS",
+}
+`;
+
+exports[`User actions refreshToken should create a proper action 1`] = `
+Object {
+  "payload": Object {
+    "token": "astrocoders_rocks_and_this_is_not_a_secret",
+  },
+  "type": "user/USER_REFRESH_TOKEN",
+}
+`;
+
+exports[`User actions userFetchData should create a proper action 1`] = `
+Object {
+  "payload": Object {
+    "me": Object {
+      "id": "x",
+      "level": "alchemist",
+      "name": "Edward Elric",
+    },
+  },
+  "type": "user/USER_FETCH_DATA",
+}
+`;
