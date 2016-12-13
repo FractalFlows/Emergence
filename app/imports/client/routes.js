@@ -9,12 +9,15 @@ import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import store from './store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // Components
 import App from './Components/App'
 import EmptyScreen from './Components/EmptyScreen'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
+
+injectTapEventPlugin()
 
 export default function createRoutes() {
   return (
