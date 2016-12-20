@@ -4,11 +4,12 @@
  */
 
 import React from 'react'
+import Header from '../Header'
 
 export default function App(props) {
   return (
     <div>
-      <h1>Emergence</h1>
+      <Header />
       {props.children}
     </div>
   )

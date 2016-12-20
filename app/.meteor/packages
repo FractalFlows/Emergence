@@ -25,3 +25,4 @@ aldeed:collection2
 useraccounts:core
 mdg:validated-method
 npm-bcrypt@0.8.7
+stylus
