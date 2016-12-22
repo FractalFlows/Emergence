@@ -6,7 +6,19 @@
 // Modules
 import React from 'react'
 import styled from 'styled-components'
-import { grey700 } from 'material-ui/styles/colors'
+import {
+	FlatButton,
+	Paper,
+	TextField,
+	RaisedButton,
+} from 'material-ui'
+import {
+	grey300,
+	grey400,
+	grey700,
+	grey800,
+	blue500,
+} from 'material-ui/styles/colors'
 
 //Styled Components
 const P = styled.p`
@@ -16,54 +28,226 @@ const P = styled.p`
 	line-height: 25px;
 `
 
+const Title = styled.h2`
+	font-size: 22px;
+	color: ${grey800};
+`
+const FooterColumn = styled.div`
+	width: 33.33%;
+	padding: 20px;
+
+	&:not(:last-child) {
+		border-right: 1px solid ${grey400}
+	}
+`
+
+const FooterTitle = styled.h4`
+	font-size: 18px;
+	margin-top: 0;
+	color: ${grey800};
+`
+
+const FooterList = styled.ul`
+	padding: 0;
+`
+
+const FooterListItemLink = styled.a`
+	color: ${blue500};
+	display: inline-block;
+	padding: 3px 0;
+	text-decoration: none;
+
+	&:hover {
+		text-decoration: underline;
+	}
+`
+
+class FooterListItem extends React.Component {
+	propTypes: {
+		link: React.PropTypes.string,
+		label: React.PropTypes.string,
+	}
+
+	render() {
+		return (
+			<li
+				style={{
+					display: 'block',
+				}}
+			>
+				<FooterListItemLink
+					href={this.props.link}
+					target="_blank"
+				>
+					{this.props.label}
+				</FooterListItemLink>
+			</li>
+		)
+	}
+}
+
 export const Home = (props) => (
   <div
   	style={{
   		padding: '30px 150px',
-  		display: 'flex',
   	}}
   >
-    <P
-    	style={{
-    		paddingRight: 25,
-    	}}
-    >
-    	Lorem ipsum Fugiat dolor laboris commodo Ut dolore cupidatat ut in ut Duis.
-    	Lorem ipsum Aliqua consectetur elit ut elit consequat.
-    	Lorem ipsum Quis velit nulla eiusmod enim aliqua occaecat nostrud nostrud.
-    	Lorem ipsum Irure et ullamco nisi laboris labore do commodo in sint.
-    	Lorem ipsum Quis dolor dolore voluptate in in pariatur dolor in tempor labore in.
-    	Lorem ipsum Laboris sit consequat do in non ut nisi et ut proident.
-    	Lorem ipsum Consequat quis laborum non culpa exercitation ad dolor adipisicing sed incididunt labore velit.
-    	Lorem ipsum Aute reprehenderit ut pariatur deserunt proident enim proident.
-    	Lorem ipsum Dolore cillum eu incididunt ullamco ad reprehenderit dolore minim anim irure culpa.
-    	Lorem ipsum Enim cupidatat anim proident dolor ad ullamco minim adipisicing ea sit.
-    	Lorem ipsum Duis mollit commodo exercitation et magna eu veniam.
-    	Lorem ipsum Adipisicing ex laboris cillum sed do nisi nulla ut consectetur consectetur.
-    	Lorem ipsum Labore aliquip culpa in Duis sunt Duis sunt dolore.
-    	Lorem ipsum Dolor consectetur incididunt exercitation deserunt incididunt minim.
+  	<h1
+  		style={{
+  			color: grey800,
+  			fontSize: 30,
+  			textTransform: 'uppercase',
+  			textAlign: 'center',
+  			marginBottom: 50,
+  		}}
+  	>Emergence from Fractal Flows</h1>
+
+    <P>
+    	<span style={{color: '#8b0000', fontWeight: 'bold'}}>Knowledge bits</span> are numerical bits, files,
+      containing simulation results, experimental results, detailed analysis,
+      datasets, detailed mathematical formulations, scripts, source code,
+      reviews, reproduction of results,
+      etc. They could also be files containing statement of assumptions,
+      hypothesis and methodologies. Knowledge bits are the hidden backbone, essentially the atomic
+      particles composing a scientific work, while the associated scientific
+      publication is merely its projection on a piece of (digital) paper.
     </P>
 
-    <P
+    <Title>The problem</Title>
+    <P>
+    	Every year there are over <u>2 million</u> articles that are
+      published in scientific peer-review journals/conferences. Hidden under
+      the millions of articles there is an even greater number of <strong><u>knowledge bits</u></strong> that are invisible, will never be
+      checked, will never be shared, will never see the
+      light of day, and will slowly rote, submerged, deep inside the abyss of
+      the authors' brains or hard disks. These so called knowledge bits could be extremely
+      important to assess the reproducibility of articles, and to actually
+      make the articles more useful for others. Unfortunately, the current system does
+      not offer incentives to the authors to share those
+      knowledge bits. As a result we only see a Tsunamy of publications
+      which saturates the attention of engineers, reduces the speed of scientific
+      progress and waste an enormous amount of time and money for society.
+    </P>
+
+    <Title>The solution</Title>
+    <P>
+    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
+      application called <strong><em>Emergence</em></strong> that allows anyone to create
+      relationships between articles and their associated knowledge
+      bits which are scattered on the web. This empowers scientist, researchers, engineers and students
+      to quickly discover the relevant scientific activities behind an article and makes it easier to search, discover,
+      collaborate, share, acquire and exchange the necessary knowledge bits revolving around an
+      article, allowing to create an impactful utility for an article beyond
+      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
+    </P>
+
+    <div
     	style={{
-    		paddingLeft: 25,
+    		textAlign: 'center',
+    		marginTop: 90,
     	}}
     >
-    	Lorem ipsum Do do fugiat sed laboris aliquip voluptate dolor.
-    	Lorem ipsum Culpa do amet aliqua do non in nulla Ut Ut exercitation.
-    	Lorem ipsum Deserunt eu irure dolor non laboris voluptate adipisicing in dolor.
-    	Lorem ipsum Anim magna reprehenderit dolor cupidatat anim quis.
-    	Lorem ipsum Commodo in consectetur Duis dolore sed quis reprehenderit ea fugiat aliquip adipisicing dolor.
-    	Lorem ipsum Ea dolor magna in tempor tempor in mollit in ullamco.
-    	Lorem ipsum Deserunt magna tempor non aliquip pariatur.
-    	Lorem ipsum Nulla ea laborum amet exercitation proident voluptate enim ut deserunt.
-    	Lorem ipsum Deserunt qui mollit irure culpa pariatur ad minim in aute velit id.
-    	Lorem ipsum Mollit dolor incididunt proident dolor aliquip aliquip aliqua.
-    	Lorem ipsum Quis sed adipisicing laboris ex deserunt cupidatat Ut.
-    	Lorem ipsum Mollit commodo nostrud sunt deserunt irure pariatur veniam Duis ex.
-    	Lorem ipsum In officia sit amet in dolor laborum qui.
-    	Lorem ipsum Sint irure dolore dolor enim voluptate exercitation incididunt esse deserunt ad esse.
-    </P>
+	    <Title>Ready to take Emergence for a spin right now? let's go.</Title>
+
+	    <div
+	    	style={{
+	    		margin: '20px 0 50px 0',
+	    	}}
+	    >
+	    	<FlatButton label="White Paper" primary={true} />
+		    <span
+		    	style={{
+		    		padding: '0 20px',
+		    	}}
+		    >|</span>
+	    	<FlatButton label="Watch the Tour" secondary={true} />
+	    </div>
+
+	    <iframe
+	    	width="871"
+	    	height="480"
+	    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
+	    	frameBorder="0"
+	    	allowFullScreen>
+	    </iframe>
+   	</div>
+
+   	<div
+   		style={{
+   			display: 'flex',
+   			marginTop: 90,
+   			backgroundColor: grey300,
+   		}}
+   	>
+   		<FooterColumn>
+   			<FooterTitle>Developers resources</FooterTitle>
+
+   			<FooterList>
+   				<FooterListItem
+   					label="Source code on GitHub"
+   					link="https://github.com/FractalFlows" />
+   				<FooterListItem
+   					label="White Paper"
+   					link="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper" />
+   				<FooterListItem
+   					label="FAQ"
+   					link="https://github.com/FractalFlows/Emergence/wiki/FAQ" />
+   				<FooterListItem
+   					label="API"
+   					link="" />
+   			</FooterList>
+   		</FooterColumn>
+   		<FooterColumn>
+   			<FooterTitle>Community</FooterTitle>
+
+   			<FooterList>
+   				<FooterListItem
+   					label="Blog"
+   					link="http://emergencefractalflows.tumblr.com/" />
+   				<FooterListItem
+   					label="Slack"
+   					link="" />
+   				<FooterListItem
+   					label="LinkedIn"
+   					link="" />
+   				<FooterListItem
+   					label="Twitter"
+   					link="" />
+   				<FooterListItem
+   					label="YouTube"
+   					link="" />
+   				<FooterListItem
+   					label="Reddit"
+   					link="" />
+   				<FooterListItem
+   					label="Stack Exchange"
+   					link="" />
+   				<FooterListItem
+   					label="Facebook"
+   					link="" />
+   				<FooterListItem
+   					label="Email us"
+   					link="mailto:AI@fractalflows.com" />
+   			</FooterList>
+   		</FooterColumn>
+   		<FooterColumn>
+	   		<FooterTitle>
+	   			Interested in what we're doing? Join our mailing list.
+	   		</FooterTitle>
+
+	   		<TextField
+	   			floatingLabelText="Name"
+	   		/>
+	   		<br />
+	   		<TextField
+	   			floatingLabelText="Email"
+	   		/>
+	   		<br />
+	   		<br />
+
+	   		<RaisedButton label="Sign Me Up!" primary={true} />
+	   	</FooterColumn>
+   	</div>
   </div>
 )
 
