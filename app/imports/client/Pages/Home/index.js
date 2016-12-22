@@ -155,13 +155,23 @@ export const Home = (props) => (
 	    		margin: '20px 0 50px 0',
 	    	}}
 	    >
-	    	<FlatButton label="White Paper" primary={true} />
+	    	<FlatButton
+	    		label="White Paper"
+	    		primary={true}
+	    		href="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper"
+	    		target="_blank"
+	    	/>
+
 		    <span
 		    	style={{
 		    		padding: '0 20px',
 		    	}}
 		    >|</span>
-	    	<FlatButton label="Watch the Tour" secondary={true} />
+	    	
+	    	<FlatButton
+	    		label="Watch the Tour"
+	    		secondary={true}
+	    	/>
 	    </div>
 
 	    <iframe
