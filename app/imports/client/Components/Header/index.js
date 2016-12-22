@@ -35,9 +35,12 @@ export default function Header(props) {
 	return (
     <div
       style={{
+      	position: 'fixed',
+      	boxSizing: 'border-box',
+      	width: '100%',
       	padding: '7px 150px',
       	backgroundColor: white,
-      	borderBottom: '1px solid #c5cfdc',
+      	boxShadow: '-2px 2px 7px #E0E0E0',
       	display: 'flex',
       	alignItems: 'center',
       }}

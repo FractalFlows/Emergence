@@ -17,7 +17,7 @@ import {
 	grey400,
 	grey700,
 	grey800,
-	blue500,
+	lightBlue500,
 } from 'material-ui/styles/colors'
 
 //Styled Components
@@ -31,6 +31,7 @@ const P = styled.p`
 const Title = styled.h2`
 	font-size: 22px;
 	color: ${grey800};
+	margin-top: 30px;
 `
 const FooterColumn = styled.div`
 	width: 33.33%;
@@ -52,7 +53,7 @@ const FooterList = styled.ul`
 `
 
 const FooterListItemLink = styled.a`
-	color: ${blue500};
+	color: ${lightBlue500};
 	display: inline-block;
 	padding: 3px 0;
 	text-decoration: none;
@@ -89,7 +90,7 @@ class FooterListItem extends React.Component {
 export const Home = (props) => (
   <div
   	style={{
-  		padding: '30px 150px',
+  		padding: '120px 150px 30px 150px',
   	}}
   >
   	<h1
