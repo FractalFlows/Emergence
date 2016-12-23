@@ -40,11 +40,6 @@ export default class Header extends React.Component {
 			isLoginModalOpen: false,
 		}
 	}
-	_openLoginModal() {
-		this.setState({
-			isLoginModalOpen: true,
-		})
-	}
 	render() {
 		return (
 			<div>
@@ -89,5 +84,10 @@ export default class Header extends React.Component {
 				<Modal isOpen={this.state.isLoginModalOpen} />
 			</div>
 		)
+	}
+	_openLoginModal() {
+		this.setState({
+			isLoginModalOpen: true,
+		})
 	}
 }

@@ -15,29 +15,21 @@ export default class Modal extends React.Component {
   constructor() {
     super()
     this.state = {
-      isOpen: false,//this.props.isOpen
+      isOpen: false,
     }
-  }
-  update(e) {
-    this.setState({
-			isOpen: this.props.isOpen,
-		})
   }
   propTypes: {
     isOpen: React.PropTypes.boolean.isRequired,
   }
-  _closeModal() {
-    this.setState({
-      isOpen: false,
-    })
+  componentWillReceiveProps({ isOpen }) {
+    this.setState({ isOpen })
   }
   render() {
-    let isOpen = this.state.isOpen
     return (
       <div
         style={{
           backgroundColor: 'white',
-          display: isOpen ? 'block' : 'none',
+          display: this.state.isOpen ? 'block' : 'none',
           height: '100vh',
           left: 0,
           opacity: 0.95,
@@ -61,5 +53,10 @@ export default class Modal extends React.Component {
       />
       </div>
     )
+  }
+  _closeModal() {
+    this.setState({
+      isOpen: false,
+    })
   }
 }
