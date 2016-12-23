@@ -40,7 +40,7 @@ const FooterColumn = styled.div`
 	padding: 20px;
 
 	&:not(:last-child) {
-		border-right: 1px solid ${grey400}
+		border-right: 1px solid #DDD;
 	}
 `
 
