@@ -26,7 +26,7 @@ const Input = styled.input`
 	&:focus
 		outline: none;
 
-	@media only screen and (max-device-width: 780px) {
+	@media (max-device-width: 780px) {
 		display: none;
 	}
 `
@@ -36,11 +36,13 @@ export default function Header(props) {
     <div
       style={{
       	position: 'fixed',
+      	top: 0,
+      	zIndex: 500,
       	boxSizing: 'border-box',
       	width: '100%',
       	padding: '7px 150px',
       	backgroundColor: white,
-      	boxShadow: '-2px 2px 7px #E0E0E0',
+      	// boxShadow: '-2px 2px 7px #E0E0E0',
       	display: 'flex',
       	alignItems: 'center',
       }}

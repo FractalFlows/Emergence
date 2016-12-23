@@ -13,6 +13,8 @@ import {
 	RaisedButton,
 } from 'material-ui'
 import {
+	white,
+	cyan400,
 	grey300,
 	grey400,
 	grey700,
@@ -63,6 +65,22 @@ const FooterListItemLink = styled.a`
 	}
 `
 
+const Hero = styled.div`
+	background-color: ${cyan400};
+	overflow: hidden;
+	height: auto;
+	margin-top: 65px;
+	position: relative;
+	// display: flex;
+	// alignItems: center;
+
+	canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+`
+
 class FooterListItem extends React.Component {
 	propTypes: {
 		link: React.PropTypes.string,
@@ -87,179 +105,216 @@ class FooterListItem extends React.Component {
 	}
 }
 
-export const Home = (props) => (
-  <div
-  	style={{
-  		padding: '120px 150px 30px 150px',
-  	}}
-  >
-  	<h1
-  		style={{
-  			color: grey800,
-  			fontSize: 30,
-  			textTransform: 'uppercase',
-  			textAlign: 'center',
-  			marginBottom: 50,
-  		}}
-  	>Emergence from Fractal Flows</h1>
+class Home extends React.Component {
+	componentDidMount() {
+		particlesJS.load('hero', 'particles.config.json')
+	}
 
-    <P>
-    	<span style={{color: '#8b0000', fontWeight: 'bold'}}>Knowledge bits</span> are numerical bits, files,
-      containing simulation results, experimental results, detailed analysis,
-      datasets, detailed mathematical formulations, scripts, source code,
-      reviews, reproduction of results,
-      etc. They could also be files containing statement of assumptions,
-      hypothesis and methodologies. Knowledge bits are the hidden backbone, essentially the atomic
-      particles composing a scientific work, while the associated scientific
-      publication is merely its projection on a piece of (digital) paper.
-    </P>
+	render() {
+		return (
+			<div>
+		  	<Hero
+		  		id="hero"
+		  	>
+		  		<div
+		  			style={{
+		  				padding: '50px 150px 40px 150px',
+		  			}}
+		  		>
+				  	<h1
+				  		style={{
+				  			color: white,
+				  			margin: 0,
+				  			fontSize: 55,
+				  			textTransform: 'uppercase',
+				  		}}
+				  	>
+				  		Emergence
+				  	</h1>
+				  	<h3
+				  		style={{
+				  			color: white,
+				  			margin: 0,
+				  			fontSize: 20,
+				  			fontWeight: 100,
+				  		}}
+				  	>
+				  		from <b>Fractal Flows</b>
+				  	</h3>
+			  	</div>
 
-    <Title>The problem</Title>
-    <P>
-    	Every year there are over <u>2 million</u> articles that are
-      published in scientific peer-review journals/conferences. Hidden under
-      the millions of articles there is an even greater number of <strong><u>knowledge bits</u></strong> that are invisible, will never be
-      checked, will never be shared, will never see the
-      light of day, and will slowly rote, submerged, deep inside the abyss of
-      the authors' brains or hard disks. These so called knowledge bits could be extremely
-      important to assess the reproducibility of articles, and to actually
-      make the articles more useful for others. Unfortunately, the current system does
-      not offer incentives to the authors to share those
-      knowledge bits. As a result we only see a Tsunamy of publications
-      which saturates the attention of engineers, reduces the speed of scientific
-      progress and waste an enormous amount of time and money for society.
-    </P>
+			  	<p
+			  		style={{
+			  			color: white,
+			  			padding: '20px 150px 50px 150px',
+			  		}}
+			  	>
+			    	<b>Knowledge bits</b> are numerical bits, files,
+			      containing simulation results, experimental results, detailed analysis,
+			      datasets, detailed mathematical formulations, scripts, source code,
+			      reviews, reproduction of results,
+			      etc. They could also be files containing statement of assumptions,
+			      hypothesis and methodologies. Knowledge bits are the hidden backbone, essentially the atomic
+			      particles composing a scientific work, while the associated scientific
+			      publication is merely its projection on a piece of (digital) paper.
+			    </p>
+			  </Hero>
 
-    <Title>The solution</Title>
-    <P>
-    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
-      application called <strong><em>Emergence</em></strong> that allows anyone to create
-      relationships between articles and their associated knowledge
-      bits which are scattered on the web. This empowers scientist, researchers, engineers and students
-      to quickly discover the relevant scientific activities behind an article and makes it easier to search, discover,
-      collaborate, share, acquire and exchange the necessary knowledge bits revolving around an
-      article, allowing to create an impactful utility for an article beyond
-      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
-    </P>
+			  <div
+			  	style={{
+			  		padding: '30px 150px',
+			  	}}
+			  >
+			    
 
-    <div
-    	style={{
-    		textAlign: 'center',
-    		marginTop: 90,
-    	}}
-    >
-	    <Title>Ready to take Emergence for a spin right now? let's go.</Title>
+			    <Title>The problem</Title>
+			    <P>
+			    	Every year there are over <u>2 million</u> articles that are
+			      published in scientific peer-review journals/conferences. Hidden under
+			      the millions of articles there is an even greater number of <strong><u>knowledge bits</u></strong> that are invisible, will never be
+			      checked, will never be shared, will never see the
+			      light of day, and will slowly rote, submerged, deep inside the abyss of
+			      the authors' brains or hard disks. These so called knowledge bits could be extremely
+			      important to assess the reproducibility of articles, and to actually
+			      make the articles more useful for others. Unfortunately, the current system does
+			      not offer incentives to the authors to share those
+			      knowledge bits. As a result we only see a Tsunamy of publications
+			      which saturates the attention of engineers, reduces the speed of scientific
+			      progress and waste an enormous amount of time and money for society.
+			    </P>
 
-	    <div
-	    	style={{
-	    		margin: '20px 0 50px 0',
-	    	}}
-	    >
-	    	<FlatButton
-	    		label="White Paper"
-	    		primary={true}
-	    		href="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper"
-	    		target="_blank"
-	    	/>
+			    <Title>The solution</Title>
+			    <P>
+			    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
+			      application called <strong><em>Emergence</em></strong> that allows anyone to create
+			      relationships between articles and their associated knowledge
+			      bits which are scattered on the web. This empowers scientist, researchers, engineers and students
+			      to quickly discover the relevant scientific activities behind an article and makes it easier to search, discover,
+			      collaborate, share, acquire and exchange the necessary knowledge bits revolving around an
+			      article, allowing to create an impactful utility for an article beyond
+			      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
+			    </P>
 
-		    <span
-		    	style={{
-		    		padding: '0 20px',
-		    	}}
-		    >|</span>
-	    	
-	    	<FlatButton
-	    		label="Watch the Tour"
-	    		secondary={true}
-	    	/>
-	    </div>
+			    <div
+			    	style={{
+			    		textAlign: 'center',
+			    		marginTop: 90,
+			    	}}
+			    >
+				    <Title>Ready to take Emergence for a spin right now? let's go.</Title>
 
-	    <iframe
-	    	width="871"
-	    	height="480"
-	    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
-	    	frameBorder="0"
-	    	allowFullScreen>
-	    </iframe>
-   	</div>
+				    <div
+				    	style={{
+				    		margin: '20px 0 50px 0',
+				    	}}
+				    >
+				    	<FlatButton
+				    		label="White Paper"
+				    		primary={true}
+				    		href="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper"
+				    		target="_blank"
+				    	/>
 
-   	<div
-   		style={{
-   			display: 'flex',
-   			marginTop: 90,
-   			backgroundColor: grey300,
-   		}}
-   	>
-   		<FooterColumn>
-   			<FooterTitle>Developers resources</FooterTitle>
+					    <span
+					    	style={{
+					    		padding: '0 20px',
+					    	}}
+					    >|</span>
+				    	
+				    	<FlatButton
+				    		label="Watch the Tour"
+				    		secondary={true}
+				    	/>
+				    </div>
 
-   			<FooterList>
-   				<FooterListItem
-   					label="Source code on GitHub"
-   					link="https://github.com/FractalFlows" />
-   				<FooterListItem
-   					label="White Paper"
-   					link="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper" />
-   				<FooterListItem
-   					label="FAQ"
-   					link="https://github.com/FractalFlows/Emergence/wiki/FAQ" />
-   				<FooterListItem
-   					label="API"
-   					link="" />
-   			</FooterList>
-   		</FooterColumn>
-   		<FooterColumn>
-   			<FooterTitle>Community</FooterTitle>
+				    <iframe
+				    	width="871"
+				    	height="480"
+				    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
+				    	frameBorder="0"
+				    	allowFullScreen>
+				    </iframe>
+			   	</div>
 
-   			<FooterList>
-   				<FooterListItem
-   					label="Blog"
-   					link="http://emergencefractalflows.tumblr.com/" />
-   				<FooterListItem
-   					label="Slack"
-   					link="" />
-   				<FooterListItem
-   					label="LinkedIn"
-   					link="" />
-   				<FooterListItem
-   					label="Twitter"
-   					link="" />
-   				<FooterListItem
-   					label="YouTube"
-   					link="" />
-   				<FooterListItem
-   					label="Reddit"
-   					link="" />
-   				<FooterListItem
-   					label="Stack Exchange"
-   					link="" />
-   				<FooterListItem
-   					label="Facebook"
-   					link="" />
-   				<FooterListItem
-   					label="Email us"
-   					link="mailto:AI@fractalflows.com" />
-   			</FooterList>
-   		</FooterColumn>
-   		<FooterColumn>
-	   		<FooterTitle>
-	   			Interested in what we're doing? Join our mailing list.
-	   		</FooterTitle>
+			   	<div
+			   		style={{
+			   			display: 'flex',
+			   			marginTop: 90,
+			   		}}
+			   	>
+			   		<FooterColumn>
+			   			<FooterTitle>Developers resources</FooterTitle>
 
-	   		<TextField
-	   			floatingLabelText="Name"
-	   		/>
-	   		<br />
-	   		<TextField
-	   			floatingLabelText="Email"
-	   		/>
-	   		<br />
-	   		<br />
+			   			<FooterList>
+			   				<FooterListItem
+			   					label="Source code on GitHub"
+			   					link="https://github.com/FractalFlows" />
+			   				<FooterListItem
+			   					label="White Paper"
+			   					link="https://github.com/FractalFlows/Emergence/wiki/Emergence-White-Paper" />
+			   				<FooterListItem
+			   					label="FAQ"
+			   					link="https://github.com/FractalFlows/Emergence/wiki/FAQ" />
+			   				<FooterListItem
+			   					label="API"
+			   					link="" />
+			   			</FooterList>
+			   		</FooterColumn>
+			   		<FooterColumn>
+			   			<FooterTitle>Community</FooterTitle>
 
-	   		<RaisedButton label="Sign Me Up!" primary={true} />
-	   	</FooterColumn>
-   	</div>
-  </div>
-)
+			   			<FooterList>
+			   				<FooterListItem
+			   					label="Blog"
+			   					link="http://emergencefractalflows.tumblr.com/" />
+			   				<FooterListItem
+			   					label="Slack"
+			   					link="" />
+			   				<FooterListItem
+			   					label="LinkedIn"
+			   					link="" />
+			   				<FooterListItem
+			   					label="Twitter"
+			   					link="" />
+			   				<FooterListItem
+			   					label="YouTube"
+			   					link="" />
+			   				<FooterListItem
+			   					label="Reddit"
+			   					link="" />
+			   				<FooterListItem
+			   					label="Stack Exchange"
+			   					link="" />
+			   				<FooterListItem
+			   					label="Facebook"
+			   					link="" />
+			   				<FooterListItem
+			   					label="Email us"
+			   					link="mailto:AI@fractalflows.com" />
+			   			</FooterList>
+			   		</FooterColumn>
+			   		<FooterColumn>
+				   		<FooterTitle>
+				   			Interested in what we're doing? Join our mailing list.
+				   		</FooterTitle>
+
+				   		<TextField
+				   			floatingLabelText="Name"
+				   		/>
+				   		<br />
+				   		<TextField
+				   			floatingLabelText="Email"
+				   		/>
+				   		<br />
+				   		<br />
+
+				   		<RaisedButton label="Sign Me Up!" primary={true} />
+				   	</FooterColumn>
+			   	</div>
+			  </div>
+		  </div>
+		)
+	}
+}
 
 export default Home
