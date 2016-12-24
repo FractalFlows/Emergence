@@ -18,6 +18,7 @@ import {
 // Components
 import Modal from '../Modal'
 import SignIn from '../SignIn'
+import SignUp from '../SignUp'
 
 //Styled Components
 const Input = styled.input`
@@ -92,11 +93,10 @@ export default class Header extends React.Component {
 				</Modal>
 
 				<Modal isOpen={this.state.isRegisterModalOpen}>
-					Sign Up modal
-					{/*<SignUp
-						openLoginModal={this._openLoginModal}
-						closeThisModal={this._closeRegisterModal}
-					/>*/}
+					<SignUp
+						openLoginModal={this._openLoginModal.bind(this)}
+						closeThisModal={this._closeRegisterModal.bind(this)}
+					/>
 				</Modal>
 			</div>
 		)
