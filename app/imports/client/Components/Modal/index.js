@@ -8,7 +8,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 import {
-  grey100,
+  white,
   grey800,
 } from 'material-ui/styles/colors'
 
@@ -17,7 +17,7 @@ const CloseButton = styled.div`
   transition: .1s;
 
   &:hover {
-    opacity: 1;
+    opacity: .8;
     cursor: pointer;
   }
 `
@@ -40,7 +40,7 @@ export default class Modal extends React.Component {
     return this.state.isOpen && (
       <div
         style={{
-          backgroundColor: grey100,
+          backgroundColor: white,
           height: '100vh',
           left: 0,
           opacity: .95,
