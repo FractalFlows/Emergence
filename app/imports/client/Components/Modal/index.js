@@ -51,31 +51,31 @@ export default class Modal extends React.Component {
           zIndex: 1000,
         }}
       >
-      <CloseButton>
-        <ClearIcon
-          color={grey800}
+        <CloseButton>
+          <ClearIcon
+            color={grey800}
+            style={{
+              height: 30,
+              position: 'absolute',
+              right: 40,
+              top: 10,
+              width: 30,
+            }}
+            onClick={this._closeModal.bind(this)}
+          />
+        </CloseButton>
+        <div
           style={{
-            height: 30,
-            position: 'absolute',
-            right: 40,
-            top: 10,
-            width: 30,
+            height: '100vh',
+            lineHeight: '100vh',
+            margin: '0 auto',
+            alignItems: 'center',
+            textAlign: 'center',
+            width: '100vw',
           }}
-          onClick={this._closeModal.bind(this)}
-        />
-      </CloseButton>
-      <div
-        style={{
-          height: '100vh',
-          lineHeight: '100vh',
-          margin: '0 auto',
-          alignItems: 'center',
-          textAlign: 'center',
-          width: '100vw',
-        }}
-      >
-        {this.props.children}
-      </div>
+        >
+          {this.props.children}
+        </div>
       </div>
     )
   }
