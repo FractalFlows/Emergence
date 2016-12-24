@@ -13,7 +13,8 @@ import {
 } from 'material-ui/styles/colors'
 
 const CloseButton = styled.div`
-  opacity: .6;
+  opacity: .4;
+  transition: .1s;
 
   &:hover {
     opacity: 1;
@@ -36,11 +37,10 @@ export default class Modal extends React.Component {
     this._setBodyOverflow(isOpen ? 'hidden' : 'initial')
   }
   render() {
-    return (
+    return this.state.isOpen && (
       <div
         style={{
           backgroundColor: grey100,
-          display: this.state.isOpen ? 'block' : 'none',
           height: '100vh',
           left: 0,
           opacity: .95,
@@ -56,9 +56,9 @@ export default class Modal extends React.Component {
             color={grey800}
             style={{
               height: 30,
-              position: 'absolute',
-              right: 40,
-              top: 10,
+              position: 'fixed',
+              right: 30,
+              top: 20,
               width: 30,
             }}
             onClick={this._closeModal.bind(this)}
@@ -85,6 +85,6 @@ export default class Modal extends React.Component {
     this._setBodyOverflow('initial')
   }
   _setBodyOverflow(state) {
-    document.body.style.overflow = state
+    document.body.style.overflowY = state
   }
 }
