@@ -66,11 +66,10 @@ export default class Modal extends React.Component {
         </CloseButton>
         <div
           style={{
+            display: 'flex',
             height: '100vh',
-            lineHeight: '100vh',
-            margin: '0 auto',
             alignItems: 'center',
-            textAlign: 'center',
+            justifyContent: 'center',
             width: '100vw',
           }}
         >

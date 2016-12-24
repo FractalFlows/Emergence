@@ -22,6 +22,9 @@ import {
 	lightBlue500,
 } from 'material-ui/styles/colors'
 
+// Components
+import Modal from '../../Components/Modal'
+
 //Styled Components
 const P = styled.p`
 	text-align: justify;
@@ -106,10 +109,15 @@ class FooterListItem extends React.Component {
 }
 
 class Home extends React.Component {
+	constructor() {
+		super()
+		this.state = {
+			isLoginModalOpen: false,
+		}
+	}
 	componentDidMount() {
 		particlesJS.load('hero', 'particles.config.json')
 	}
-
 	render() {
 		return (
 			<div>
@@ -165,7 +173,7 @@ class Home extends React.Component {
 			  		padding: '30px 150px',
 			  	}}
 			  >
-			    
+
 
 			    <Title>The problem</Title>
 			    <P>
@@ -220,20 +228,22 @@ class Home extends React.Component {
 					    		padding: '0 20px',
 					    	}}
 					    >|</span>
-				    	
+
 				    	<FlatButton
 				    		label="Watch the Tour"
 				    		secondary={true}
+								onClick={this._openLoginModal.bind(this)}
 				    	/>
 				    </div>
-
-				    <iframe
-				    	width="871"
-				    	height="480"
-				    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
-				    	frameBorder="0"
-				    	allowFullScreen>
-				    </iframe>
+						<Modal isOpen={this.state.isLoginModalOpen}>
+					    <iframe
+					    	width="871"
+					    	height="480"
+					    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
+					    	frameBorder="0"
+					    	allowFullScreen>
+					    </iframe>
+						</Modal>
 			   	</div>
 
 			   	<div
@@ -314,6 +324,11 @@ class Home extends React.Component {
 			  </div>
 		  </div>
 		)
+	}
+	_openLoginModal() {
+		this.setState({
+			isLoginModalOpen: true,
+		})
 	}
 }
 
