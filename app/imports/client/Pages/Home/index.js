@@ -24,8 +24,18 @@ import {
 
 // Components
 import Modal from '../../Components/Modal'
+import SearchInput from '../../Components/SearchInput'
 
 //Styled Components
+const SearchInputWrapper = styled.div`
+	width: 100%;
+	display: none;
+
+	@media (max-width: 780px) {
+		display: initial;
+	}
+`
+
 const P = styled.p`
 	text-align: justify;
 	color: ${grey700};
@@ -74,8 +84,6 @@ const Hero = styled.div`
 	height: auto;
 	margin-top: 65px;
 	position: relative;
-	// display: flex;
-	// alignItems: center;
 
 	canvas {
 		position: absolute;
@@ -150,6 +158,10 @@ class Home extends React.Component {
 				  		from <b>Fractal Flows</b>
 				  	</h3>
 			  	</div>
+
+					<SearchInputWrapper>
+						<SearchInput />
+					</SearchInputWrapper>
 
 			  	<p
 			  		style={{

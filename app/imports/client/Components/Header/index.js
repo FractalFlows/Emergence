@@ -19,17 +19,11 @@ import {
 import Modal from '../Modal'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
+import SearchInput from '../SearchInput'
 
 //Styled Components
-const Input = styled.input`
-	padding: 15px;
-	border: none;
-	background-color: ${grey100};
+const SearchInputWrapper = styled.div`
 	flex-grow: 100000;
-
-	&:focus {
-		outline: none;
-	}
 
 	@media (max-width: 780px) {
 		display: none;
@@ -70,10 +64,10 @@ export default class Header extends React.Component {
 		    		}}
 		    	/>
 
-		    	<Input
-		    		type="text"
-		    		placeholder="Enter an article DOI, title, author or keywords"
-		    	/>
+					<SearchInputWrapper>
+						<SearchInput />
+					</SearchInputWrapper>
+
 		    	<p
 		    		style={{
 		    			marginLeft: 50,
