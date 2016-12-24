@@ -17,6 +17,7 @@ import {
 
 // Components
 import Modal from '../Modal'
+import SignIn from '../SignIn'
 
 //Styled Components
 const Input = styled.input`
@@ -39,6 +40,7 @@ export default class Header extends React.Component {
 		super()
 		this.state = {
 			isLoginModalOpen: false,
+			isRegisterModalOpen: false,
 		}
 	}
 	render() {
@@ -83,7 +85,18 @@ export default class Header extends React.Component {
 		    	</p>
 		    </div>
 				<Modal isOpen={this.state.isLoginModalOpen}>
-					{/*<Component />*/}
+					<SignIn
+						openRegisterModal={this._openRegisterModal.bind(this)}
+						closeThisModal={this._closeLoginModal.bind(this)}
+					/>
+				</Modal>
+
+				<Modal isOpen={this.state.isRegisterModalOpen}>
+					Sign Up modal
+					{/*<SignUp
+						openLoginModal={this._openLoginModal}
+						closeThisModal={this._closeRegisterModal}
+					/>*/}
 				</Modal>
 			</div>
 		)
@@ -91,6 +104,21 @@ export default class Header extends React.Component {
 	_openLoginModal() {
 		this.setState({
 			isLoginModalOpen: true,
+		})
+	}
+	_openRegisterModal() {
+		this.setState({
+			isRegisterModalOpen: true,
+		})
+	}
+	_closeLoginModal() {
+		this.setState({
+			isLoginModalOpen: false,
+		})
+	}
+	_closeRegisterModal() {
+		this.setState({
+			isRegisterModalOpen: false,
 		})
 	}
 }
