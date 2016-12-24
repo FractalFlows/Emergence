@@ -74,7 +74,8 @@ export default class Header extends React.Component {
 		    	<p
 		    		style={{
 		    			marginLeft: 50,
-		    			color: grey800,
+		    			color: cyan400,
+							cursor: 'pointer',
 		    		}}
 						onClick={this._openLoginModal.bind(this)}
 		    	>
