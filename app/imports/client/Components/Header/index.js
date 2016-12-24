@@ -25,8 +25,9 @@ const Input = styled.input`
 	background-color: ${grey100};
 	flex-grow: 100000;
 
-	&:focus
+	&:focus {
 		outline: none;
+	}
 
 	@media (max-device-width: 780px) {
 		display: none;
@@ -68,9 +69,8 @@ export default class Header extends React.Component {
 
 		    	<Input
 		    		type="text"
-		    		placeholder="Enter an article DOI or keywords"
+		    		placeholder="Enter an article DOI, title, author or keywords"
 		    	/>
-
 		    	<p
 		    		style={{
 		    			marginLeft: 50,
@@ -81,7 +81,9 @@ export default class Header extends React.Component {
 		    		Login
 		    	</p>
 		    </div>
-				<Modal isOpen={this.state.isLoginModalOpen} />
+				<Modal isOpen={this.state.isLoginModalOpen}>
+					{/*<Component />*/}
+				</Modal>
 			</div>
 		)
 	}

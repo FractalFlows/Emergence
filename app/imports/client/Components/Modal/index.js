@@ -5,11 +5,21 @@
 
 //Modules
 import React from 'react'
+import styled from 'styled-components'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 import {
-  white,
-	grey600,
+  grey100,
+  grey800,
 } from 'material-ui/styles/colors'
+
+const CloseButton = styled.div`
+  opacity: .6;
+
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+`
 
 export default class Modal extends React.Component {
   constructor() {
@@ -28,11 +38,11 @@ export default class Modal extends React.Component {
     return (
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: grey100,
           display: this.state.isOpen ? 'block' : 'none',
           height: '100vh',
           left: 0,
-          opacity: 0.95,
+          opacity: .95,
           position: 'fixed',
           top: 0,
           transition: '0.5s',
@@ -40,17 +50,31 @@ export default class Modal extends React.Component {
           zIndex: 1000,
         }}
       >
-      <ClearIcon
-        color={grey600}
+      <CloseButton>
+        <ClearIcon
+          color={grey800}
+          style={{
+            height: 30,
+            position: 'absolute',
+            right: 40,
+            top: 10,
+            width: 30,
+          }}
+          onClick={this._closeModal.bind(this)}
+        />
+      </CloseButton>
+      <div
         style={{
-          height: 30,
-          position: 'absolute',
-          right: 20,
-          top: 10,
-          width: 30,
+          height: '100vh',
+          lineHeight: '100vh',
+          margin: '0 auto',
+          alignItems: 'center',
+          textAlign: 'center',
+          width: '100vw',
         }}
-        onClick={this._closeModal.bind(this)}
-      />
+      >
+        {this.props.children}
+      </div>
       </div>
     )
   }
