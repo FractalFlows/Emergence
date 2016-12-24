@@ -33,6 +33,7 @@ export default class Modal extends React.Component {
   }
   componentWillReceiveProps({ isOpen }) {
     this.setState({ isOpen })
+    this._setBodyOverflow(isOpen ? 'hidden' : 'initial')
   }
   render() {
     return (
@@ -82,5 +83,9 @@ export default class Modal extends React.Component {
     this.setState({
       isOpen: false,
     })
+    this._setBodyOverflow('initial')
+  }
+  _setBodyOverflow(state) {
+    document.body.style.overflow = state
   }
 }
