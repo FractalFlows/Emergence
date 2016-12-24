@@ -29,7 +29,7 @@ const Input = styled.input`
 		outline: none;
 	}
 
-	@media (max-device-width: 780px) {
+	@media (max-width: 780px) {
 		display: none;
 	}
 `
