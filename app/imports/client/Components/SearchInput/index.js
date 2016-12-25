@@ -16,6 +16,7 @@ import {
   cyan500,
   grey100,
   grey200,
+  grey400,
   grey500,
   grey800,
 } from 'material-ui/styles/colors'
@@ -29,7 +30,7 @@ const SearchInputWrapper = styled.div`
   transition: .1s;
 
   &.focus {
-    box-shadow: 0 0 2px ${grey500};
+    box-shadow: 0 1px 3px ${grey400};
     background-color: ${white};
   }
 `
