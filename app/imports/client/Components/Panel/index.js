@@ -15,6 +15,7 @@ export default function Panel(props) {
       style={{
         boxShadow: `-1px 1px 2px ${grey400}`,
         backgroundColor: white,
+        marginBottom: 30,
       }}
     >
       {props.children}

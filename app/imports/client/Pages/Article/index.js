@@ -10,8 +10,9 @@ import { RaisedButton } from 'material-ui'
 import {
   grey200,
   grey300,
-  grey700,
   grey600,
+  grey700,
+  grey800,
 } from 'material-ui/styles/colors'
 
 // Components
@@ -33,6 +34,13 @@ const PanelHeaderButton = styled.button`
     background-color: ${grey300};
   }
 `
+
+const ArticleDetail = styled.p`
+  color: ${grey600};
+  margin: 0 0 3px 0;
+  font-size: 15px;
+`
+
 export default class Article extends React.Component {
   render() {
     const summaries = [
@@ -57,6 +65,26 @@ export default class Article extends React.Component {
         }}
       >
         <Panel>
+          <PanelBody>
+            <h1
+              style={{
+                margin: '0 0 20px 0',
+                color: grey800,
+                fontSize: 23,
+              }}
+            >
+              {unescape(this.props.params.slug)}
+            </h1>
+            <ArticleDetail>
+              <b>Authors:</b> Theo J. Bastiaens; Lincoln C. Wood; Torsten Reiners
+            </ArticleDetail>
+            <ArticleDetail>
+              <b>DOI:</b> 10.1109/TC.2002.1009146
+            </ArticleDetail>
+          </PanelBody>
+        </Panel>
+
+        <Panel>
           <PanelHeader title="Summaries">
             <PanelHeaderButton>
               Add summary
@@ -75,6 +103,28 @@ export default class Article extends React.Component {
                 <RaisedButton label="Create a new summary" primary={true} />
               </div>
             }
+          </PanelBody>
+        </Panel>
+
+        <Panel>
+          <PanelHeader title="Knowledge bits">
+            <PanelHeaderButton>
+              Add knowledge product
+            </PanelHeaderButton>
+          </PanelHeader>
+          <PanelBody>
+            {/*summaries.length > 0 ?
+              summaries.map((summary, i) =>
+                <ArticleSummary key={i} summary={summary} />
+              ) :
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+                >
+                <RaisedButton label="Create a new summary" primary={true} />
+              </div>
+            */}
           </PanelBody>
         </Panel>
       </div>
