@@ -16,7 +16,7 @@ import {
 
 //Styled Components
 const ArticleItemLink = styled.div`
-  &:hover {
+  &:hover, &.hover {
     background-color: ${grey100};
   }
 
@@ -55,7 +55,10 @@ export default class ArticleItem extends React.Component {
     })
 
     return (
-      <ArticleItemLink>
+      <ArticleItemLink
+        className="dropdown-article-item"
+        onMouseOver={this._removeResultsFocus}
+      >
         <Link
           to={`/article/${article.title}`}
           style={{
@@ -84,5 +87,13 @@ export default class ArticleItem extends React.Component {
         </Link>
       </ArticleItemLink>
     )
+  }
+  _removeResultsFocus() {
+    const selectedResult =
+      document.querySelector('.dropdown-article-item.hover')
+
+    if (selectedResult) {
+      selectedResult.classList.remove('hover')
+    }
   }
 }

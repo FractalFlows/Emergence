@@ -63,11 +63,11 @@ export default class Modal extends React.Component {
   constructor() {
     super()
     this.state = {
-      isSearching: false,
       isFocused: false,
       isLoading: false,
       searchText: '',
       searchResults: [],
+      showDropdown: false,
     }
   }
   render() {
@@ -93,6 +93,8 @@ export default class Modal extends React.Component {
             placeholder="Enter an article DOI, title, author or keywords"
             ref="searchInput"
             onInput={this._search.bind(this)}
+            onKeyDown={this._searchSelect.bind(this)}
+            onClick={this._searchFocus.bind(this)}
             onFocus={this._searchFocus.bind(this)}
             onBlur={this._searchBlur.bind(this)}
           />
@@ -108,7 +110,7 @@ export default class Modal extends React.Component {
           <CloseIcon
             color={grey500}
             style={{
-              visibility: this.state.isSearching ? 'visible' : 'hidden',
+              visibility: this.state.searchText ? 'visible' : 'hidden',
               cursor: 'pointer',
               height: 25,
               padding: 5,
@@ -118,8 +120,9 @@ export default class Modal extends React.Component {
         </SearchInputWrapper>
 
         <ResultsDropdown
+          className="dropdown-article-list"
           style={{
-            display: this.state.isFocused ? 'block' : 'none',
+            display: this.state.showDropdown ? 'block' : 'none',
           }}
         >
           {this.state.searchResults.map(
@@ -159,7 +162,27 @@ export default class Modal extends React.Component {
       {
         title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
         authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
-        DOI: '10.1109/TC.2002.1009146',
+        DOI: '10.1109/TC.2002.100914',
+      },
+      {
+        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
+        authors: ['Theo J. Bastiaes', 'Lincoln C. Wood', 'Torsten Reiners'],
+        DOI: '10.1109/TC.2002.100946',
+      },
+      {
+        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
+        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
+        DOI: '10.1109/TC.20.100146',
+      },
+      {
+        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
+        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
+        DOI: '10.1109/T.2002.100946',
+      },
+      {
+        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
+        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
+        DOI: '10.1109/TC.202.100914',
       },
     ].filter(article => article.title.match(new RegExp(`(${searchText})`, 'gi')))
 
@@ -170,21 +193,19 @@ export default class Modal extends React.Component {
     this.setState({ searchText })
 
     if (searchText) {
-      this.setState({
-        isSearching: true,
-        isLoading: true,
-      })
+      this.setState({ isLoading: true })
 
       //Simulating data fetching
       Meteor.setTimeout(() => {
         this.setState({
           isLoading: false,
-          searchResults: this.state.isSearching ? results : [],
+          showDropdown: true,
+          searchResults: this.state.searchText ? results : [],
         })
       }, 1100)
     } else {
       this.setState({
-        isSearching: false,
+        showDropdown: false,
         searchResults: [],
       })
     }
@@ -197,13 +218,82 @@ export default class Modal extends React.Component {
 
     this._search()
   }
+  _searchSelect({ which: key }) {
+    //Arrow Down
+    if (key === 40) {
+      const hoveredResult =
+        document.querySelector('.dropdown-article-item:hover')
+
+      if (hoveredResult) return
+
+      const currentResultSelected =
+        document.querySelector('.dropdown-article-item.hover')
+
+      if (currentResultSelected) {
+        const { nextSibling } = currentResultSelected
+
+        if (nextSibling) {
+          currentResultSelected.classList.remove('hover')
+          nextSibling.classList.add('hover')
+          document.querySelector('.dropdown-article-list')
+            .scrollTop = nextSibling.offsetTop
+        }
+      } else {
+        const firstResult =
+          document.querySelector('.dropdown-article-item')
+
+        if (firstResult) {
+          firstResult.classList.add('hover')
+          document.querySelector('.dropdown-article-list').scrollTop = 0
+        }
+      }
+
+    //Arrow Up
+    } else if (key === 38) {
+      const currentResultSelected =
+        document.querySelector('.dropdown-article-item.hover')
+
+      if (currentResultSelected) {
+        currentResultSelected.classList.remove('hover')
+
+        const { previousSibling } = currentResultSelected
+
+        if (previousSibling) {
+          previousSibling.classList.add('hover')
+
+          document.querySelector('.dropdown-article-list')
+            .scrollTop = previousSibling.offsetTop
+        }
+      }
+
+    //Enter
+    } else if (key === 13) {
+      const currentResultSelected =
+        document.querySelector('.dropdown-article-item.hover a')
+
+      if (currentResultSelected) {
+        currentResultSelected.click()
+        currentResultSelected.parentElement.classList.remove('hover')
+        ReactDOM.findDOMNode(this.refs.searchInput).blur()
+      }
+    } else if (key === 27) {
+      if (this.state.showDropdown) {
+        this.setState({ showDropdown: false })
+      } else {
+        ReactDOM.findDOMNode(this.refs.searchInput).blur()
+      }
+    }
+  }
   _searchFocus() {
-    this.setState({ isFocused: true })
+    this.setState({
+      isFocused: true,
+      showDropdown: true,
+    })
   }
   _searchBlur() {
-    Meteor.setTimeout(
-      () => this.setState({ isFocused: false }),
-      150
-    )
+    Meteor.setTimeout(() => this.setState({
+      isFocused: false,
+      showDropdown: false,
+    }), 150)
   }
 }
