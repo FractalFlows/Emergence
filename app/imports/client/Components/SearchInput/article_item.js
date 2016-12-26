@@ -29,13 +29,20 @@ const ArticleName = styled.p`
   color: ${grey800};
   font-size: 15px;
   line-height: 15px;
-  margin: 0 0 5px 0;
+  margin: 0 0 6px 0;
 `
 
 const ArticleDetail = styled.p`
   font-size: 12px;
   color: ${grey500};
   margin: 0;
+  display: flex;
+
+  b {
+    display: inline-block;
+    width: 85px;
+    flex-shrink: 0;
+  }
 `
 
 export default class ArticleItem extends React.Component {
@@ -71,18 +78,18 @@ export default class ArticleItem extends React.Component {
             dangerouslySetInnerHTML={getHighlightedTitle()}
           />
           <ArticleDetail>
-            <b>Authors:</b> {article.authors.join('; ')}
+            <b>Authors:</b> <div>{article.authors.join('; ')}</div>
           </ArticleDetail>
           <ArticleDetail>
-            <b>DOI:</b> {article.DOI}
+            <b>DOI:</b> <div>{article.DOI}</div>
           </ArticleDetail>
           <ArticleDetail
             title={article.abstract.length > 300 ? article.abstract : ''}
           >
-            <b>Abstract:</b> {article.abstract.length > 300 ?
+            <b>Abstract:</b> <div>{article.abstract.length > 300 ?
               `${article.abstract.substring(0, 300)}...` :
               article.abstract
-            }
+            }</div>
           </ArticleDetail>
         </Link>
       </ArticleItemLink>

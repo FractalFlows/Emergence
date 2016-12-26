@@ -275,7 +275,10 @@ export default class Modal extends React.Component {
         currentResultSelected.click()
         currentResultSelected.parentElement.classList.remove('hover')
         ReactDOM.findDOMNode(this.refs.searchInput).blur()
+      } else if (!this.state.showDropdown) {
+        this.setState({ showDropdown: true })
       }
+    //Esc
     } else if (key === 27) {
       if (this.state.showDropdown) {
         this.setState({ showDropdown: false })
@@ -290,10 +293,17 @@ export default class Modal extends React.Component {
       showDropdown: true,
     })
   }
-  _searchBlur() {
-    Meteor.setTimeout(() => this.setState({
-      isFocused: false,
-      showDropdown: false,
-    }), 150)
+  _searchBlur(event) {
+    Meteor.setTimeout(() => {
+      const isBlurred =
+        !ReactDOM.findDOMNode(this.refs.searchInput).matches(':focus')
+
+      if (isBlurred) {
+         this.setState({
+          isFocused: false,
+          showDropdown: false,
+        })
+      }
+    }, 150)
   }
 }
