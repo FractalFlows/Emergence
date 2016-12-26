@@ -6,16 +6,21 @@
 // Modules
 import React from 'react'
 
-import container from './container'
-
 // Components
+import Panel from '../../Components/Panel'
 
-export const Article = (props) => (
-  <div
-    style={{ backgroundColor: '#F1F1F1' }}
-  >
-    <p>Article page</p>
-  </div>
-)
+export default class Article extends React.Component {
+  render() {
+    return (
+      <div
+        style={{
+          padding: '40px 150px',
+        }}
+      >
+        <Panel title="Summaries" />
+      </div>
+    )
+  }
+}
 
-export default container(Article)
+// export default container(Article)

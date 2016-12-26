@@ -11,7 +11,14 @@ export default function App(props) {
   return (
     <div>
       <Header />
-      {props.children}
+      <div
+        style={{
+          marginTop: 65,
+          minHeight: '100vh',
+        }}
+      >
+        {props.children}
+      </div>
       <Footer />
     </div>
   )
