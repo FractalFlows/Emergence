@@ -15,6 +15,7 @@ import {
   grey800,
 } from 'material-ui/styles/colors'
 
+//Styled Components
 const RegisterLink = styled.p`
   color: ${cyan400};
   margin: 0 0 0 0;

@@ -12,6 +12,7 @@ import {
   grey800,
 } from 'material-ui/styles/colors'
 
+//Styled Components
 const CloseButton = styled.div`
   opacity: .4;
   transition: .1s;
@@ -79,9 +80,7 @@ export default class Modal extends React.Component {
     )
   }
   _closeModal() {
-    this.setState({
-      isOpen: false,
-    })
+    this.setState({ isOpen: false })
     this._setBodyOverflow('initial')
   }
   _setBodyOverflow(state) {
