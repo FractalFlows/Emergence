@@ -5,6 +5,7 @@
 
 // Modules
 import React from 'react'
+import { Link } from 'react-router'
 import styled from 'styled-components'
 import EventSeatIcon from 'material-ui/svg-icons/action/event-seat'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
@@ -55,15 +56,17 @@ export default class Header extends React.Component {
 		      	display: 'flex',
 		      	alignItems: 'center',
 		      }}
-		    >
-		    	<EventSeatIcon
-		    		color={cyan400}
-		    		style={{
-		    			marginRight: 20,
-		    			height: 40,
-		    			width: 40,
-		    		}}
-		    	/>
+		    />
+					<Link to="/">
+			    	<EventSeatIcon
+			    		color={cyan400}
+			    		style={{
+			    			marginRight: 20,
+			    			height: 40,
+			    			width: 40,
+			    		}}
+			    	/>
+					</Link>
 
 					<SearchInputWrapper>
 						<SearchInput />
