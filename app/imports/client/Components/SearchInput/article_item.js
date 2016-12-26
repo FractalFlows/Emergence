@@ -5,6 +5,7 @@
 
 //Modules
 import React from 'react'
+import { Link } from 'react-router'
 import styled from 'styled-components'
 import {
   grey100,
@@ -14,11 +15,7 @@ import {
 } from 'material-ui/styles/colors'
 
 //Styled Components
-const ArticleItemLink = styled.a`
-  display: block;
-  padding: 15px;
-  text-decoration: none;
-
+const ArticleItemLink = styled.div`
   &:hover {
     background-color: ${grey100};
   }
@@ -58,26 +55,33 @@ export default class ArticleItem extends React.Component {
     })
 
     return (
-      <ArticleItemLink
-        href="/article/birrrll"
-      >
-        <ArticleName
-          dangerouslySetInnerHTML={getHighlightedTitle()}
-        />
-        <ArticleDetail>
-          <b>Authors:</b> {article.authors.join('; ')}
-        </ArticleDetail>
-        <ArticleDetail>
-          <b>DOI:</b> {article.DOI}
-        </ArticleDetail>
-        <ArticleDetail
-          title={article.abstract.length > 300 ? article.abstract : ''}
+      <ArticleItemLink>
+        <Link
+          to={`/article/${article.title}`}
+          style={{
+            padding: 15,
+            display: 'block',
+            textDecoration: 'none',
+          }}
         >
-          <b>Abstract:</b> {article.abstract.length > 300 ?
-            `${article.abstract.substring(0, 300)}...` :
-            article.abstract
-          }
-        </ArticleDetail>
+          <ArticleName
+            dangerouslySetInnerHTML={getHighlightedTitle()}
+          />
+          <ArticleDetail>
+            <b>Authors:</b> {article.authors.join('; ')}
+          </ArticleDetail>
+          <ArticleDetail>
+            <b>DOI:</b> {article.DOI}
+          </ArticleDetail>
+          <ArticleDetail
+            title={article.abstract.length > 300 ? article.abstract : ''}
+          >
+            <b>Abstract:</b> {article.abstract.length > 300 ?
+              `${article.abstract.substring(0, 300)}...` :
+              article.abstract
+            }
+          </ArticleDetail>
+        </Link>
       </ArticleItemLink>
     )
   }
