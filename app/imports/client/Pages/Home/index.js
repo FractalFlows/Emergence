@@ -226,7 +226,7 @@ class Home extends React.Component {
 			    		marginTop: 90,
 			    	}}
 			    >
-				    <Title>Ready to take Emergence for a spin right now? let's go.</Title>
+				    <Title>Ready to take Emergence for a spin right now? Let's go.</Title>
 
 				    <div
 				    	style={{
