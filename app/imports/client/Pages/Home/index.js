@@ -79,17 +79,11 @@ const FooterListItemLink = styled.a`
 `
 
 const Hero = styled.div`
-	background-color: ${cyan400};
+	background-image: url(images/background.png);
 	overflow: hidden;
 	height: auto;
 	margin-top: 65px;
 	position: relative;
-
-	canvas {
-		position: absolute;
-		top: 0;
-		left: 0;
-	}
 `
 
 class FooterListItem extends React.Component {
@@ -97,7 +91,6 @@ class FooterListItem extends React.Component {
 		link: React.PropTypes.string,
 		label: React.PropTypes.string,
 	}
-
 	render() {
 		return (
 			<li
@@ -123,15 +116,10 @@ class Home extends React.Component {
 			isLoginModalOpen: false,
 		}
 	}
-	componentDidMount() {
-		particlesJS.load('hero', 'particles.config.json')
-	}
 	render() {
 		return (
 			<div>
-		  	<Hero
-		  		id="hero"
-		  	>
+		  	<Hero>
 		  		<div
 		  			style={{
 		  				padding: '50px 150px 40px 150px',

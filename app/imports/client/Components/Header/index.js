@@ -52,11 +52,11 @@ export default class Header extends React.Component {
 		      	width: '100%',
 		      	padding: '7px 150px',
 		      	backgroundColor: white,
-		      	boxShadow: `0 2px 8px ${grey400}`,
+		      	boxShadow: `0 1px 4px ${grey400}`,
 		      	display: 'flex',
 		      	alignItems: 'center',
 		      }}
-		    />
+		    >
 					<Link to="/">
 			    	<EventSeatIcon
 			    		color={cyan400}
