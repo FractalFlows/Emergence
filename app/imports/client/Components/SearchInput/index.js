@@ -55,6 +55,8 @@ const ResultsDropdown = styled.div`
   position: absolute;
   top: calc(100% + 1px);
   box-shadow: 0 1px 3px ${grey400};
+  max-height: 500px;
+  overflow-y: auto;
 `
 
 export default class Modal extends React.Component {
