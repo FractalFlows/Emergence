@@ -173,35 +173,54 @@ class Home extends React.Component {
 			  		padding: '30px 150px',
 			  	}}
 			  >
-
-
-			    <Title>The problem</Title>
-			    <P>
-			    	Every year there are over <u>2 million</u> articles that are
-			      published in scientific peer-review journals/conferences. Hidden under
-			      the millions of articles there is an even greater number of <strong><u>knowledge bits</u></strong> that are invisible, will never be
-			      checked, will never be shared, will never see the
-			      light of day, and will slowly rote, submerged, deep inside the abyss of
-			      the authors' brains or hard disks. These so called knowledge bits could be extremely
-			      important to assess the reproducibility of articles, and to actually
-			      make the articles more useful for others. Unfortunately, the current system does
-			      not offer incentives to the authors to share those
-			      knowledge bits. As a result we only see a Tsunamy of publications
-			      which saturates the attention of engineers, reduces the speed of scientific
-			      progress and waste an enormous amount of time and money for society.
-			    </P>
-
-			    <Title>The solution</Title>
-			    <P>
-			    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
-			      application called <strong><em>Emergence</em></strong> that allows anyone to create
-			      relationships between articles and their associated knowledge
-			      bits which are scattered on the web. This empowers scientist, researchers, engineers and students
-			      to quickly discover the relevant scientific activities behind an article and makes it easier to search, discover,
-			      collaborate, share, acquire and exchange the necessary knowledge bits revolving around an
-			      article, allowing to create an impactful utility for an article beyond
-			      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
-			    </P>
+					<div
+						style={{
+							display: 'flex',
+						}}
+					>
+						<div
+							style={{
+								paddingRight: 20,
+								width: '50%',
+								boxSizing: 'border-box',
+							}}
+						>
+					    <Title>The problem</Title>
+					    <P>
+					    	Every year there are over <u>2 million</u> articles that are
+					      published in scientific peer-review journals/conferences. Hidden under
+					      the millions of articles there is an even greater number of <strong><u>knowledge bits</u></strong> that are invisible, will never be
+					      checked, will never be shared, will never see the
+					      light of day, and will slowly rote, submerged, deep inside the abyss of
+					      the authors' brains or hard disks. These so called knowledge bits could be extremely
+					      important to assess the reproducibility of articles, and to actually
+					      make the articles more useful for others. Unfortunately, the current system does
+					      not offer incentives to the authors to share those
+					      knowledge bits. As a result we only see a Tsunamy of publications
+					      which saturates the attention of engineers, reduces the speed of scientific
+					      progress and waste an enormous amount of time and money for society.
+					    </P>
+						</div>
+						<div
+							style={{
+								paddingLeft: 20,
+								width: '50%',
+								boxSizing: 'border-box',
+							}}
+						>
+					    <Title>The solution</Title>
+					    <P>
+					    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
+					      application called <strong><em>Emergence</em></strong> that allows anyone to create
+					      relationships between articles and their associated knowledge
+					      bits which are scattered on the web. This empowers scientist, researchers, engineers and students
+					      to quickly discover the relevant scientific activities behind an article and makes it easier to search, discover,
+					      collaborate, share, acquire and exchange the necessary knowledge bits revolving around an
+					      article, allowing to create an impactful utility for an article beyond
+					      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
+				    	</P>
+						</div>
+					</div>
 
 			    <div
 			    	style={{
