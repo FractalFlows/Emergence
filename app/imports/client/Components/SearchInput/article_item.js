@@ -59,7 +59,7 @@ export default class ArticleItem extends React.Component {
 
     return (
       <ArticleItemLink
-        href=""
+        href="/article/birrrll"
       >
         <ArticleName
           dangerouslySetInnerHTML={getHighlightedTitle()}

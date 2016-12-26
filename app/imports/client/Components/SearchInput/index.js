@@ -199,6 +199,9 @@ export default class Modal extends React.Component {
     this.setState({ isFocused: true })
   }
   _searchBlur() {
-    this.setState({ isFocused: false })
+    Meteor.setTimeout(
+      () => this.setState({ isFocused: false }),
+      150
+    )
   }
 }
