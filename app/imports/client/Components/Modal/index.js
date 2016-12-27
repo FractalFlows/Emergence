@@ -80,7 +80,7 @@ export default class Modal extends React.Component {
     )
   }
   _closeModal() {
-    this.setState({ isOpen: false })
+    this.props.close()
     this._setBodyOverflow('initial')
   }
   _setBodyOverflow(state) {

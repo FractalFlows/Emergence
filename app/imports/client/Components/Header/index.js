@@ -83,14 +83,18 @@ export default class Header extends React.Component {
 		    		Login
 		    	</p>
 		    </div>
-				<Modal isOpen={this.state.isLoginModalOpen}>
+				<Modal
+					isOpen={this.state.isLoginModalOpen}
+					close={this._closeLoginModal.bind(this)}>
 					<SignIn
 						openRegisterModal={this._openRegisterModal.bind(this)}
 						closeThisModal={this._closeLoginModal.bind(this)}
 					/>
 				</Modal>
 
-				<Modal isOpen={this.state.isRegisterModalOpen}>
+				<Modal
+					isOpen={this.state.isRegisterModalOpen}
+					close={this._closeRegisterModal.bind(this)}>
 					<SignUp
 						openLoginModal={this._openLoginModal.bind(this)}
 						closeThisModal={this._closeRegisterModal.bind(this)}
@@ -100,23 +104,15 @@ export default class Header extends React.Component {
 		)
 	}
 	_openLoginModal() {
-		this.setState({
-			isLoginModalOpen: true,
-		})
+		this.setState({ isLoginModalOpen: true })
 	}
 	_openRegisterModal() {
-		this.setState({
-			isRegisterModalOpen: true,
-		})
+		this.setState({ isRegisterModalOpen: true })
 	}
 	_closeLoginModal() {
-		this.setState({
-			isLoginModalOpen: false,
-		})
+		this.setState({ isLoginModalOpen: false })
 	}
 	_closeRegisterModal() {
-		this.setState({
-			isRegisterModalOpen: false,
-		})
+		this.setState({ isRegisterModalOpen: false })
 	}
 }
