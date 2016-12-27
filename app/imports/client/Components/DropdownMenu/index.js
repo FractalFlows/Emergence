@@ -8,7 +8,6 @@ import React from 'react'
 import styled from 'styled-components'
 import {
 	white,
-	cyan400,
 	grey100,
 	grey400,
 	grey700,
@@ -25,15 +24,17 @@ const Dropdown = styled.div`
 		right: ${props => props.pullLeft ? '0' : 'initial'};
 		visibility: hidden;
 		transition: visibility .15s;
-		box-shadow: -1px 1px 5px ${grey400};
+		box-shadow: -1px 1px 3px ${grey400};
+		background-color: ${white};
+		padding: 8px 0;
 
 		a {
 			color: ${grey700};
-			padding: 10px 15px;
+			padding: 8px 20px;
+			font-size: 13.5px;
 			text-decoration: none;
-			background-color: ${white};
 			float: left;
-			min-width: 120px;
+			min-width: 140px;
 
 			&:hover {
 				background-color: ${grey100};
