@@ -42,7 +42,6 @@ export default class SignUp extends React.Component {
           <EventSeatIcon
             color={cyan400}
             style={{
-              marginRight: 20,
               height: 70,
               width: 70,
             }}

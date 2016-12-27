@@ -83,25 +83,13 @@ export default class Header extends React.Component {
 		    	>
 		    		Login
 		    	</p>
-
-					<DropdownMenu
-						label={
-							<MoreVertIcon
-								color={grey800}
-								style={{
-									marginLeft: 15,
-									height: 20,
-								}}
-							/>
-						}
-						pullLeft={true}
-					>
-						<Link to="/dashboard">Dashboard</Link>
-				  </DropdownMenu>
 		    </div>
 				<Modal
 					isOpen={this.state.isLoginModalOpen}
 					close={this._closeLoginModal.bind(this)}
+					style={{
+						padding: 90,
+					}}
 				>
 					<SignIn
 						openRegisterModal={this._openRegisterModal.bind(this)}
@@ -112,6 +100,9 @@ export default class Header extends React.Component {
 				<Modal
 					isOpen={this.state.isRegisterModalOpen}
 					close={this._closeRegisterModal.bind(this)}
+					style={{
+						padding: 90,
+					}}
 				>
 					<SignUp
 						openLoginModal={this._openLoginModal.bind(this)}

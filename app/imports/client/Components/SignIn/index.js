@@ -33,6 +33,7 @@ export default class SignIn extends React.Component {
         style={{
           maxWidth: 450,
         }}
+
       >
         <div
           style={{
@@ -42,7 +43,6 @@ export default class SignIn extends React.Component {
           <EventSeatIcon
             color={cyan400}
             style={{
-              marginRight: 20,
               height: 70,
               width: 70,
             }}
