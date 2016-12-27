@@ -107,11 +107,11 @@ class FooterListItem extends React.Component {
 	}
 }
 
-class Home extends React.Component {
+export default class Home extends React.Component {
 	constructor() {
 		super()
 		this.state = {
-			isLoginModalOpen: false,
+			isWatchTourModalOpen: false,
 		}
 	}
 	render() {
@@ -249,10 +249,17 @@ class Home extends React.Component {
 				    	<FlatButton
 				    		label="Watch the Tour"
 				    		secondary={true}
-								onClick={this._openLoginModal.bind(this)}
+								onClick={this._openWatchTourModal.bind(this)}
 				    	/>
 				    </div>
-						<Modal isOpen={this.state.isLoginModalOpen}>
+						<Modal
+							isOpen={this.state.isWatchTourModalOpen}
+							close={this._closeWatchTourModal.bind(this)}
+							style={{
+								height: 600,
+								alignItems: 'center',
+							}}
+						>
 					    <iframe
 					    	width="871"
 					    	height="480"
@@ -342,11 +349,12 @@ class Home extends React.Component {
 		  </div>
 		)
 	}
-	_openLoginModal() {
+	_openWatchTourModal() {
 		this.setState({
-			isLoginModalOpen: true,
+			isWatchTourModalOpen: true,
 		})
 	}
+	_closeWatchTourModal() {
+		this.setState({ isWatchTourModalOpen: false })
+	}
 }
-
-export default Home

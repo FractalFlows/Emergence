@@ -67,11 +67,9 @@ export default class Header extends React.Component {
 			    		}}
 			    	/>
 					</Link>
-
 					<SearchInputWrapper>
 						<SearchInput />
 					</SearchInputWrapper>
-
 		    	<p
 		    		style={{
 		    			marginLeft: 50,
@@ -85,16 +83,23 @@ export default class Header extends React.Component {
 		    </div>
 				<Modal
 					isOpen={this.state.isLoginModalOpen}
-					close={this._closeLoginModal.bind(this)}>
+					close={this._closeLoginModal.bind(this)}
+					style={{
+						padding: 90,
+					}}
+				>
 					<SignIn
 						openRegisterModal={this._openRegisterModal.bind(this)}
 						closeThisModal={this._closeLoginModal.bind(this)}
 					/>
 				</Modal>
-
 				<Modal
 					isOpen={this.state.isRegisterModalOpen}
-					close={this._closeRegisterModal.bind(this)}>
+					close={this._closeRegisterModal.bind(this)}
+					style={{
+						padding: 90,
+					}}
+				>
 					<SignUp
 						openLoginModal={this._openLoginModal.bind(this)}
 						closeThisModal={this._closeRegisterModal.bind(this)}
