@@ -22,6 +22,7 @@ import Modal from '../Modal'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
 import SearchInput from '../SearchInput'
+import DropdownMenu from '../DropdownMenu'
 
 //Styled Components
 const SearchInputWrapper = styled.div`
@@ -82,10 +83,26 @@ export default class Header extends React.Component {
 		    	>
 		    		Login
 		    	</p>
+
+					<DropdownMenu
+						label={
+							<MoreVertIcon
+								color={grey800}
+								style={{
+									marginLeft: 15,
+									height: 20,
+								}}
+							/>
+						}
+						pullLeft={true}
+					>
+						<Link to="/dashboard">Dashboard</Link>
+				  </DropdownMenu>
 		    </div>
 				<Modal
 					isOpen={this.state.isLoginModalOpen}
-					close={this._closeLoginModal.bind(this)}>
+					close={this._closeLoginModal.bind(this)}
+				>
 					<SignIn
 						openRegisterModal={this._openRegisterModal.bind(this)}
 						closeThisModal={this._closeLoginModal.bind(this)}
@@ -94,7 +111,8 @@ export default class Header extends React.Component {
 
 				<Modal
 					isOpen={this.state.isRegisterModalOpen}
-					close={this._closeRegisterModal.bind(this)}>
+					close={this._closeRegisterModal.bind(this)}
+				>
 					<SignUp
 						openLoginModal={this._openLoginModal.bind(this)}
 						closeThisModal={this._closeRegisterModal.bind(this)}
