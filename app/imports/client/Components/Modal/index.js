@@ -53,40 +53,53 @@ export default class Modal extends React.Component {
   }
   render() {
     return this.state.isOpen && (
-      <div
-        className="modal"
-        style={{
-          backgroundColor: white,
-          height: '100vh',
-          left: 0,
-          opacity: .95,
-          overflowY: 'auto',
-          position: 'fixed',
-          top: 0,
-          width: '100vw',
-          zIndex: 1000,
-        }}
-      >
-        <CloseButton>
-          <ClearIcon
-            color={grey800}
-            style={{
-              height: 30,
-              position: 'fixed',
-              right: 30,
-              top: 20,
-              width: 30,
-            }}
-            onClick={this._closeModal.bind(this)}
-          />
-        </CloseButton>
-        <Content
+      <div>
+        <div
           style={{
-            ...this.props.style,
+            backgroundColor: white,
+            height: '100vh',
+            left: 0,
+            opacity: .95,
+            position: 'fixed',
+            top: 0,
+            width: '100vw',
+            zIndex: 1000,
           }}
         >
-          {this.props.children}
-        </Content>
+        </div>
+        <div
+          className="modal"
+          style={{
+            height: '100vh',
+            left: 0,
+            overflowY: 'auto',
+            position: 'fixed',
+            top: 0,
+            width: '100vw',
+            zIndex: 1001,
+          }}
+        >
+          <CloseButton>
+            <ClearIcon
+              color={grey800}
+              style={{
+                height: 30,
+                position: 'fixed',
+                right: 30,
+                top: 20,
+                width: 30,
+              }}
+              onClick={this._closeModal.bind(this)}
+            />
+          </CloseButton>
+          <Content
+            style={{
+              ...this.props.style,
+            }}
+          >
+            {this.props.children}
+          </Content>
+        </div>
       </div>
     )
   }
