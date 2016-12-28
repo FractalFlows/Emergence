@@ -350,9 +350,7 @@ export default class Home extends React.Component {
 		)
 	}
 	_openWatchTourModal() {
-		this.setState({
-			isWatchTourModalOpen: true,
-		})
+		this.setState({ isWatchTourModalOpen: true })
 	}
 	_closeWatchTourModal() {
 		this.setState({ isWatchTourModalOpen: false })
