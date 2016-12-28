@@ -164,26 +164,6 @@ export default class Modal extends React.Component {
         authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
         DOI: '10.1109/TC.2002.100914',
       },
-      {
-        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
-        authors: ['Theo J. Bastiaes', 'Lincoln C. Wood', 'Torsten Reiners'],
-        DOI: '10.1109/TC.2002.100946',
-      },
-      {
-        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
-        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
-        DOI: '10.1109/TC.20.100146',
-      },
-      {
-        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
-        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
-        DOI: '10.1109/T.2002.100946',
-      },
-      {
-        title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
-        authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
-        DOI: '10.1109/TC.202.100914',
-      },
     ].filter(article => article.title.match(new RegExp(`(${searchText})`, 'gi')))
 
     results.map(article =>
