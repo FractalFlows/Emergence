@@ -16,6 +16,7 @@ import App from './Components/App'
 import EmptyScreen from './Components/EmptyScreen'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
+import Dashboard from './Pages/Dashboard'
 
 injectTapEventPlugin()
 
@@ -27,6 +28,7 @@ export default function createRoutes() {
           <Route path="/" component={App}>
             <IndexRoute component={Home}/>
             <Route path="/article/:slug" component={Article}/>
+            <Route path="/dashboard" component={Dashboard}/>
             <Route path="*" component={EmptyScreen}/>
           </Route>
         </Router>
