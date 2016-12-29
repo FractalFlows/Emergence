@@ -6,7 +6,11 @@
 // Modules
 import React from 'react'
 import styled from 'styled-components'
-import { RaisedButton } from 'material-ui'
+import WarningIcon from 'material-ui/svg-icons/alert/warning'
+import {
+  RaisedButton,
+  TextField,
+} from 'material-ui'
 import {
   grey200,
   grey300,
@@ -18,10 +22,11 @@ import {
 
 // Components
 import ArticleSummary from '../ArticleSummary'
-import RelatedArticle from '../RelatedArticle'
+import Modal from '../../Components/Modal'
 import Panel from '../../Components/Panel'
 import PanelBody from '../../Components/PanelBody'
 import PanelHeader from '../../Components/PanelHeader'
+import RelatedArticle from '../RelatedArticle'
 
 //Styled Components
 const PanelHeaderButton = styled.button`
@@ -43,7 +48,22 @@ const ArticleDetail = styled.p`
   font-size: 15px;
 `
 
+const ReportArticleButton = styled.div`
+  opacity: .4;
+
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+`
+
 export default class Article extends React.Component {
+  constructor() {
+		super()
+		this.state = {
+			isReportArticleModalOpen: false,
+		}
+	}
   render() {
     const summaries = [
       {
@@ -83,15 +103,34 @@ export default class Article extends React.Component {
       >
         <Panel>
           <PanelBody>
-            <h1
+            <div
               style={{
-                margin: '0 0 20px 0',
-                color: grey800,
-                fontSize: 23,
+                width: '100%',
+                height: 'auto',
               }}
             >
-              {unescape(this.props.params.slug)}
-            </h1>
+              <h1
+                style={{
+                  color: grey800,
+                  fontSize: 23,
+                  float: 'left',
+                  margin: '0 0 20px 0',
+                  width: '95%',
+                }}
+              >
+                {unescape(this.props.params.slug)}
+              </h1>
+              <ReportArticleButton >
+                <WarningIcon
+                  color={grey600}
+                  style={{
+                    float: 'right',
+                    width: '5%',
+                  }}
+                  onClick={this._openReportArticleModal.bind(this)}
+                />
+              </ReportArticleButton>
+            </div>
             <ArticleDetail>
               <b>Authors:</b> Theo J. Bastiaens; Lincoln C. Wood; Torsten Reiners
             </ArticleDetail>
@@ -168,9 +207,61 @@ export default class Article extends React.Component {
             </table>
           </PanelBody>
         </Panel>
+        <Modal
+					isOpen={this.state.isReportArticleModalOpen}
+					close={this._closeReportArticleModal.bind(this)}
+          style={{
+						padding: 90,
+					}}
+				>
+          <div
+            style={{
+              width: 500,
+            }}
+          >
+            <div
+              style={{
+                textAlign: 'center',
+              }}
+            >
+              <h2
+                style={{
+                  color: grey800,
+                }}
+              >
+                Report this article
+              </h2>
+            </div>
+            <form
+              style={{
+                marginTop: 40,
+                marginBottom: 40,
+              }}
+            >
+              <TextField
+                hintText="This article contains a summary that does not fits with the essence of the article, contains graphic content, unappropriated language"
+                multiLine={true}
+                rows={2}
+                rowsMax={6}
+                fullWidth={true}
+              />
+              <RaisedButton
+                label="Confirm"
+                primary={true}
+                fullWidth={true}
+              />
+            </form>
+          </div>
+				</Modal>
       </div>
     )
   }
+  _openReportArticleModal() {
+		this.setState({ isReportArticleModalOpen: true })
+	}
+	_closeReportArticleModal() {
+		this.setState({ isReportArticleModalOpen: false })
+	}
 }
 
 // export default container(Article)
