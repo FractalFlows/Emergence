@@ -62,7 +62,6 @@ export default class ArticleSummary extends React.Component {
               display: 'flex',
               alignItems: 'center',
               height: 50,
-              borderRadius: 25,
               flexGrow: 9999,
               cursor: 'pointer',
             }}
@@ -78,6 +77,7 @@ export default class ArticleSummary extends React.Component {
               style={{
                 color: grey600,
                 flexGrow: 1,
+                fontSize: 15,
               }}
             >
               Summary by <span style={{color: grey800}}>{summary.author}</span>
