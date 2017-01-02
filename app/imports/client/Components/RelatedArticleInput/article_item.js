@@ -61,13 +61,14 @@ export default class ArticleItem extends React.Component {
           <div
             style={{
               flexGrow: 9999,
+              paddingLeft: 5
             }}
           >
             <div
               dangerouslySetInnerHTML={getHighlightedTitle()}
               style={{
                 color: grey800,
-                fontSize: 15,
+                fontSize: 14,
               }}
             />
               <div
