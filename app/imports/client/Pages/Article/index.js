@@ -125,6 +125,8 @@ export default class Article extends React.Component {
                   color={grey600}
                   style={{
                     float: 'right',
+                    height : 30,
+                    margin: '0 0 50px 0',
                     width: '5%',
                   }}
                   onClick={this._openReportArticleModal.bind(this)}
