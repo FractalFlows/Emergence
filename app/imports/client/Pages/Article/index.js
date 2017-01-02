@@ -6,7 +6,10 @@
 // Modules
 import React from 'react'
 import styled from 'styled-components'
-import { RaisedButton } from 'material-ui'
+import {
+  RaisedButton,
+  Snackbar,
+} from 'material-ui'
 import {
   grey200,
   grey300,
@@ -17,11 +20,14 @@ import {
 } from 'material-ui/styles/colors'
 
 // Components
-import ArticleSummary from '../ArticleSummary'
-import RelatedArticle from '../RelatedArticle'
-import Panel from '../../Components/Panel'
-import PanelBody from '../../Components/PanelBody'
-import PanelHeader from '../../Components/PanelHeader'
+import ArticleSummary from '../../Components/ArticleSummary'
+import RelatedArticle from '../../Components/RelatedArticle'
+import RelatedArticleInput from '../../Components/RelatedArticleInput'
+import {
+  Panel,
+  PanelHeader,
+  PanelBody,
+} from '../../Components/Panel'
 
 //Styled Components
 const PanelHeaderButton = styled.button`
@@ -44,6 +50,14 @@ const ArticleDetail = styled.p`
 `
 
 export default class Article extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      isAddingNewRelatedArticle: false,
+      snackbarIsOpen: false,
+      snackbarMessage: undefined,
+    }
+  }
   render() {
     const summaries = [
       {
@@ -139,7 +153,9 @@ export default class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Related articles">
-            <PanelHeaderButton>
+            <PanelHeaderButton
+              onClick={this._showAddRelatedArticleInput.bind(this)}
+            >
               Add more related articles
             </PanelHeaderButton>
           </PanelHeader>
@@ -150,26 +166,62 @@ export default class Article extends React.Component {
                 borderCollapse: 'collapse',
               }}
             >
-              {relatedArticles.length > 0 ?
-                relatedArticles.map((relatedArticle, i) =>
-                  <RelatedArticle key={i} article={relatedArticle} />
-                ) :
-                <div
-                  style={{
-                    textAlign: 'center',
-                  }}
-                >
-                  <RaisedButton
-                    label="Add related articles"
-                    primary={true}
-                  />
-                </div>
-              }
+              <tbody>
+                {relatedArticles.length > 0 ?
+                  relatedArticles.map((relatedArticle, i) =>
+                    <RelatedArticle key={i} article={relatedArticle} />
+                  ) :
+                  <div
+                    style={{
+                      textAlign: 'center',
+                    }}
+                  >
+                    <RaisedButton
+                      label="Add related articles"
+                      primary={true}
+                    />
+                  </div>
+                }
+                {this.state.isAddingNewRelatedArticle &&
+                  <tr>
+                    <td colSpan="2">
+                      <RelatedArticleInput
+                        cancel={this._hideAddRelatedArticleInput.bind(this)}
+                        showSnackbar={this._showSnackbar.bind(this)}
+                      />
+                    </td>
+                  </tr>
+                }
+              </tbody>
             </table>
           </PanelBody>
         </Panel>
+
+        <Snackbar
+          open={this.state.snackbarIsOpen}
+          message={this.state.snackbarMessage}
+          action="undo"
+          autoHideDuration={4000}
+          onRequestClose={this._hideSnackbar.bind(this)}
+        />
       </div>
     )
+  }
+  _showAddRelatedArticleInput() {
+    this.setState({ isAddingNewRelatedArticle: true })
+  }
+  _hideAddRelatedArticleInput() {
+    this.setState({ isAddingNewRelatedArticle: false })
+  }
+
+  _showSnackbar(message) {
+    this.setState({
+      snackbarIsOpen: true,
+      snackbarMessage: message,
+    })
+  }
+  _hideSnackbar() {
+    this.setState({ snackbarIsOpen: false })
   }
 }
 
