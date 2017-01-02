@@ -47,6 +47,13 @@ const ArticleDetail = styled.p`
   color: ${grey600};
   margin: 0 0 3px 0;
   font-size: 15px;
+  display: flex;
+
+  b {
+    display: inline-block;
+    width: 85px;
+    flex-shrink: 0;
+  }
 `
 
 export default class Article extends React.Component {
@@ -107,10 +114,22 @@ export default class Article extends React.Component {
               {unescape(this.props.params.slug)}
             </h1>
             <ArticleDetail>
-              <b>Authors:</b> Theo J. Bastiaens; Lincoln C. Wood; Torsten Reiners
+              <b>Authors:</b>
+              <div>
+                Theo J. Bastiaens; Lincoln C. Wood; Torsten Reiners
+              </div>
             </ArticleDetail>
             <ArticleDetail>
-              <b>DOI:</b> 10.1109/TC.2002.1009146
+              <b>DOI:</b>
+              <div>
+                10.1109/TC.2002.1009146
+              </div>
+            </ArticleDetail>
+            <ArticleDetail>
+              <b>Abstract:</b>
+              <div>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sit amet ligula a neque dapibus maximus sed eu velit. Donec mattis congue tellus quis condimentum. Aliquam pulvinar rutrum tortor a tempus. Duis maximus vel neque sit amet pellentesque. Maecenas tincidunt nisl id sapien iaculis iaculis. Sed aliquet id dolor gravida lobortis. Cras quam tellus, euismod sit amet quam eleifend, cursus lacinia mauris. Donec nec vulputate turpis, et malesuada eros. Nulla nec nulla non ante volutpat dignissim vitae a lorem. Vestibulum lacus enim, hendrerit sit amet ultrices nec, porttitor id nisl. Fusce interdum pharetra metus sit amet blandit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Duis semper libero cursus semper consequat. Nullam nec dapibus nisi, eu convallis ligula. Sed tristique nisl quis faucibus ullamcorper. Fusce a nisl ac sem pretium tincidunt. Cras lobortis mattis sodales. Vivamus bibendum turpis sit amet nibh laoreet porta. Phasellus porttitor dignissim quam et gravida. Morbi aliquam ut neque eget rhoncus. Nunc ac nisi ante. Nullam efficitur eros ut nibh pulvinar, ut volutpat ligula sodales. Proin bibendum dignissim orci et egestas. Nunc tortor odio, dictum id lorem quis, gravida consequat tortor. Cras auctor fermentum libero. Suspendisse non nisl nisi. Curabitur fringilla neque neque, vitae iaculis tortor vestibulum id. Praesent viverra libero et ornare auctor. Nunc a lectus lorem. Duis et magna tempus, venenatis leo in, consectetur tellus. Interdum et malesuada fames ac ante ipsum primis in faucibus. Praesent vitae convallis diam. Integer gravida consequat ex, nec hendrerit est vestibulum a. Phasellus eu ante et urna facilisis convallis. Morbi volutpat mauris sit amet diam placerat, nec iaculis mauris rutrum. Donec nulla felis, vestibulum elementum efficitur non, bibendum et massa. Donec dolor tortor, molestie at eleifend vitae, pharetra vitae ex. Suspendisse tellus velit, porttitor ac dapibus nec, volutpat vitae mauris. Sed vel ultrices.
+              </div>
             </ArticleDetail>
           </PanelBody>
         </Panel>
