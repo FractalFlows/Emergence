@@ -14,10 +14,14 @@ import { RaisedButton } from 'material-ui'
 import SwipeableViews from 'react-swipeable-views';
 import {
   white,
+  grey400,
   grey700,
 } from 'material-ui/styles/colors'
 
+//Components
+import Users from './users'
 
+//Styled Components
 const TabItem = styled(Tab)`
   background-color: ${white} !important;
   color: ${grey700} !important;
@@ -51,28 +55,26 @@ export default class Dashboard extends React.Component {
             padding: '30px 150px',
           }}
         >
-          <Tabs
-            onChange={this._handleTabChange.bind(this)}
-            value={this.state.slideIndex}
+          <div
+            style={{
+              boxShadow: `-1px 1px 2px ${grey400}`,
+            }}
           >
-            <TabItem label="Articles" value={0} />
-            <TabItem label="Users" value={1} />
-          </Tabs>
-          <SwipeableViews
-            index={this.state.slideIndex}
-            onChangeIndex={this.handleChange}
-          >
-            <div>
-              <h2>Tabs with slide effect</h2>
-              Swipe to see the next slide.<br />
-            </div>
-            <div>
-              slide n°2
-            </div>
-            <div>
-              slide n°3
-            </div>
-          </SwipeableViews>
+            <Tabs
+              onChange={this._handleTabChange.bind(this)}
+              value={this.state.slideIndex}
+            >
+              <TabItem label="Users" value={0} />
+              <TabItem label="Articles" value={1} />
+            </Tabs>
+
+            <SwipeableViews
+              index={this.state.slideIndex}
+              onChangeIndex={this.handleChange}
+            >
+              <Users />
+            </SwipeableViews>
+          </div>
         </div>
 		  </div>
 		)
