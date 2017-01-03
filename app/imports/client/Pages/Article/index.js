@@ -218,9 +218,17 @@ export default class Article extends React.Component {
 				>
           <div
             style={{
+              textAlign: 'center',
               width: 500,
             }}
           >
+          <WarningIcon
+            color={grey400}
+            style={{
+              height: 70,
+              width: 70,
+            }}
+          />
             <div
               style={{
                 textAlign: 'center',
