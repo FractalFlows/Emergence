@@ -22,6 +22,7 @@
     "react-swipeable-views": "^0.9.3",
     "react-tap-event-plugin": "^2.0.1",
     "react-toolbox": "^2.0.0-beta.1",
+    "recompose": "^0.21.2",
     "redux": "^3.6.0",
     "redux-form": "^6.4.3",
     "redux-immutable": "^3.0.8",
