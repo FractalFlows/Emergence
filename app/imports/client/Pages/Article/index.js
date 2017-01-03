@@ -126,13 +126,13 @@ export default class Article extends React.Component {
                   style={{
                     float: 'right',
                     height : 30,
-                    margin: '0 0 50px 0',
                     width: '5%',
                   }}
                   onClick={this._openReportArticleModal.bind(this)}
                 />
               </ReportArticleButton>
             </div>
+            <div className="addthis_inline_share_toolbox"></div>
             <ArticleDetail>
               <b>Authors:</b> Theo J. Bastiaens; Lincoln C. Wood; Torsten Reiners
             </ArticleDetail>
