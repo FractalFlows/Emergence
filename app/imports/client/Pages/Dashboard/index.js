@@ -10,10 +10,10 @@ import {
   Tabs,
   Tab,
 } from 'material-ui/Tabs'
-import { RaisedButton } from 'material-ui'
 import SwipeableViews from 'react-swipeable-views';
 import {
   white,
+  cyan400,
   grey400,
   grey700,
 } from 'material-ui/styles/colors'
@@ -23,6 +23,14 @@ import Users from './users'
 import Articles from './articles'
 
 //Styled Components
+const TabsList = styled(Tabs)`
+  margin: 0 2px;
+  box-shadow: -1px 1px 2px ${grey400};
+
+  & > div:nth-child(2) div {
+    background-color: ${cyan400} !important;
+  }
+`
 const TabItem = styled(Tab)`
   background-color: ${white} !important;
   color: ${grey700} !important;
@@ -32,12 +40,7 @@ const TabItem = styled(Tab)`
   }
 `
 
-const ButtonRaisedD = styled(RaisedButton)`
-  padding: 50px;
-  background-color: #000;
-`
-
-//Disguise the StyledComponent TabItem as a MaterialUI Tab component
+//Disguise the StyledComponent components as MaterialUI Tab components
 //*Tabs component requires it
 TabItem.muiName = 'Tab'
 
@@ -56,17 +59,13 @@ export default class Dashboard extends React.Component {
             padding: '30px 150px',
           }}
         >
-          <Tabs
+          <TabsList
             onChange={this._handleTabChange.bind(this)}
             value={this.state.slideIndex}
-            style={{
-              margin: '0 2px',
-              boxShadow: `-1px 1px 2px ${grey400}`,
-            }}
           >
             <TabItem label="Users" value={0} />
             <TabItem label="Articles" value={1} />
-          </Tabs>
+          </TabsList>
 
           <SwipeableViews
             index={this.state.slideIndex}
