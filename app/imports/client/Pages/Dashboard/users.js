@@ -5,7 +5,6 @@
 
 // Modules
 import React from 'react'
-import styled from 'styled-components'
 import {
   Table,
   TableHeader,
@@ -14,10 +13,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'
-import {
-  white,
-  grey700,
-} from 'material-ui/styles/colors'
+import { grey400 } from 'material-ui/styles/colors'
 
 export default class Users extends React.Component {
 	render() {
@@ -50,10 +46,15 @@ export default class Users extends React.Component {
         name: 'Adam Moore',
         email: 'adam.moore@gmail.com',
       },
-    ];
+    ]
 
 		return (
-			<div>
+			<div
+        style={{
+          margin: '0 2px 1px 2px',
+          boxShadow: `-1px 1px 2px ${grey400}`,
+        }}
+      >
         <Table
           multiSelectable={true}
         >

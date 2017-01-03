@@ -20,6 +20,7 @@ import {
 
 //Components
 import Users from './users'
+import Articles from './articles'
 
 //Styled Components
 const TabItem = styled(Tab)`
@@ -55,26 +56,25 @@ export default class Dashboard extends React.Component {
             padding: '30px 150px',
           }}
         >
-          <div
+          <Tabs
+            onChange={this._handleTabChange.bind(this)}
+            value={this.state.slideIndex}
             style={{
+              margin: '0 2px',
               boxShadow: `-1px 1px 2px ${grey400}`,
             }}
           >
-            <Tabs
-              onChange={this._handleTabChange.bind(this)}
-              value={this.state.slideIndex}
-            >
-              <TabItem label="Users" value={0} />
-              <TabItem label="Articles" value={1} />
-            </Tabs>
+            <TabItem label="Users" value={0} />
+            <TabItem label="Articles" value={1} />
+          </Tabs>
 
-            <SwipeableViews
-              index={this.state.slideIndex}
-              onChangeIndex={this.handleChange}
-            >
-              <Users />
-            </SwipeableViews>
-          </div>
+          <SwipeableViews
+            index={this.state.slideIndex}
+            onChangeIndex={this.handleChange}
+          >
+            <Users />
+            <Articles />
+          </SwipeableViews>
         </div>
 		  </div>
 		)
