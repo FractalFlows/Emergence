@@ -3,8 +3,73 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
 const Articles = new Mongo.Collection('articles')
 
+const ArticleVoteSchema = new SimpleSchema({
+  vote: {
+    type: Number,
+    allowedValues: [-1, 1],
+  },
+  voterId: {
+    type: SimpleSchema.RegEx.Id,
+  },
+  voterName: {
+    type: String,
+  },
+})
 
-Articles.schema = new SimpleSchema({
+export const ArticleSummarySchema = new SimpleSchema({
+  author: {
+    type: String,
+  },
+  content: {
+    type: String,
+  },
+  date: {
+    type: Date,
+  },
+  upVotes: {
+    type: Number,
+  },
+  downVotes: {
+    type: Number,
+  },
+  voters: {
+    type: [ArticleVoteSchema],
+    optional: true,
+  },
+})
+
+export const ArticleKnowledgeBitSchema = new SimpleSchema({
+  type: {
+    type: String,
+    allowedValues: ['pdf', 'github'],
+  },
+  link: {
+    type: SimpleSchema.RegEx.Url,
+  },
+  addedById: {
+    type: SimpleSchema.RegEx.Email,
+  },
+  addedByName: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+  },
+  upVotes: {
+    type: Number,
+    optional: true,
+  },
+  downVotes: {
+    type: Number,
+    optional: true,
+  },
+  voters: {
+    type: [ArticleVoteSchema],
+    optional: true,
+  },
+})
+
+const schema = new SimpleSchema({
   createdAt: {
     type: Date,
     optional: true,
@@ -35,8 +100,27 @@ Articles.schema = new SimpleSchema({
     max: 150,
     unique: true,
   },
+  authors: {
+    type: [String],
+  },
+  doi: {
+    type: String,
+    unique: true,
+  },
+  summaries: {
+    type: [ArticleSummarySchema],
+    optional: true,
+  },
+  knowledgeBits: {
+    type: [ArticleKnowledgeBitSchema],
+    optional: true,
+  },
+  relatedArticles: {
+    type: [SimpleSchema.RegEx.Id],
+    optional: true,
+  },
 })
 
 Articles.attachSchema(Articles.schema)
-export default Articles
 
+export default Articles
