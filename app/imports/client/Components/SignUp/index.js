@@ -27,6 +27,7 @@ import {
 
 // Components
 import renderField from '/imports/client/Components/Form/renderField'
+import Error from '/imports/client/Components/Error'
 
 //Styled Components
 const RegisterLink = styled.p`
@@ -37,10 +38,6 @@ const RegisterLink = styled.p`
   &:hover {
     text-decoration: underline;
   }
-`
-
-const Error = styled.p`
-  color: ${red500};
 `
 
 class SignUp extends PureComponent {
