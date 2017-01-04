@@ -3,7 +3,10 @@
  * @flow
  */
 
-import React from 'react'
+import React, {
+  PureComponent,
+  PropTypes,
+} from 'react'
 import styled from 'styled-components'
 import {
   TextField,
@@ -26,14 +29,18 @@ const RegisterLink = styled.p`
   }
 `
 
-export default class SignIn extends React.Component {
+export default class SignIn extends PureComponent {
+  propTypes: {
+    openRegisterModal: PropTypes.func.isRequired,
+    closeThisModal: PropTypes.func.isRequired,
+  }
+
   render() {
     return (
       <div
         style={{
           maxWidth: 450,
         }}
-
       >
         <div
           style={{
@@ -63,25 +70,26 @@ export default class SignIn extends React.Component {
         >
           <TextField
             floatingLabelText="Your email"
-            fullWidth={true}
+            fullWidth
           />
 
           <RaisedButton
             label="Sign Me In"
-            primary={true}
-            fullWidth={true}
+            primary
+            fullWidth
           />
         </form>
 
         <RegisterLink
-          onClick={this._changeModal.bind(this)}
+          onClick={this.changeModal.bind(this)}
         >
           Do not have an account yet? Register to start sharing your knowledge now!
         </RegisterLink>
       </div>
     )
   }
-  _changeModal() {
+
+  changeModal() {
     this.props.openRegisterModal()
     this.props.closeThisModal()
   }
