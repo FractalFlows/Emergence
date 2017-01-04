@@ -7,7 +7,14 @@ import React, {
   PureComponent,
   PropTypes,
 } from 'react'
+import { isEmpty } from 'lodash'
+import { Meteor } from 'meteor/meteor'
 import styled from 'styled-components'
+import {
+  Field,
+  reduxForm,
+  SubmissionError,
+} from 'redux-form'
 import {
   TextField,
   RaisedButton,
@@ -17,6 +24,10 @@ import {
 	cyan400,
   grey800,
 } from 'material-ui/styles/colors'
+
+// Components
+import renderField from '/imports/client/Components/Form/renderField'
+import Error from '/imports/client/Components/Error'
 
 //Styled Components
 const RegisterLink = styled.p`
@@ -29,13 +40,22 @@ const RegisterLink = styled.p`
   }
 `
 
-export default class SignIn extends PureComponent {
+class SignIn extends PureComponent {
   propTypes: {
     openRegisterModal: PropTypes.func.isRequired,
     closeThisModal: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    error: PropTypes.string,
+    submitting: PropTypes.bool,
   }
 
   render() {
+    const {
+      handleSubmit,
+      error,
+      submitting,
+    } = this.props
+
     return (
       <div
         style={{
@@ -67,14 +87,19 @@ export default class SignIn extends PureComponent {
           style={{
             marginBottom: 40,
           }}
+          onSubmit={handleSubmit(this.submitLoginUser.bind(this))}
         >
-          <TextField
+          <Field
+            name="email"
             floatingLabelText="Your email"
+            component={renderField}
             fullWidth
           />
 
           <RaisedButton
             label="Sign Me In"
+            type="submit"
+            disabled={submitting}
             primary
             fullWidth
           />
@@ -89,8 +114,38 @@ export default class SignIn extends PureComponent {
     )
   }
 
+  submitLoginUser(values) {
+    return new Promise((resolve, reject) => {
+      const syncValidationErrors = this.validateSync(values, ['email'])
+      if(!isEmpty(syncValidationErrors)){
+        return reject(new SubmissionError(syncValidationErrors))
+      }
+
+      Meteor.loginWithPassword(values.email, 'defaultpassword', (error) => {
+        if(error){
+          return reject(new SubmissionError({
+            _error: error.reason,
+          }))
+        }
+
+        this.props.closeThisModal()
+      })
+    })
+  }
+
+  validateSync(values, fields){
+    return fields.reduce((errors, field) => {
+      if( isEmpty(values[field]) ) return { ...errors, [field]: 'Field can not be empty' }
+      else return { ...errors }
+    }, {})
+  }
+
   changeModal() {
     this.props.openRegisterModal()
     this.props.closeThisModal()
   }
 }
+
+export default reduxForm({
+  form: 'signIn',
+})(SignIn)
