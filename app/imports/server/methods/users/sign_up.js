@@ -10,10 +10,11 @@ Meteor.methods({
     }).validate(user)
 
     const userId = Accounts.createUser({
-      username: values.email.split('@')[0] + Math.random().toString().slice(2, 6),
+      username: user.email.split('@')[0] + Math.random().toString().slice(2, 6),
       password: 'defaultpassword',
+      email: user.email,
       profile: {
-        name: values.fullName,
+        firstName: user.name,
       },
     })
 

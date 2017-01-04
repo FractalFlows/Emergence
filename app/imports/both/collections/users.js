@@ -42,7 +42,7 @@ Meteor.users.schema = new SimpleSchema({
     type: Object
   },
 
-  'profile.name': {
+  'profile.firstName': {
     label:'First name',
     type: String,
     optional: true,
