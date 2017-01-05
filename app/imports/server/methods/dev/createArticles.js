@@ -14,6 +14,7 @@ Meteor.methods({
         title: 'Electrospinning of polymeric nanofibers for tissue engineering applications: a review',
         authors: ['Quynh P. Pham', 'Upma Sharma', 'Antonios G. Mikos'],
         DOI: '10.1109/FIE.2000.896576',
+        abstract: getMonkeySayings(),
       },
 
       // No KD but summaries
@@ -21,6 +22,7 @@ Meteor.methods({
         title: 'Utility of multimaterial 3D printers in creating models with pathological entities to enhance the training experience of neurosurgeons',
         authors: ['Vicknes Waran', 'Vairavan Narayanan', 'Ravindran Karuppiah', 'Sarah L. F. Owen', 'Tipu Aziz'],
         DOI: '10.3171/2013.11.JNS131066',
+        abstract: getMonkeySayings(),
         summaries: [
           {
             authorId: users[0]._id,
@@ -43,6 +45,7 @@ Meteor.methods({
         title: 'New Landscapes and New Eyes: The Role of Virtual World Design for Supply Chain Education',
         authors: ['Theo J. Bastiaens', 'Lincoln C. Wood', 'Torsten Reiners'],
         DOI: '10.1109/TC.2002.100914',
+        abstract: getMonkeySayings(),
         informations: [
           {
             type: 'github',
