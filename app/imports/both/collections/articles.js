@@ -17,7 +17,7 @@ const ArticleVoteSchema = new SimpleSchema({
 })
 
 export const ArticleSummarySchema = new SimpleSchema({
-  author: {
+  authorId: {
     type: String,
   },
   content: {
@@ -93,7 +93,7 @@ const schema = new SimpleSchema({
     },
     denyInsert: true,
   },
-  name: {
+  title: {
     label: 'Article name',
     index: true,
     type: String,
@@ -103,7 +103,7 @@ const schema = new SimpleSchema({
   authors: {
     type: [String],
   },
-  doi: {
+  DOI: {
     type: String,
     unique: true,
   },
@@ -111,7 +111,7 @@ const schema = new SimpleSchema({
     type: [ArticleSummarySchema],
     optional: true,
   },
-  knowledgeBits: {
+  informations: {
     type: [ArticleKnowledgeBitSchema],
     optional: true,
   },
@@ -121,6 +121,6 @@ const schema = new SimpleSchema({
   },
 })
 
-Articles.attachSchema(Articles.schema)
+Articles.attachSchema(schema)
 
 export default Articles
