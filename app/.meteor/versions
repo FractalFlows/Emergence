@@ -45,6 +45,7 @@ launch-screen@1.1.0
 livedata@1.0.18
 localstorage@1.0.12
 logging@1.1.16
+matb33:collection-hooks@0.7.15
 mdg:validated-method@1.1.0
 mdg:validation-error@0.5.1
 meteor@1.6.0
@@ -85,6 +86,7 @@ templating@1.2.15
 templating-compiler@1.2.15
 templating-runtime@1.2.15
 templating-tools@1.0.5
+todda00:friendly-slugs@0.6.0
 tracker@1.1.1
 ui@1.0.12
 underscore@1.0.10
