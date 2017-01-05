@@ -80,6 +80,7 @@ export default class Header extends React.Component {
 							cursor: 'pointer',
 		    		}}
 						onClick={this._openLoginModal.bind(this)}
+            data-name="header-login-btn"
 		    	>
 		    		Login
 		    	</p>
