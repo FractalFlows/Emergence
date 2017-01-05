@@ -55,9 +55,6 @@ Meteor.users.schema = new SimpleSchema({
     label:'Phone number',
     type: String,
     optional: true,
-    custom() {
-      if (this.userId && !this.value) return 'required'
-    }
   },
 
   'profile.description': {
