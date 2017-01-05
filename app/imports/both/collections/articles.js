@@ -107,6 +107,9 @@ const schema = new SimpleSchema({
     type: String,
     unique: true,
   },
+  abstract: {
+    type: String,
+  },
   summaries: {
     type: [ArticleSummarySchema],
     optional: true,
@@ -122,5 +125,6 @@ const schema = new SimpleSchema({
 })
 
 Articles.attachSchema(schema)
+Articles.friendlySlugs('title')
 
 export default Articles
