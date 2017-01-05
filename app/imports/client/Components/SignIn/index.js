@@ -107,6 +107,7 @@ class SignIn extends PureComponent {
 
         <RegisterLink
           onClick={this.changeModal.bind(this)}
+          data-name="sign-in-register-link"
         >
           Do not have an account yet? Register to start sharing your knowledge now!
         </RegisterLink>
