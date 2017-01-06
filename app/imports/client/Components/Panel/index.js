@@ -46,7 +46,7 @@ function PanelHeader(props) {
         style={{
           color: grey600,
           margin: 0,
-          fontSize: 16,
+          fontSize: 15,
           fontWeight: 200,
           flexGrow: 9999,
         }}
