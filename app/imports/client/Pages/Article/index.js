@@ -174,7 +174,9 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Knowledge bits">
-            <PanelHeaderButton>
+            <PanelHeaderButton
+              data-name="add-knowledge-btn"
+            >
               Add knowledge product
             </PanelHeaderButton>
           </PanelHeader>
