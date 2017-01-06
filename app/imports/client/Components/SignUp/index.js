@@ -26,8 +26,10 @@ import {
 } from 'material-ui/styles/colors'
 
 // Components
+import SignIn from '/imports/client/Components/SignIn'
 import renderField from '/imports/client/Components/Form/renderField'
 import Error from '/imports/client/Components/Error'
+import ModalBtn from '/imports/client/Components/ModalBtn'
 
 //Styled Components
 const RegisterLink = styled.p`
@@ -43,7 +45,8 @@ const RegisterLink = styled.p`
 class SignUp extends PureComponent {
   propTypes: {
     openLoginModal: PropTypes.func.isRequired,
-    closeThisModal: PropTypes.func.isRequired, handleSubmit: PropTypes.func.isRequired,
+    closeThisModal: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
   }
 
@@ -99,24 +102,22 @@ class SignUp extends PureComponent {
           <RaisedButton
             label="Sign Me Up"
             type="submit"
+            disabled={this.props.submitting}
             fullWidth
             primary
           />
         </form>
 
-        <RegisterLink
-          onClick={this.changeModal.bind(this)}
-          disabled={this.props.submitting}
+        <ModalBtn
+          onClick={() => this.props.closeThisModal()}
+          content={SignIn}
         >
-          Already have an account? Sign in.
-        </RegisterLink>
+          <RegisterLink>
+            Already have an account? Sign in.
+          </RegisterLink>
+        </ModalBtn>
       </div>
     )
-  }
-
-  changeModal() {
-    this.props.openLoginModal()
-    this.props.closeThisModal()
   }
 
   submitCreateUser(values) {

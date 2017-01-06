@@ -20,6 +20,7 @@ import {
 
 // Components
 import Modal from '../Modal'
+import ModalBtn from '../ModalBtn'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
 import SearchInput from '../SearchInput'
@@ -83,17 +84,20 @@ class Header extends React.Component {
 
           { isEmpty(user) ? 
             (
+            <ModalBtn
+              content={SignUp}
+            >
               <p
                 style={{
                   marginLeft: 50,
                   color: cyan400,
                   cursor: 'pointer',
                 }}
-                onClick={this.openLoginModal.bind(this)}
                 data-name="header-login-btn"
               >
                 Login
               </p>
+            </ModalBtn>
             ) : (
               <p
                 style={{
