@@ -167,7 +167,8 @@ class Header extends React.Component {
 	closeRegisterModal() {
 		this.setState({ isRegisterModalOpen: false })
 	}
-  logoutUser() {
+  logoutUser(e) {
+    e.preventDefault()
     Meteor.logout()
   }
 }
