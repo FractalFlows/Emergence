@@ -96,6 +96,8 @@ class SignIn extends PureComponent {
             fullWidth
           />
 
+          {error ? <Error>{this.humanizeError(error)}</Error> : null}
+
           <RaisedButton
             label="Sign Me In"
             type="submit"
@@ -144,6 +146,11 @@ class SignIn extends PureComponent {
   changeModal() {
     this.props.openRegisterModal()
     this.props.closeThisModal()
+  }
+
+  humanizeError(error) {
+    const cleaned = error.replace('error.accounts.', '')
+    return  cleaned === 'Login forbidden' ? 'User not found' : cleaned
   }
 }
 
