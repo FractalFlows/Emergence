@@ -3,9 +3,23 @@
  * @flow
  */
 
-import { connect } from 'react-redux'
-import * as actionsToProps from './actions'
+import composeWithTracker from 'compose-with-tracker'
+import Articles from '/imports/both/collections/articles'
 
-const stateToProps = ({ article }) => ({ article })
+export default composeWithTracker((props, onData) => {
+  const slug = props.params.slug
+  const handle = Meteor.subscribe('articles.bySlug', slug)
 
-export default connect(stateToProps, actionsToProps)
+  if(handle.ready()){
+    onData(null, {
+      article: Articles.findOne({ slug }) || {},
+    })
+  } else {
+    onData(null, {
+      isLoading: true,
+    })
+  }
+}, {
+  propsToWatch: 'params',
+  pure: true,
+})
