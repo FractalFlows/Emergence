@@ -3,8 +3,7 @@
  * @flow
  */
 
-//Modules
-import React from 'react'
+import React, { PropTypes }  from 'react'
 import styled, { keyframes } from 'styled-components'
 import ClearIcon from 'material-ui/svg-icons/content/clear'
 import {
@@ -39,20 +38,13 @@ const Content = styled.div`
 `
 
 export default class Modal extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      isOpen: false,
-    }
-  }
   propTypes: {
     isOpen: React.PropTypes.boolean.isRequired,
+    close: PropTypes.func.isRequired,
   }
-  componentWillReceiveProps({ isOpen }) {
-    this.setState({ isOpen })
-  }
+
   render() {
-    return this.state.isOpen && (
+    return this.props.isOpen === true ? (
       <div>
         <div
           style={{
@@ -89,7 +81,7 @@ export default class Modal extends React.Component {
                 top: 20,
                 width: 30,
               }}
-              onClick={this._closeModal.bind(this)}
+              onClick={this.closeModal.bind(this)}
             />
           </CloseButton>
           <Content
@@ -101,20 +93,24 @@ export default class Modal extends React.Component {
           </Content>
         </div>
       </div>
-    )
+    ) : null
   }
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
+    if(prevProps.isOpen === this.props.isOpen) return
+
     if (document.getElementsByClassName('modal')[0]) {
-      this._setBodyOverflow('hidden')
+      this.setBodyOverflow('hidden')
     } else {
-      this._setBodyOverflow('initial')
+      this.setBodyOverflow('initial')
     }
   }
-  _closeModal() {
+
+  closeModal() {
+    this.setBodyOverflow('initial')
     this.props.close()
-    this._setBodyOverflow('initial')
   }
-  _setBodyOverflow(state) {
+
+  setBodyOverflow(state) {
     document.body.style.overflowY = state
   }
 }
