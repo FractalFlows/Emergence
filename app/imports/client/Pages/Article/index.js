@@ -11,6 +11,14 @@ import {
   Snackbar,
 } from 'material-ui'
 import {
+  Table,
+  TableHeader,
+  TableHeaderColumn,
+  TableBody,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table'
+import {
   grey200,
   grey300,
   grey400,
@@ -21,6 +29,7 @@ import {
 
 // Components
 import ArticleSummary from '../../Components/ArticleSummary'
+import KnowledgeBit from '../../Components/KnowledgeBit'
 import RelatedArticle from '../../Components/RelatedArticle'
 import RelatedArticleInput from '../../Components/RelatedArticleInput'
 import {
@@ -82,6 +91,29 @@ class Article extends React.Component {
       relatedArticles = [],
       DOI,
     } = this.props.article || {}
+
+    const knowledgeBits = [
+      {
+        label: 'ManualRedPR2aEd.pdf',
+        type: 'pdf',
+        author: 'Yuri Jean Fabris',
+      },
+      {
+        label: 'aframe',
+        type: 'github',
+        author: 'Gabriel Rubens',
+      },
+      {
+        label: 'Surround360',
+        type: 'github',
+        author: 'Guilherme Decampo',
+      },
+      {
+        label: 'gvr-android-sdk',
+        type: 'github',
+        author: 'Luiz Augusto Moratelli',
+      },
+    ]
 
     return (
       <div
@@ -147,7 +179,21 @@ class Article extends React.Component {
             </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
-
+            {knowledgeBits.length > 0 ?
+              knowledgeBits.map((knowledgeBit, i) =>
+                <KnowledgeBit key={i} knowledgeBit={knowledgeBit} />
+              ) :
+              <div
+                style={{
+                  textAlign: 'center',
+                }}
+              >
+                <RaisedButton
+                  label="Create a new knowledge bit"
+                  primary={true}
+                />
+              </div>
+            }
           </PanelBody>
         </Panel>
 

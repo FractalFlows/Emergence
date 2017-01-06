@@ -94,7 +94,7 @@ export default class ArticleSummary extends React.Component {
             onClick={this._toggleContent.bind(this)}
           >
             <PlusIcon
-              color={grey400}
+              color={grey500}
               style={{
                 margin: '0 40px 0 30px',
               }}
@@ -103,7 +103,7 @@ export default class ArticleSummary extends React.Component {
               style={{
                 color: grey600,
                 flexGrow: 1,
-                fontSize: 15,
+                fontSize: 13,
               }}
               >
               Summary by <span style={{color: grey800}}>{summary.author}</span>
@@ -111,7 +111,7 @@ export default class ArticleSummary extends React.Component {
             <span
               style={{
                 color: grey500,
-                paddingRight: 200,
+                width: 300,
                 fontSize: 13,
               }}
               >
