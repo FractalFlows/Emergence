@@ -122,6 +122,10 @@ const schema = new SimpleSchema({
     type: [SimpleSchema.RegEx.Id],
     optional: true,
   },
+  slug: {
+    type: String,
+    optional: true,
+  },
 })
 
 Articles.attachSchema(schema)
