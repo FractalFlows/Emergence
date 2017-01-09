@@ -26,6 +26,7 @@ import {
   grey700,
   grey800,
 } from 'material-ui/styles/colors'
+import { Link } from 'react-router'
 
 // Components
 import ArticleSummary from '../../Components/ArticleSummary'
@@ -174,11 +175,18 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Knowledge bits">
-            <PanelHeaderButton
-              data-name="add-knowledge-btn"
+            <Link
+              to={{
+                pathname: `/article/information-upsert/${this.props.params.slug}`,
+                state: { modal: true },
+              }}
             >
-              Add knowledge product
-            </PanelHeaderButton>
+              <PanelHeaderButton
+                data-name="add-knowledge-btn"
+              >
+                Add knowledge product
+              </PanelHeaderButton>
+            </Link>
           </PanelHeader>
           <PanelBody>
             {knowledgeBits.length > 0 ?
