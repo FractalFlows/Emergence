@@ -3,6 +3,7 @@ import {
   pure,
   compose,
   withProps,
+  lifecycle,
 } from 'recompose'
 import {
   get,
@@ -64,7 +65,6 @@ function InformationUpsert({
         <Field
           name="type"
           component={SelectField}
-          defaultValue={information.type}
           floatingLabelText="What is the type of the Knowledge Bit?"
           fullWidth
         >
@@ -80,7 +80,6 @@ function InformationUpsert({
 
         <Field
           name="link"
-          defaultValue={information.link}
           component={TextField}
           floatingLabelText="What is the link of it?"
           fullWidth
@@ -137,6 +136,11 @@ export default compose(
       })
     },
   })),
+  lifecycle({
+    componentWillMount(){
+      this.props.initialize(get('information', this.props.location.state))
+    }
+  }),
   ArticleContainer,
   pure,
 )(InformationUpsert)
