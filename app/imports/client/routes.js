@@ -30,8 +30,8 @@ export default function createRoutes() {
         <Router history={browserHistory}>
           <Route path="/" component={App}>
             <IndexRoute component={Home}/>
-            <Route path="/login" component={SignUp}/>
-            <Route path="/sign-in" component={SignIn}/>
+            <Route path="/login" component={SignIn}/>
+            <Route path="/sign-up" component={SignUp}/>
             <Route path="/tutorial-video" component={TutorialVideo}/>
             <Route path="/article/:slug" component={Article}/>
             <Route path="/dashboard" component={Dashboard}/>

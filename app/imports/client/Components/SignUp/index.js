@@ -10,7 +10,8 @@ import React, {
 import { isEmpty } from 'lodash'
 import { Meteor } from 'meteor/meteor'
 import styled from 'styled-components'
-import { Link } from 'react-router'
+import { withRouter } from 'react-router'
+import { compose } from 'recompose'
 import {
   Field,
   reduxForm,
@@ -24,16 +25,17 @@ import {
 	cyan400,
   grey800,
   red500,
-} from 'material-ui/styles/colors'
-
+} from 'material-ui/styles/colors' 
 // Components
 import SignIn from '/imports/client/Components/SignIn'
 import renderField from '/imports/client/Components/Form/renderField'
 import Error from '/imports/client/Components/Error'
-import ModalBtn from '/imports/client/Components/ModalBtn'
 
 //Styled Components
 const RegisterLink = styled.p`
+  color: ${cyan400};
+  margin: 0;
+  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -42,8 +44,6 @@ const RegisterLink = styled.p`
 
 class SignUp extends PureComponent {
   propTypes: {
-    openLoginModal: PropTypes.func.isRequired,
-    closeThisModal: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
   }
@@ -106,19 +106,11 @@ class SignUp extends PureComponent {
           />
         </form>
 
-        <Link
-          style={{
-            color: cyan400,
-            margin: '0',
-            textDecoration: 'none',
-          }}
-          to={{
-            pathname: '/sign-in',
-            state: { modal: true },
-          }}
+        <RegisterLink
+          onClick={() => this.props.router.goBack()}
         >
-          Already have an account? Sign in.
-        </Link>
+          Already have an account? Login.
+        </RegisterLink>
       </div>
     )
   }
@@ -154,6 +146,9 @@ class SignUp extends PureComponent {
   }
 }
 
-export default reduxForm({
-  form: 'signUp',
-})(SignUp)
+export default compose(
+  reduxForm({
+    form: 'signUp',
+  }),
+  withRouter
+)(SignUp)

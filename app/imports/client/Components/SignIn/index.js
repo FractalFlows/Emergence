@@ -9,6 +9,8 @@ import React, {
 } from 'react'
 import { isEmpty } from 'lodash'
 import { Meteor } from 'meteor/meteor'
+import { Link } from 'react-router'
+import { compose } from 'recompose'
 import styled from 'styled-components'
 import {
   Field,
@@ -107,12 +109,20 @@ class SignIn extends PureComponent {
           />
         </form>
 
-        <RegisterLink
-          onClick={this.changeModal.bind(this)}
+        <Link
+          style={{
+            color: cyan400,
+            margin: '0',
+            textDecoration: 'none',
+          }}
+          to={{
+            pathname: '/sign-up',
+            state: { modal: true },
+          }}
           data-name="sign-in-register-link"
         >
           Do not have an account yet? Register to start sharing your knowledge now!
-        </RegisterLink>
+        </Link>
       </div>
     )
   }
@@ -143,17 +153,14 @@ class SignIn extends PureComponent {
     }, {})
   }
 
-  changeModal() {
-    this.props.openRegisterModal()
-    this.props.closeThisModal()
-  }
-
   humanizeError(error) {
     const cleaned = error.replace('error.accounts.', '')
-    return  cleaned === 'Login forbidden' ? 'User not found' : cleaned
+    return cleaned === 'Login forbidden' ? 'User not found' : cleaned
   }
 }
 
-export default reduxForm({
-  form: 'signIn',
-})(SignIn)
+export default compose(
+  reduxForm({
+    form: 'signIn',
+  }),
+)(SignIn)
