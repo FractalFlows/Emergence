@@ -93,29 +93,6 @@ class Article extends React.Component {
       DOI,
     } = this.props.article || {}
 
-    const knowledgeBits = [
-      {
-        label: 'ManualRedPR2aEd.pdf',
-        type: 'pdf',
-        author: 'Yuri Jean Fabris',
-      },
-      {
-        label: 'aframe',
-        type: 'github',
-        author: 'Gabriel Rubens',
-      },
-      {
-        label: 'Surround360',
-        type: 'github',
-        author: 'Guilherme Decampo',
-      },
-      {
-        label: 'gvr-android-sdk',
-        type: 'github',
-        author: 'Luiz Augusto Moratelli',
-      },
-    ]
-
     return (
       <div
         style={{
@@ -189,8 +166,8 @@ class Article extends React.Component {
             </Link>
           </PanelHeader>
           <PanelBody>
-            {knowledgeBits.length > 0 ?
-              knowledgeBits.map((knowledgeBit, i) =>
+            {informations.length > 0 ?
+              informations.map((knowledgeBit, i) =>
                 <KnowledgeBit key={i} knowledgeBit={knowledgeBit} />
               ) :
               <div
