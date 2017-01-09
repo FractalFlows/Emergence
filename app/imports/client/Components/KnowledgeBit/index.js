@@ -94,59 +94,6 @@ export default class KnowledgeBit extends React.Component {
 			margin: '0 40px 0 30px',
 		}
 
-		knowledgeBit.commits = [
-      {
-        hash: '8645586',
-        message: 'Add todda00:friendly-slugs',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: 'fd8d99c',
-        message: 'Init Article title slugs',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: 'd8f7a96',
-        message: 'Update dev/createArticles with abstract field',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: 'dffd638',
-        message: 'Create articles.bySlug publication',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: '000a1bd',
-        message: 'Add compose-with-tracker',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: '4b5c78a',
-        message: 'Fix misusage of collection in articles.bySlug',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: '8f2a073',
-        message: 'Create subscription container for Article ',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: '66e5158',
-        message: 'Hook Pages/Article with slug subscription',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: 'd6fec48',
-        message: 'Add slug to articles schema',
-				author: 'Gabriel Rubens',
-      },
-      {
-        hash: '3475d18',
-        message: 'Update lodash, react-redux and redux-form',
-				author: 'Gabriel Rubens',
-      },
-    ]
-
     return (
       <div
         style={{
@@ -193,7 +140,7 @@ export default class KnowledgeBit extends React.Component {
                 fontSize: 13,
               }}
             >
-              {knowledgeBit.author}
+              {knowledgeBit.addedByName}
             </span>
           </div>
 
@@ -207,7 +154,7 @@ export default class KnowledgeBit extends React.Component {
 									paddingLeft: 20,
 								}}
 							>
-								{knowledgeBit.commits.map((commit, i) => (
+								{(knowledgeBit.commits || []).map((commit, i) => (
 									<li
 										style={{
 											display: 'block',
@@ -257,7 +204,7 @@ export default class KnowledgeBit extends React.Component {
             </VoteButtonHolder>
 
             <Votes>
-              64
+            {knowledgeBit.upVotes}
             </Votes>
           </VoteButton>
 
@@ -268,7 +215,7 @@ export default class KnowledgeBit extends React.Component {
               <ThumbDown color={red400} />
             </VoteButtonHolder>
             <Votes>
-              12
+            {knowledgeBit.downVotes}
             </Votes>
           </VoteButton>
         </div>
