@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import './users'
+import './articles'
 
 if(Meteor.settings.public.env === 'development'){
   require('./dev')
