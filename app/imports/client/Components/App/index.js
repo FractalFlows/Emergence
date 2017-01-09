@@ -15,13 +15,13 @@ export default class App extends PureComponent {
     // and if the new one is a modal
     if ((
       nextProps.location.key !== this.props.location.key &&
-      nextProps.location.state &&
-      nextProps.location.state.modal
+      // if the current route is already a modal we skip the
+      // previousChildren change
+      !get('modal', this.props.location.state) &&
+      get('modal', nextProps.location.state)
     )) {
       // save the old children (just like animation)
       this.previousChildren = this.props.children
-    } else {
-      this.previousChildren = null
     }
   }
 
