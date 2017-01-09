@@ -10,6 +10,7 @@ import React, {
 import { isEmpty } from 'lodash'
 import { Meteor } from 'meteor/meteor'
 import styled from 'styled-components'
+import { Link } from 'react-router'
 import {
   Field,
   reduxForm,
@@ -33,9 +34,6 @@ import ModalBtn from '/imports/client/Components/ModalBtn'
 
 //Styled Components
 const RegisterLink = styled.p`
-  color: ${cyan400};
-  margin: 0 0 0 0;
-  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -108,14 +106,19 @@ class SignUp extends PureComponent {
           />
         </form>
 
-        <ModalBtn
-          onClick={() => this.props.closeThisModal()}
-          content={SignIn}
+        <Link
+          style={{
+            color: cyan400,
+            margin: '0',
+            textDecoration: 'none',
+          }}
+          to={{
+            pathname: '/sign-in',
+            state: { modal: true },
+          }}
         >
-          <RegisterLink>
-            Already have an account? Sign in.
-          </RegisterLink>
-        </ModalBtn>
+          Already have an account? Sign in.
+        </Link>
       </div>
     )
   }
