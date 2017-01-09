@@ -167,7 +167,11 @@ class Article extends React.Component {
           <PanelBody>
             {informations.length > 0 ?
               informations.map((knowledgeBit, i) =>
-                <KnowledgeBit key={i} knowledgeBit={knowledgeBit} />
+                <KnowledgeBit
+                  key={i}
+                  knowledgeBit={knowledgeBit}
+                  articleSlug={this.props.params.slug}
+                />
               ) :
               <div
                 style={{

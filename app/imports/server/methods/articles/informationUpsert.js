@@ -57,6 +57,7 @@ Meteor.methods({
             addedByName: Meteor.user().profile.firstName,
             upVotes: 0,
             downVotes: 0,
+            status: 'enabled',
             label: 'Emergence',
           },
         },
