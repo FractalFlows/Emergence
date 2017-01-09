@@ -8,8 +8,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { get } from 'lodash/fp'
+import { compose } from 'recompose'
+import { withRouter } from 'react-router'
 import { FlatButton } from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/image/edit'
 import PdfIcon from 'material-ui/svg-icons/image/picture-as-pdf'
 import RepositoryIcon from 'material-ui/svg-icons/action/class'
 import PlusIcon from 'material-ui/svg-icons/content/add'
@@ -226,10 +229,23 @@ class KnowledgeBit extends React.Component {
           </VoteButton>
 
           { knowledgeBit.addedById === get('_id', this.props.user) ? (
-              <FlatButton
-                style={{ marginLeft: 10 }}
-                icon={<DeleteIcon color={red800}/>}
-              />
+              [ 
+                <FlatButton
+                  style={{ marginLeft: 10 }}
+                  icon={<DeleteIcon color={red800}/>}
+                  onClick={() => Meteor.call('article/deleteInformation', {
+                    information: { link: knowledgeBit.link },
+                    articleSlug: this.props.articleSlug,
+                  })}
+                />,
+                <FlatButton
+                  icon={<EditIcon color={green400}/>}
+                  onClick={() => this.props.router.push({
+                    pathname: `/article/information-upsert/${this.props.articleSlug}`,
+                    state: { modal: true, information: knowledgeBit },
+                  })}
+                />
+              ]
             ) : null
           }
         </div>
@@ -253,4 +269,7 @@ class KnowledgeBit extends React.Component {
   }
 }
 
-export default UserContainer(KnowledgeBit)
+export default compose(
+  UserContainer,
+  withRouter,
+)(KnowledgeBit)
