@@ -1,5 +1,5 @@
 describe('Users', () => {
-  describe('Sign up @watch', () => {
+  describe('Sign up', () => {
     before(() => {
       server.call('dev/resetDatabase')
       browser.url('http://localhost:3000')
