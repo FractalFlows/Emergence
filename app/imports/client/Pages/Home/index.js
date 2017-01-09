@@ -249,25 +249,9 @@ export default class Home extends React.Component {
 				    	<FlatButton
 				    		label="Watch the Tour"
 				    		secondary={true}
-								onClick={this._openWatchTourModal.bind(this)}
+                onClick={() => this.props.router.push({ pathname: '/tutorial-video', state: { modal: true} })}
 				    	/>
 				    </div>
-						<Modal
-							isOpen={this.state.isWatchTourModalOpen}
-							close={this._closeWatchTourModal.bind(this)}
-							style={{
-								height: 600,
-								alignItems: 'center',
-							}}
-						>
-					    <iframe
-					    	width="871"
-					    	height="480"
-					    	src="https://www.youtube.com/embed/D3KH5cbAKUc?showinfo=0"
-					    	frameBorder="0"
-					    	allowFullScreen>
-					    </iframe>
-						</Modal>
 			   	</div>
 
 			   	<div
@@ -348,11 +332,5 @@ export default class Home extends React.Component {
 			  </div>
 		  </div>
 		)
-	}
-	_openWatchTourModal() {
-		this.setState({ isWatchTourModalOpen: true })
-	}
-	_closeWatchTourModal() {
-		this.setState({ isWatchTourModalOpen: false })
 	}
 }

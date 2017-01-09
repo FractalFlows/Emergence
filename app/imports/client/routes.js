@@ -14,7 +14,9 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 // Components
 import App from './Components/App'
 import EmptyScreen from './Components/EmptyScreen'
+import SignUp from './Components/SignUp'
 import SignIn from './Components/SignIn'
+import TutorialVideo from './Components/TutorialVideo'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
 import Dashboard from './Pages/Dashboard'
@@ -28,7 +30,9 @@ export default function createRoutes() {
         <Router history={browserHistory}>
           <Route path="/" component={App}>
             <IndexRoute component={Home}/>
-            <Route path="/login" component={SignIn}/>
+            <Route path="/login" component={SignUp}/>
+            <Route path="/sign-in" component={SignIn}/>
+            <Route path="/tutorial-video" component={TutorialVideo}/>
             <Route path="/article/:slug" component={Article}/>
             <Route path="/dashboard" component={Dashboard}/>
             <Route path="*" component={EmptyScreen}/>
