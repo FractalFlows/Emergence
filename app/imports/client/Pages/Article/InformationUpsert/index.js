@@ -32,13 +32,13 @@ import ArticleContainer from '../container'
 
 function InformationUpsert({
   submitting,
-  article,
   slug,
   location: {
     state = {},
   },
   onSubmit,
   handleSubmit,
+  error,
 }){
   const information = state.information || {}
 
@@ -86,6 +86,8 @@ function InformationUpsert({
           fullWidth
         />
 
+        { error && <Error>{error}</Error>}
+
         <RaisedButton
           label="Save"
           type="submit"
@@ -99,11 +101,10 @@ function InformationUpsert({
 }
 
 export default compose(
-  pure,
   reduxForm({
     form: 'informationUpsert',
   }),
-  withProps(({ article = {}, location, router }) => ({
+  withProps(({ params, location, router }) => ({
     onSubmit(values){
       // Validator
       function validateSync(values, fields){
@@ -121,8 +122,8 @@ export default compose(
           return reject(new SubmissionError(syncValidationErrors))
         }
 
-        Meteor.call('article/upsertInformation', {
-          articleId: article._id,
+        Meteor.call('article/informationUpsert', {
+          articleSlug: params.slug,
           information: values,
         }, error => {
           if(error){
@@ -136,4 +137,6 @@ export default compose(
       })
     },
   })),
+  ArticleContainer,
+  pure,
 )(InformationUpsert)
