@@ -100,12 +100,6 @@ class Modal extends React.PureComponent {
     )
   }
 
-  closeModal(e) {
-    e.stopPropagation()
-    this.setBodyOverflow('initial')
-    this.props.close()
-  }
-
   setBodyOverflow(state) {
     document.body.style.overflowY = state
   }
