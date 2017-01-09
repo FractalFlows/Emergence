@@ -46,6 +46,9 @@ export const ArticleKnowledgeBitSchema = new SimpleSchema({
   link: {
     type: SimpleSchema.RegEx.Url,
   },
+  label: {
+    type: String,
+  },
   addedById: {
     type: SimpleSchema.RegEx.Email,
   },
