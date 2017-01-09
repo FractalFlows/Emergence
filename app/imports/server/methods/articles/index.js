@@ -1,1 +1,2 @@
 import './informationUpsert'
+import './deleteInformation'

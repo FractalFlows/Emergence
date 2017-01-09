@@ -166,7 +166,7 @@ class Article extends React.Component {
           </PanelHeader>
           <PanelBody>
             {informations.length > 0 ?
-              informations.map((knowledgeBit, i) =>
+              informations.filter(info => info.status === 'enabled').map((knowledgeBit, i) =>
                 <KnowledgeBit
                   key={i}
                   knowledgeBit={knowledgeBit}
