@@ -41,6 +41,8 @@ import {
 
 import container from './container'
 
+import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
+
 //Styled Components
 const PanelHeaderButton = styled.button`
   backgroundColor: ${grey200};
@@ -152,18 +154,15 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Knowledge bits">
-            <Link
-              to={{
+            <PanelHeaderButton
+              data-name="add-knowledge-btn"
+              onClick={() => requireLoginAndGoTo({
                 pathname: `/article/information-upsert/${this.props.params.slug}`,
                 state: { modal: true },
-              }}
+              })}
             >
-              <PanelHeaderButton
-                data-name="add-knowledge-btn"
-              >
-                Add knowledge product
-              </PanelHeaderButton>
-            </Link>
+              Add knowledge product
+            </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
             {informations.length > 0 ?
