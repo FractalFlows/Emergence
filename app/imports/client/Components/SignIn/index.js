@@ -142,7 +142,7 @@ class SignIn extends PureComponent {
         }
 
         if(this.props.location.state.redirTo){
-          return this.props.router.replace(redirTo)
+          return this.props.router.replace(this.props.location.state.redirTo)
         }
 
         this.props.router.goBack()
