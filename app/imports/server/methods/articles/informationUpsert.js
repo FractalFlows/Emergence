@@ -33,6 +33,10 @@ Meteor.methods({
     const existingInformationIndex = findLastIndex({ link: information.link }, article.informations)
 
     if(existingInformationIndex !== -1){
+      if(article.informations[existingInformationIndex].addedById !== this.userId){
+        throw new Meteor.Error(401, 'Only knowledge bit creator can modify it')
+      }
+
       // If is an existing information update it
       Articles.update({_id: article._id}, {
         $set: {
