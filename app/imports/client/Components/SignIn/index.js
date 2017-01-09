@@ -117,7 +117,7 @@ class SignIn extends PureComponent {
           }}
           to={{
             pathname: '/sign-up',
-            state: { modal: true },
+            state: { modal: true, redirTo: this.props.location.state.redirTo },
           }}
           data-name="sign-in-register-link"
         >
@@ -141,7 +141,11 @@ class SignIn extends PureComponent {
           }))
         }
 
-        this.props.closeThisModal()
+        if(this.props.location.state.redirTo){
+          return this.props.router.replace(redirTo)
+        }
+
+        this.props.router.goBack()
       })
     })
   }

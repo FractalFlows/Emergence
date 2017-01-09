@@ -133,7 +133,12 @@ class SignUp extends PureComponent {
         }
 
         Meteor.loginWithPassword(values.email, 'defaultpassword')
-        this.props.closeThisModal()
+
+        if(this.props.location.state.redirTo){
+          return this.props.router.replace(redirTo)
+        }
+
+        this.props.router.goBack()
       })
     })
   }
