@@ -7,6 +7,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
+import { get } from 'lodash/fp'
+import { FlatButton } from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
 import PdfIcon from 'material-ui/svg-icons/image/picture-as-pdf'
 import RepositoryIcon from 'material-ui/svg-icons/action/class'
 import PlusIcon from 'material-ui/svg-icons/content/add'
@@ -25,6 +28,9 @@ import {
 	red800,
 } from 'material-ui/styles/colors'
 import moment from 'moment'
+
+// Containers
+import UserContainer from '/imports/client/Containers/User'
 
 //Styled Components
 const SummaryContent = styled.div`
@@ -77,7 +83,7 @@ const HashLink = styled.a`
 	}
 `
 
-export default class KnowledgeBit extends React.Component {
+class KnowledgeBit extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -218,6 +224,14 @@ export default class KnowledgeBit extends React.Component {
             {knowledgeBit.downVotes}
             </Votes>
           </VoteButton>
+
+          { knowledgeBit.addedById === get('_id', this.props.user) ? (
+              <FlatButton
+                style={{ marginLeft: 10 }}
+                icon={<DeleteIcon color={red800}/>}
+              />
+            ) : null
+          }
         </div>
       </div>
     )
@@ -238,3 +252,5 @@ export default class KnowledgeBit extends React.Component {
     })
   }
 }
+
+export default UserContainer(KnowledgeBit)

@@ -56,6 +56,7 @@ Meteor.methods({
             createdAt: new Date(),
             upVotes: 0,
             downVotes: 0,
+            status: 'enabled',
           }
         ],
       },

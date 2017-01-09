@@ -55,7 +55,13 @@ export const ArticleKnowledgeBitSchema = new SimpleSchema({
   addedByName: {
     type: String,
   },
+  status: {
+    type: String,
+  },
   createdAt: {
+    type: Date,
+  },
+  updatedAt: {
     type: Date,
   },
   upVotes: {
