@@ -3,10 +3,13 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
 const Articles = new Mongo.Collection('articles')
 
+export const UPVOTE = 1
+export const DOWNVOTE = -1
+
 const ArticleVoteSchema = new SimpleSchema({
   vote: {
     type: Number,
-    allowedValues: [-1, 1],
+    allowedValues: [DOWNVOTE, UPVOTE],
   },
   voterId: {
     type: SimpleSchema.RegEx.Id,
