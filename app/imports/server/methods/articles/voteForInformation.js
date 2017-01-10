@@ -54,7 +54,6 @@ Meteor.methods({
     // upvote again this time we need to remove the upvote do nothing.
 
     if(hasUserAlreadyDownvoted){
-      console.log('already downvoted')
       Articles.update({
         slug: params.articleSlug,
         'informations.link': params.link,
