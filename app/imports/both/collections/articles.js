@@ -14,6 +14,9 @@ const ArticleVoteSchema = new SimpleSchema({
   voterName: {
     type: String,
   },
+  createdAt: {
+    type: Date,
+  },
 })
 
 export const ArticleSummarySchema = new SimpleSchema({
