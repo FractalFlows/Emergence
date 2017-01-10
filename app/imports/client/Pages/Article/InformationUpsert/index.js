@@ -5,6 +5,7 @@ import {
   withProps,
   lifecycle,
 } from 'recompose'
+import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import {
   get,
   isEmpty,
@@ -27,6 +28,9 @@ import {
 import renderField from '/imports/client/Components/Form/renderField'
 import Error from '/imports/client/Components/Error'
 import ModalTitle from '/imports/client/Components/ModalTitle'
+
+// Helpers
+import validateObject from '/imports/client/Utils/validateObject'
 
 // Containers
 import ArticleContainer from '../container'
@@ -105,18 +109,17 @@ export default compose(
   }),
   withProps(({ params, location, router }) => ({
     onSubmit(values){
-      // Validator
-      function validateSync(values, fields){
-        return fields.reduce((errors, field) => {
-          if( isEmpty(values[field]) ) return { ...errors, [field]: 'Field can not be empty' }
-          else return { ...errors }
-        }, {})
-      }
-
       return new Promise((resolve, reject) => {
         // Validate the data first
-        // TODO: find a way to use the schema for this
-        const syncValidationErrors = validateSync(values, ['type', 'link'])
+        const syncValidationErrors = validateObject({
+          link: {
+            type: SimpleSchema.RegEx.Url,
+          },
+          type: {
+            type: String,
+          },
+        }, values)
+
         if(!isEmpty(syncValidationErrors)){
           return reject(new SubmissionError(syncValidationErrors))
         }
