@@ -28,15 +28,8 @@ Meteor.methods({
             authorId: users[0]._id,
             content: getMonkeySayings(),
             date: new Date(),
-            upVotes: 1,
+            upVotes: 0,
             downVotes: 0,
-            voters: [
-              {
-                vote: 1,
-                voterId: users[1]._id,
-                voterName: users[1].profile.firstName,
-              },
-            ],
           }
         ]
       },
