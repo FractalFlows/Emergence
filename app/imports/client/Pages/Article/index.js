@@ -106,6 +106,9 @@ class Article extends React.Component {
       DOI,
     } = this.props.article || {}
 
+    const filteredSummaries = summaries.filter(info => info.status === 'enabled')
+    const filteredInformations = informations.filter(info => info.status === 'enabled')
+
     return (
       <div
         style={{
@@ -164,14 +167,24 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Summaries">
-            <PanelHeaderButton>
+            <PanelHeaderButton
+              data-name="add-summary-btn"
+              onClick={() => requireLoginAndGoTo({
+                pathname: `/article/summary-upsert/${this.props.params.slug}`,
+                state: { modal: true },
+              })}
+            >
               Add summary
             </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
             {summaries.length > 0 ?
-              summaries.map((summary, i) =>
-                <ArticleSummary key={i} summary={summary} />
+            filteredSummaries.map((summary, i) =>
+              <ArticleSummary
+                key={i}
+                summary={summary}
+                articleSlug={this.props.params.slug}
+              />
               ) :
               <div
                 style={{
@@ -180,6 +193,10 @@ class Article extends React.Component {
               >
                 <RaisedButton
                   label="Create a new summary"
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
                   primary
                 />
               </div>
@@ -200,8 +217,8 @@ class Article extends React.Component {
             </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
-            {informations.length > 0 ?
-              informations.filter(info => info.status === 'enabled').map((knowledgeBit, i) =>
+            {filteredInformations.length > 0 ?
+              filteredInformations.map((knowledgeBit, i) =>
                 <KnowledgeBit
                   key={i}
                   knowledgeBit={knowledgeBit}
@@ -215,7 +232,11 @@ class Article extends React.Component {
               >
                 <RaisedButton
                   label="Create a new knowledge bit"
-                  primary={true}
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/information-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
+                  primary
                 />
               </div>
             }
