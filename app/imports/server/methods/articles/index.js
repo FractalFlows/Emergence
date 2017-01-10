@@ -1,3 +1,5 @@
 import './informationUpsert'
 import './deleteInformation'
 import './voteForInformation'
+import './summaryUpsert'
+import './deleteSummary'
