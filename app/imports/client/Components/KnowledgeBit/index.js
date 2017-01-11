@@ -31,9 +31,13 @@ import {
 	red800,
 } from 'material-ui/styles/colors'
 import moment from 'moment'
+import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
 // Containers
 import UserContainer from '/imports/client/Containers/User'
+
+// Helpers
+import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
 
 //Styled Components
 const SummaryContent = styled.div`
@@ -205,7 +209,10 @@ class KnowledgeBit extends React.Component {
             height: 50,
           }}
         >
-          <VoteButton>
+          <VoteButton
+            data-name={`${knowledgeBit.link}-upvote-btn`}
+            onClick={this.upvote.bind(this)}
+          >
             <VoteButtonHolder
               title="Upvote"
             >
@@ -217,7 +224,10 @@ class KnowledgeBit extends React.Component {
             </Votes>
           </VoteButton>
 
-          <VoteButton>
+          <VoteButton
+            data-name={`${knowledgeBit.link}-downvote-btn`}
+            onClick={this.downvote.bind(this)}
+          >
             <VoteButtonHolder
               title="Downvote"
             >
@@ -252,6 +262,27 @@ class KnowledgeBit extends React.Component {
       </div>
     )
   }
+
+  upvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForInformation', {
+        vote: UPVOTE,
+        articleSlug: this.props.articleSlug,
+        link: this.props.knowledgeBit.link,
+      })
+    })
+  }
+
+  downvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForInformation', {
+        vote: DOWNVOTE,
+        articleSlug: this.props.articleSlug,
+        link: this.props.knowledgeBit.link,
+      })
+    })
+  }
+
   _toggleContent() {
     const content = ReactDOM.findDOMNode(this.refs.content)
 
