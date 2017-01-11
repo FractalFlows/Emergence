@@ -16,12 +16,14 @@
     "test": "cd app && rm -rf ./node_modules/jest-cli/.haste_cache && jest",
     "test:watch": "cd app && jest --watch",
     "test:coverage": "cd app && jest --coverage",
-    "test:report-coverage": "cd app && npm run test:coverage --silent -- -u; CODECLIMATE_REPO_TOKEN=??? codeclimate-test-reporter < coverage/lcov.info"
+    "test:report-coverage": "cd app && npm run test:coverage --silent -- -u; CODECLIMATE_REPO_TOKEN=??? codeclimate-test-reporter < coverage/lcov.info",
+    "test:chimp": "chimp config/chimp/chimp-ci.js --ddp http://localhost:3000/ --path=tests --mocha",
+    "test:chimp:watch": "npm run test:chimp -- --watch",
+    "test:chimp:phantomjs": "npm run test:chimp -- --browser=phantomjs",
+    "test:chimp:ci": "node ./scripts/ci"
   },
   "dependencies": {
-    "radium": "^0.18.1",
-    "react": "^15.4.1",
-    "react-motion": "^0.4.7",
-    "react-swipeable-views": "^0.9.3"
+    "chimp": "^0.45.1",
+    "radium": "^0.18.1"
   }
 }

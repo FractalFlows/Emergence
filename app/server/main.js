@@ -1,2 +1,2 @@
-import '../imports/both'
-import '../imports/server'
+import '/imports/both'
+import '/imports/server'

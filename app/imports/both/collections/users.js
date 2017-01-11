@@ -10,6 +10,16 @@ Meteor.users.schema = new SimpleSchema({
     denyInsert: true,
     optional: true,
   },
+
+  createdAt: {
+    type: Date,
+    autoValue() {
+      if (this.isInsert) return new Date()
+    },
+    denyUpdate: true,
+    optional: true,
+  },
+
   username: {
     label: 'Username',
     type: String,
@@ -31,17 +41,9 @@ Meteor.users.schema = new SimpleSchema({
   profile: {
     type: Object
   },
+
   'profile.firstName': {
     label:'First name',
-    type: String,
-    optional: true,
-    custom() {
-      if (this.userId && !this.value) return 'required'
-    }
-  },
-
-  'profile.lastName': {
-    label:'Last name',
     type: String,
     optional: true,
     custom() {
@@ -53,9 +55,6 @@ Meteor.users.schema = new SimpleSchema({
     label:'Phone number',
     type: String,
     optional: true,
-    custom() {
-      if (this.userId && !this.value) return 'required'
-    }
   },
 
   'profile.description': {

@@ -6,6 +6,7 @@
 // Modules
 import React from 'react'
 import { Link } from 'react-router'
+import { isEmpty } from 'lodash'
 import styled from 'styled-components'
 import EventSeatIcon from 'material-ui/svg-icons/action/event-seat'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
@@ -24,6 +25,9 @@ import SignUp from '../SignUp'
 import SearchInput from '../SearchInput'
 import DropdownMenu from '../DropdownMenu'
 
+// Containers
+import UserContainer from '/imports/client/Containers/User'
+
 //Styled Components
 const SearchInputWrapper = styled.div`
 	flex-grow: 100000;
@@ -33,15 +37,19 @@ const SearchInputWrapper = styled.div`
 	}
 `
 
-export default class Header extends React.Component {
-	constructor() {
-		super()
+class Header extends React.Component {
+	constructor(props) {
+		super(props)
 		this.state = {
 			isLoginModalOpen: false,
 			isRegisterModalOpen: false,
 		}
 	}
 	render() {
+    const {
+      user,
+    } = this.props
+
 		return (
 			<div>
 				<div
@@ -73,71 +81,96 @@ export default class Header extends React.Component {
 						<SearchInput />
 					</SearchInputWrapper>
 
-		    	<p
-		    		style={{
-		    			marginLeft: 50,
-		    			color: cyan400,
-							cursor: 'pointer',
-		    		}}
-						onClick={this._openLoginModal.bind(this)}
-		    	>
-		    		Login
-		    	</p>
+          { isEmpty(user) ? 
+            (
+              <p
+                style={{
+                  marginLeft: 50,
+                  color: cyan400,
+                  cursor: 'pointer',
+                }}
+                onClick={this.openLoginModal.bind(this)}
+                data-name="header-login-btn"
+              >
+                Login
+              </p>
+            ) : (
+              <p
+                style={{
+                  marginLeft: 50,
+                }}
+                data-name="header-login-btn"
+              >
+                Welcome, {this.props.user.profile.firstName}
+              </p>
+            )
+          }
 
-					<DropdownMenu
-						label={
-							<MoreVertIcon
-								color={grey800}
-								style={{
-									marginLeft: 15,
-									height: 20,
-								}}
-							/>
-						}
-						pullLeft={true}
-					>
-						<Link to="/dashboard">Dashboard</Link>
-				  </DropdownMenu>
+          { !isEmpty(user) ?
+            (
+              <DropdownMenu
+                label={
+                  <MoreVertIcon
+                    color={grey800}
+                    style={{
+                      marginLeft: 15,
+                      height: 20,
+                    }}
+                  />
+                }
+                pullLeft
+              >
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="#" onClick={this.logoutUser}>Logout</Link>
+              </DropdownMenu>
+            ) : null
+          }
 		    </div>
 
 				<Modal
 					isOpen={this.state.isLoginModalOpen}
-					close={this._closeLoginModal.bind(this)}
+					close={this.closeLoginModal.bind(this)}
 					style={{
 						padding: 90,
 					}}
 				>
 					<SignIn
-						openRegisterModal={this._openRegisterModal.bind(this)}
-						closeThisModal={this._closeLoginModal.bind(this)}
+						openRegisterModal={this.openRegisterModal.bind(this)}
+						closeThisModal={this.closeLoginModal.bind(this)}
 					/>
 				</Modal>
 
 				<Modal
 					isOpen={this.state.isRegisterModalOpen}
-					close={this._closeRegisterModal.bind(this)}
+					close={this.closeRegisterModal.bind(this)}
 					style={{
 						padding: 90,
 					}}
 				>
 					<SignUp
-						openLoginModal={this._openLoginModal.bind(this)}
-						closeThisModal={this._closeRegisterModal.bind(this)}
+						openLoginModal={this.openLoginModal.bind(this)}
+						closeThisModal={this.closeRegisterModal.bind(this)}
 					/>
 				</Modal>
 			</div>
 		)
 	}
-	_openLoginModal() {
+	openLoginModal() {
 		this.setState({ isLoginModalOpen: true })
 	}
-	_openRegisterModal() {
+	openRegisterModal() {
 		this.setState({ isRegisterModalOpen: true })
 	}
-	_closeLoginModal() {
+	closeLoginModal() {
 		this.setState({ isLoginModalOpen: false })
 	}
-	_closeRegisterModal() {
+	closeRegisterModal() {
 		this.setState({ isRegisterModalOpen: false })
 	}
+  logoutUser(e) {
+    e.preventDefault()
+    Meteor.logout()
+  }
 }
+
+export default UserContainer(Header)
