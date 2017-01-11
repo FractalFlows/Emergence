@@ -31,6 +31,7 @@ Meteor.methods({
       'informations.link': params.link,
       'informations.voters.voterId': this.userId,
       'informations.voters.vote': DOWNVOTE,
+      'informations.status': 'enabled',
     }).count()
 
     const hasUserAlreadyUpvoted = Articles.find({
@@ -38,6 +39,7 @@ Meteor.methods({
       'informations.link': params.link,
       'informations.voters.voterId': this.userId,
       'informations.voters.vote': UPVOTE,
+      'informations.status': 'enabled',
     }).count()
 
 
@@ -57,6 +59,7 @@ Meteor.methods({
       Articles.update({
         slug: params.articleSlug,
         'informations.link': params.link,
+        'informations.status': 'enabled',
       }, {
         $inc: {
           'informations.$.downVotes': -1,
@@ -77,6 +80,7 @@ Meteor.methods({
       Articles.update({
         slug: params.articleSlug,
         'informations.link': params.link,
+        'informations.status': 'enabled',
       }, {
         $inc: {
           'informations.$.upVotes': -1,
@@ -98,6 +102,7 @@ Meteor.methods({
     Articles.update({
       slug: params.articleSlug,
       'informations.link': params.link,
+      'informations.status': 'enabled',
     }, {
       $inc: {
         ...( params.vote === UPVOTE ? {'informations.$.upVotes': 1} : {} ),
