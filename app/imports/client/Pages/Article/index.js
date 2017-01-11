@@ -33,9 +33,6 @@ import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import { Link } from 'react-router'
 
 // Components
-import KnowledgeBit from '../../Components/KnowledgeBit'
-import RelatedArticle from '../../Components/RelatedArticle'
-import RelatedArticleInput from '../../Components/RelatedArticleInput'
 import {
   Panel,
   PanelHeader,
@@ -44,11 +41,10 @@ import {
 } from '../../Components/Panel'
 import ArticleSummaries from './ArticleSummaries'
 import ArticleInformations from './ArticleInformations'
+import ArticleRelatedArticles from './RelatedArticles'
 
 import container from './container'
 import UserContainer from '/imports/client/Containers/User'
-
-import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
 
 //Styled Components
 
@@ -79,15 +75,6 @@ const ReportArticleButton = styled.div`
 `
 
 class Article extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isAddingNewRelatedArticle: false,
-      snackbarIsOpen: false,
-      snackbarMessage: '',
-    }
-  }
-
   render() {
     const {
       abstract,
@@ -101,6 +88,7 @@ class Article extends React.PureComponent {
 
     const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
     const filteredInformations = informations.filter(info => info.status === 'enabled')
+    const filteredRelatedArticles = relatedArticles.filter(relatedArticle => relatedArticle.status === 'enabled')
 
     return (
       <div
@@ -170,80 +158,13 @@ class Article extends React.PureComponent {
           user={this.props.user}
         />
 
-        <Panel>
-          <PanelHeader title="Related articles">
-            <PanelHeaderButton
-              onClick={this._showAddRelatedArticleInput.bind(this)}
-            >
-              Add more related articles
-            </PanelHeaderButton>
-          </PanelHeader>
-          <PanelBody>
-            <table
-              style={{
-                width: '100%',
-                borderCollapse: 'collapse',
-              }}
-            >
-              <tbody>
-                {relatedArticles.length > 0 ?
-                  relatedArticles.map((relatedArticle, i) =>
-                    <RelatedArticle key={i} article={relatedArticle} />
-                  ) :
-                  <div
-                    style={{
-                      textAlign: 'center',
-                    }}
-                  >
-                    <RaisedButton
-                      label="Add related articles"
-                      primary={true}
-                    />
-                  </div>
-                }
-                {this.state.isAddingNewRelatedArticle &&
-                  <tr>
-                    <td colSpan="2">
-                      <RelatedArticleInput
-                        cancel={this._hideAddRelatedArticleInput.bind(this)}
-                        showSnackbar={this._showSnackbar.bind(this)}
-                      />
-                    </td>
-                  </tr>
-                }
-              </tbody>
-            </table>
-          </PanelBody>
-        </Panel>
-
-        <Snackbar
-          open={this.state.snackbarIsOpen}
-          message={this.state.snackbarMessage}
-          action="undo"
-          autoHideDuration={4000}
-          onRequestClose={this._hideSnackbar.bind(this)}
+        <ArticleRelatedArticles
+          relatedArticles={filteredRelatedArticles}
+          articleSlug={this.props.params.slug}
+          user={this.props.user}
         />
       </div>
     )
-  }
-
-  _showAddRelatedArticleInput() {
-    this.setState({ isAddingNewRelatedArticle: true })
-  }
-
-  _hideAddRelatedArticleInput() {
-    this.setState({ isAddingNewRelatedArticle: false })
-  }
-
-  _showSnackbar(message) {
-    this.setState({
-      snackbarIsOpen: true,
-      snackbarMessage: message,
-    })
-  }
-
-  _hideSnackbar() {
-    this.setState({ snackbarIsOpen: false })
   }
 }
 
