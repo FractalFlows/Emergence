@@ -28,6 +28,7 @@ import {
   grey800,
 } from 'material-ui/styles/colors'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
+import { Link } from 'react-router'
 
 // Components
 import ArticleSummary from '../../Components/ArticleSummary'
@@ -41,6 +42,8 @@ import {
 } from '../../Components/Panel'
 
 import container from './container'
+
+import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
 
 //Styled Components
 const PanelHeaderButton = styled.button`
@@ -102,29 +105,6 @@ class Article extends React.Component {
       relatedArticles = [],
       DOI,
     } = this.props.article || {}
-
-    const knowledgeBits = [
-      {
-        label: 'ManualRedPR2aEd.pdf',
-        type: 'pdf',
-        author: 'Yuri Jean Fabris',
-      },
-      {
-        label: 'aframe',
-        type: 'github',
-        author: 'Gabriel Rubens',
-      },
-      {
-        label: 'Surround360',
-        type: 'github',
-        author: 'Guilherme Decampo',
-      },
-      {
-        label: 'gvr-android-sdk',
-        type: 'github',
-        author: 'Luiz Augusto Moratelli',
-      },
-    ]
 
     return (
       <div
@@ -209,14 +189,24 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Knowledge bits">
-            <PanelHeaderButton>
+            <PanelHeaderButton
+              data-name="add-knowledge-btn"
+              onClick={() => requireLoginAndGoTo({
+                pathname: `/article/information-upsert/${this.props.params.slug}`,
+                state: { modal: true },
+              })}
+            >
               Add knowledge product
             </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
-            {knowledgeBits.length > 0 ?
-              knowledgeBits.map((knowledgeBit, i) =>
-                <KnowledgeBit key={i} knowledgeBit={knowledgeBit} />
+            {informations.length > 0 ?
+              informations.filter(info => info.status === 'enabled').map((knowledgeBit, i) =>
+                <KnowledgeBit
+                  key={i}
+                  knowledgeBit={knowledgeBit}
+                  articleSlug={this.props.params.slug}
+                />
               ) :
               <div
                 style={{

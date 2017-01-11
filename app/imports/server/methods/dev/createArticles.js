@@ -49,12 +49,15 @@ Meteor.methods({
         informations: [
           {
             type: 'github',
+            label: 'Emergence',
             link: 'https://github.com/FractalFlows/Emergence',
             addedById: users[0]._id,
             addedByName: users[0].profile.firstName,
             createdAt: new Date(),
+            updatedAt: new Date(),
             upVotes: 0,
             downVotes: 0,
+            status: 'enabled',
           }
         ],
       },

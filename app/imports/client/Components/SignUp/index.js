@@ -10,6 +10,8 @@ import React, {
 import { isEmpty } from 'lodash'
 import { Meteor } from 'meteor/meteor'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
+import { compose } from 'recompose'
 import {
   Field,
   reduxForm,
@@ -23,16 +25,16 @@ import {
 	cyan400,
   grey800,
   red500,
-} from 'material-ui/styles/colors'
-
+} from 'material-ui/styles/colors' 
 // Components
+import SignIn from '/imports/client/Components/SignIn'
 import renderField from '/imports/client/Components/Form/renderField'
 import Error from '/imports/client/Components/Error'
 
 //Styled Components
 const RegisterLink = styled.p`
   color: ${cyan400};
-  margin: 0 0 0 0;
+  margin: 0;
   cursor: pointer;
 
   &:hover {
@@ -42,8 +44,7 @@ const RegisterLink = styled.p`
 
 class SignUp extends PureComponent {
   propTypes: {
-    openLoginModal: PropTypes.func.isRequired,
-    closeThisModal: PropTypes.func.isRequired, handleSubmit: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
     error: PropTypes.string,
   }
 
@@ -99,24 +100,19 @@ class SignUp extends PureComponent {
           <RaisedButton
             label="Sign Me Up"
             type="submit"
+            disabled={this.props.submitting}
             fullWidth
             primary
           />
         </form>
 
         <RegisterLink
-          onClick={this.changeModal.bind(this)}
-          disabled={this.props.submitting}
+          onClick={() => this.props.router.goBack()}
         >
-          Already have an account? Sign in.
+          Already have an account? Login.
         </RegisterLink>
       </div>
     )
-  }
-
-  changeModal() {
-    this.props.openLoginModal()
-    this.props.closeThisModal()
   }
 
   submitCreateUser(values) {
@@ -137,7 +133,12 @@ class SignUp extends PureComponent {
         }
 
         Meteor.loginWithPassword(values.email, 'defaultpassword')
-        this.props.closeThisModal()
+
+        if(this.props.location.state.redirTo){
+          return this.props.router.replace(redirTo)
+        }
+
+        this.props.router.goBack()
       })
     })
   }
@@ -150,6 +151,9 @@ class SignUp extends PureComponent {
   }
 }
 
-export default reduxForm({
-  form: 'signUp',
-})(SignUp)
+export default compose(
+  reduxForm({
+    form: 'signUp',
+  }),
+  withRouter
+)(SignUp)

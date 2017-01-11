@@ -19,7 +19,6 @@ import {
 } from 'material-ui/styles/colors'
 
 // Components
-import Modal from '../Modal'
 import SignIn from '../SignIn'
 import SignUp from '../SignUp'
 import SearchInput from '../SearchInput'
@@ -38,13 +37,6 @@ const SearchInputWrapper = styled.div`
 `
 
 class Header extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			isLoginModalOpen: false,
-			isRegisterModalOpen: false,
-		}
-	}
 	render() {
     const {
       user,
@@ -83,17 +75,22 @@ class Header extends React.Component {
 
           { isEmpty(user) ? 
             (
-              <p
-                style={{
-                  marginLeft: 50,
-                  color: cyan400,
-                  cursor: 'pointer',
-                }}
-                onClick={this.openLoginModal.bind(this)}
-                data-name="header-login-btn"
-              >
-                Login
-              </p>
+            <Link
+              to={{
+                pathname: '/login',
+                state: {
+                  modal: true,
+                },
+              }}
+              style={{
+                marginLeft: 50,
+                color: cyan400,
+                textDecoration: 'none',
+              }}
+              data-name="header-login-btn"
+            >
+              Login
+            </Link>
             ) : (
               <p
                 style={{
@@ -126,46 +123,8 @@ class Header extends React.Component {
             ) : null
           }
 		    </div>
-
-				<Modal
-					isOpen={this.state.isLoginModalOpen}
-					close={this.closeLoginModal.bind(this)}
-					style={{
-						padding: 90,
-					}}
-				>
-					<SignIn
-						openRegisterModal={this.openRegisterModal.bind(this)}
-						closeThisModal={this.closeLoginModal.bind(this)}
-					/>
-				</Modal>
-
-				<Modal
-					isOpen={this.state.isRegisterModalOpen}
-					close={this.closeRegisterModal.bind(this)}
-					style={{
-						padding: 90,
-					}}
-				>
-					<SignUp
-						openLoginModal={this.openLoginModal.bind(this)}
-						closeThisModal={this.closeRegisterModal.bind(this)}
-					/>
-				</Modal>
 			</div>
 		)
-	}
-	openLoginModal() {
-		this.setState({ isLoginModalOpen: true })
-	}
-	openRegisterModal() {
-		this.setState({ isRegisterModalOpen: true })
-	}
-	closeLoginModal() {
-		this.setState({ isLoginModalOpen: false })
-	}
-	closeRegisterModal() {
-		this.setState({ isRegisterModalOpen: false })
 	}
   logoutUser(e) {
     e.preventDefault()
