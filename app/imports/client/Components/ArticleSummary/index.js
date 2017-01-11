@@ -29,9 +29,13 @@ import {
   red800,
 } from 'material-ui/styles/colors'
 import moment from 'moment'
+import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
 // Containers
 import UserContainer from '/imports/client/Containers/User'
+
+// Helpers
+import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
 
 //Styled Components
 const SummaryContent = styled.div`
@@ -143,7 +147,9 @@ class ArticleSummary extends React.Component {
             height: 50,
           }}
         >
-          <VoteButton>
+          <VoteButton
+            onClick={this.upvote.bind(this)}
+          >
             <VoteButtonHolder
               title="Upvote"
             >
@@ -153,7 +159,9 @@ class ArticleSummary extends React.Component {
             <Votes>{summary.upVotes}</Votes>
           </VoteButton>
 
-          <VoteButton>
+          <VoteButton
+            onClick={this.downvote.bind(this)}
+          >
             <VoteButtonHolder
               title="Downvote"
             >
@@ -187,6 +195,27 @@ class ArticleSummary extends React.Component {
       </div>
     )
   }
+
+  upvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForSummary', {
+        vote: UPVOTE,
+        articleSlug: this.props.articleSlug,
+        authorId: this.props.summary.authorId,
+      })
+    })
+  }
+
+  downvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForSummary', {
+        vote: DOWNVOTE,
+        articleSlug: this.props.articleSlug,
+        authorId: this.props.summary.authorId,
+      })
+    })
+  }
+
   _toggleContent() {
     const content = ReactDOM.findDOMNode(this.refs.content)
 

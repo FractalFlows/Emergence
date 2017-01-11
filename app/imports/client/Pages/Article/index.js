@@ -14,6 +14,8 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'
+import { compose } from 'recompose'
+import { get, find } from 'lodash/fp'
 import {
   RaisedButton,
   TextField,
@@ -42,6 +44,7 @@ import {
 } from '../../Components/Panel'
 
 import container from './container'
+import UserContainer from '/imports/client/Containers/User'
 
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
 
@@ -106,7 +109,7 @@ class Article extends React.Component {
       DOI,
     } = this.props.article || {}
 
-    const filteredSummaries = summaries.filter(info => info.status === 'enabled')
+    const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
     const filteredInformations = informations.filter(info => info.status === 'enabled')
 
     return (
@@ -167,18 +170,22 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Summaries">
-            <PanelHeaderButton
-              data-name="add-summary-btn"
-              onClick={() => requireLoginAndGoTo({
-                pathname: `/article/summary-upsert/${this.props.params.slug}`,
-                state: { modal: true },
-              })}
-            >
-              Add summary
-            </PanelHeaderButton>
+            {
+              !find({authorId: get('_id', this.props.user), status: 'enabled'}, summaries) ? (
+                <PanelHeaderButton
+                  data-name="add-summary-btn"
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
+                >
+                  Add summary
+                </PanelHeaderButton>
+              ) : null
+            }
           </PanelHeader>
           <PanelBody>
-            {summaries.length > 0 ?
+            {filteredSummaries.length > 0 ?
             filteredSummaries.map((summary, i) =>
               <ArticleSummary
                 key={i}
@@ -320,4 +327,7 @@ class Article extends React.Component {
   }
 }
 
-export default container(Article)
+export default compose(
+  container,
+  UserContainer
+)(Article)

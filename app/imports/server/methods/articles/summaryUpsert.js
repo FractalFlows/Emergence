@@ -26,7 +26,7 @@ Meteor.methods({
       fields: { summaries: 1 },
     })
 
-    const existingSummaryIndex = findLastIndex({ authorId: this.userId }, article.summaries)
+    const existingSummaryIndex = findLastIndex({ authorId: this.userId, status: 'enabled' }, article.summaries)
 
     if(existingSummaryIndex !== -1){
       // If is an existing summary update it
