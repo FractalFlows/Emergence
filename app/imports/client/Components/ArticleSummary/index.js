@@ -149,6 +149,7 @@ class ArticleSummary extends React.Component {
         >
           <VoteButton
             onClick={this.upvote.bind(this)}
+            data-name={`${summary.authorId}-upvote-btn`}
           >
             <VoteButtonHolder
               title="Upvote"
@@ -161,6 +162,7 @@ class ArticleSummary extends React.Component {
 
           <VoteButton
             onClick={this.downvote.bind(this)}
+            data-name={`${summary.authorId}-downvote-btn`}
           >
             <VoteButtonHolder
               title="Downvote"
