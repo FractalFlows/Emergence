@@ -139,7 +139,7 @@ class Article extends React.Component {
                     height : 30,
                     width: '5%',
                   }}
-                  onClick={() => this.router.push({
+                  onClick={() => this.props.router.push({
                     pathname: `/article/report-modal/${this.props.params.slug}`,
                     state: { modal: true },
                   })}
