@@ -33,15 +33,17 @@ import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import { Link } from 'react-router'
 
 // Components
-import ArticleSummary from '../../Components/ArticleSummary'
 import KnowledgeBit from '../../Components/KnowledgeBit'
 import RelatedArticle from '../../Components/RelatedArticle'
 import RelatedArticleInput from '../../Components/RelatedArticleInput'
 import {
   Panel,
   PanelHeader,
+  PanelHeaderButton,
   PanelBody,
 } from '../../Components/Panel'
+import ArticleSummaries from './ArticleSummaries'
+import ArticleInformations from './ArticleInformations'
 
 import container from './container'
 import UserContainer from '/imports/client/Containers/User'
@@ -49,20 +51,8 @@ import UserContainer from '/imports/client/Containers/User'
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
 
 //Styled Components
-const PanelHeaderButton = styled.button`
-  backgroundColor: ${grey200};
-  color: ${grey600};
-  border: 1px solid ${grey300};
-  padding: 7px 10px;
-  borderRadius: 3px;
-  cursor: pointer;
 
-  &:hover {
-    background-color: ${grey300};
-  }
-`
-
-const ArticleDetail = styled.p`
+const ArticleDetail = styled.div`
   color: ${grey600};
   margin: 0 0 3px 0;
   font-size: 14px;
@@ -88,9 +78,9 @@ const ReportArticleButton = styled.div`
   }
 `
 
-class Article extends React.Component {
-  constructor() {
-    super()
+class Article extends React.PureComponent {
+  constructor(props) {
+    super(props)
     this.state = {
       isAddingNewRelatedArticle: false,
       snackbarIsOpen: false,
@@ -168,87 +158,17 @@ class Article extends React.Component {
           </PanelBody>
         </Panel>
 
-        <Panel>
-          <PanelHeader title="Summaries">
-            {
-              !find({authorId: get('_id', this.props.user), status: 'enabled'}, summaries) ? (
-                <PanelHeaderButton
-                  data-name="add-summary-btn"
-                  onClick={() => requireLoginAndGoTo({
-                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
-                    state: { modal: true },
-                  })}
-                >
-                  Add summary
-                </PanelHeaderButton>
-              ) : null
-            }
-          </PanelHeader>
-          <PanelBody>
-            {filteredSummaries.length > 0 ?
-            filteredSummaries.map((summary, i) =>
-              <ArticleSummary
-                key={i}
-                summary={summary}
-                articleSlug={this.props.params.slug}
-              />
-              ) :
-              <div
-                style={{
-                  textAlign: 'center',
-                }}
-              >
-                <RaisedButton
-                  label="Create a new summary"
-                  onClick={() => requireLoginAndGoTo({
-                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
-                    state: { modal: true },
-                  })}
-                  primary
-                />
-              </div>
-            }
-          </PanelBody>
-        </Panel>
+        <ArticleSummaries
+          summaries={filteredSummaries}
+          articleSlug={this.props.params.slug}
+          user={this.props.user}
+        />
 
-        <Panel>
-          <PanelHeader title="Knowledge bits">
-            <PanelHeaderButton
-              data-name="add-knowledge-btn"
-              onClick={() => requireLoginAndGoTo({
-                pathname: `/article/information-upsert/${this.props.params.slug}`,
-                state: { modal: true },
-              })}
-            >
-              Add knowledge product
-            </PanelHeaderButton>
-          </PanelHeader>
-          <PanelBody>
-            {filteredInformations.length > 0 ?
-              filteredInformations.map((knowledgeBit, i) =>
-                <KnowledgeBit
-                  key={i}
-                  knowledgeBit={knowledgeBit}
-                  articleSlug={this.props.params.slug}
-                />
-              ) :
-              <div
-                style={{
-                  textAlign: 'center',
-                }}
-              >
-                <RaisedButton
-                  label="Create a new knowledge bit"
-                  onClick={() => requireLoginAndGoTo({
-                    pathname: `/article/information-upsert/${this.props.params.slug}`,
-                    state: { modal: true },
-                  })}
-                  primary
-                />
-              </div>
-            }
-          </PanelBody>
-        </Panel>
+        <ArticleInformations
+          informations={filteredInformations}
+          articleSlug={this.props.params.slug}
+          user={this.props.user}
+        />
 
         <Panel>
           <PanelHeader title="Related articles">

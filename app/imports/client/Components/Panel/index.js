@@ -8,10 +8,12 @@ import React from 'react'
 import {
   white,
   grey100,
+  grey200,
   grey300,
   grey400,
 	grey600,
 } from 'material-ui/styles/colors'
+import styled from 'styled-components'
 
 //Panel wrapper
 function Panel(props) {
@@ -74,8 +76,22 @@ function PanelBody(props) {
   )
 }
 
+const PanelHeaderButton = styled.button`
+  backgroundColor: ${grey200};
+  color: ${grey600};
+  border: 1px solid ${grey300};
+  padding: 7px 10px;
+  borderRadius: 3px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${grey300};
+  }
+`
+
 export {
   Panel,
   PanelHeader,
   PanelBody,
+  PanelHeaderButton,
 }

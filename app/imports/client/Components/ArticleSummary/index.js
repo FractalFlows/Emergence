@@ -31,9 +31,6 @@ import {
 import moment from 'moment'
 import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
-// Containers
-import UserContainer from '/imports/client/Containers/User'
-
 // Helpers
 import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
 
@@ -71,7 +68,7 @@ const Votes = styled.div`
   text-align: center;
 `
 
-class ArticleSummary extends React.Component {
+class ArticleSummary extends React.PureComponent {
   constructor() {
     super()
     this.state = {
@@ -82,7 +79,7 @@ class ArticleSummary extends React.Component {
     summary: React.PropTypes.object.isRequired,
   }
   render() {
-    const { summary } = this.props
+    const { summary = {} } = this.props
 
     return (
       <div
@@ -234,6 +231,5 @@ class ArticleSummary extends React.Component {
 }
 
 export default compose(
-  UserContainer,
   withRouter,
 )(ArticleSummary)
