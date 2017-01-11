@@ -6,14 +6,14 @@ import Articles, {
 } from '/imports/both/collections/articles'
 
 Meteor.methods({
-  'article/voteForInformation'(params){
+  'article/voteForSummary'(params){
     new SimpleSchema({
       articleSlug: {
         type: String,
       },
 
-      link: {
-        type: SimpleSchema.RegEx.Url,
+      authorId: {
+        type: SimpleSchema.RegEx.Id,
       },
 
       vote: {
@@ -28,18 +28,18 @@ Meteor.methods({
 
     const hasUserAlreadyDownvoted = Articles.find({
       slug: params.articleSlug,
-      'informations.link': params.link,
-      'informations.voters.voterId': this.userId,
-      'informations.voters.vote': DOWNVOTE,
-      'informations.status': 'enabled',
+      'summaries.authorId': params.authorId,
+      'summaries.status': 'enabled',
+      'summaries.voters.voterId': this.userId,
+      'summaries.voters.vote': DOWNVOTE,
     }).count()
 
     const hasUserAlreadyUpvoted = Articles.find({
       slug: params.articleSlug,
-      'informations.link': params.link,
-      'informations.voters.voterId': this.userId,
-      'informations.voters.vote': UPVOTE,
-      'informations.status': 'enabled',
+      'summaries.authorId': params.authorId,
+      'summaries.status': 'enabled',
+      'summaries.voters.voterId': this.userId,
+      'summaries.voters.vote': UPVOTE,
     }).count()
 
 
@@ -58,14 +58,14 @@ Meteor.methods({
     if(hasUserAlreadyDownvoted){
       Articles.update({
         slug: params.articleSlug,
-        'informations.link': params.link,
-        'informations.status': 'enabled',
+        'summaries.authorId': params.authorId,
+        'summaries.status': 'enabled',
       }, {
         $inc: {
-          'informations.$.downVotes': -1,
+          'summaries.$.downVotes': -1,
         },
         $pull: {
-          'informations.$.voters': {
+          'summaries.$.voters': {
             vote: DOWNVOTE,
             voterId: this.userId,
           },
@@ -79,14 +79,14 @@ Meteor.methods({
     if(hasUserAlreadyUpvoted){
       Articles.update({
         slug: params.articleSlug,
-        'informations.link': params.link,
-        'informations.status': 'enabled',
+        'summaries.authorId': params.authorId,
+        'summaries.status': 'enabled',
       }, {
         $inc: {
-          'informations.$.upVotes': -1,
+          'summaries.$.upVotes': -1,
         },
         $pull: {
-          'informations.$.voters': {
+          'summaries.$.voters': {
             vote: UPVOTE,
             voterId: this.userId,
           },
@@ -101,15 +101,15 @@ Meteor.methods({
     // Just add the respective vote and increases it counter.
     Articles.update({
       slug: params.articleSlug,
-      'informations.link': params.link,
-      'informations.status': 'enabled',
+      'summaries.authorId': params.authorId,
+      'summaries.status': 'enabled',
     }, {
       $inc: {
-        ...( params.vote === UPVOTE ? {'informations.$.upVotes': 1} : {} ),
-        ...( params.vote === DOWNVOTE ? {'informations.$.downVotes': 1} : {} ),
+        ...( params.vote === UPVOTE ? {'summaries.$.upVotes': 1} : {} ),
+        ...( params.vote === DOWNVOTE ? {'summaries.$.downVotes': 1} : {} ),
       },
       $addToSet: {
-        'informations.$.voters': {
+        'summaries.$.voters': {
           voterId: this.userId,
           voterName: Meteor.user().profile.firstName,
           vote: params.vote,

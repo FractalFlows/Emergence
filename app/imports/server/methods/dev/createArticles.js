@@ -26,8 +26,11 @@ Meteor.methods({
         summaries: [
           {
             authorId: users[0]._id,
+            authorName: users[0].profile.firstName,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            status: 'enabled',
             content: getMonkeySayings(),
-            date: new Date(),
             upVotes: 0,
             downVotes: 0,
           }

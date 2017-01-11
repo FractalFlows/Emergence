@@ -36,8 +36,8 @@ Meteor.methods({
       // If is an existing information update it
       Articles.update({_id: article._id}, {
         $set: {
-          [`informations.0.status`]: 'disabled',
-          [`informations.0.updatedAt`]: new Date(),
+          [`informations.${existingInformationIndex}.status`]: 'disabled',
+          [`informations.${existingInformationIndex}.updatedAt`]: new Date(),
         },
       })
     }

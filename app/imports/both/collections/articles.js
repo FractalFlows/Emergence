@@ -26,10 +26,16 @@ export const ArticleSummarySchema = new SimpleSchema({
   authorId: {
     type: String,
   },
+  authorName: {
+    type: String,
+  },
   content: {
     type: String,
   },
-  date: {
+  createdAt: {
+    type: Date,
+  },
+  updatedAt: {
     type: Date,
   },
   upVotes: {
@@ -41,6 +47,10 @@ export const ArticleSummarySchema = new SimpleSchema({
   voters: {
     type: [ArticleVoteSchema],
     optional: true,
+  },
+  status: {
+    type: String,
+    allowedValues: ['enabled', 'disabled'],
   },
 })
 
@@ -63,6 +73,7 @@ export const ArticleKnowledgeBitSchema = new SimpleSchema({
   },
   status: {
     type: String,
+    allowedValues: ['enabled', 'disabled'],
   },
   createdAt: {
     type: Date,

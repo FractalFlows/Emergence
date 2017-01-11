@@ -21,6 +21,7 @@ import TutorialVideo from './Components/TutorialVideo'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
 import InformationUpsert from './Pages/Article/InformationUpsert'
+import SummaryUpsert from './Pages/Article/SummaryUpsert'
 import Dashboard from './Pages/Dashboard'
 
 injectTapEventPlugin()
@@ -38,6 +39,7 @@ export default function createRoutes() {
             <Route path="/article/:slug" component={Article}/>
             <Route path="/article/report-article/:slug" component={ReportArticle}/>
             <Route path="/article/information-upsert/:slug" component={InformationUpsert}/>
+            <Route path="/article/summary-upsert/:slug" component={SummaryUpsert}/>
             <Route path="/dashboard" component={Dashboard}/>
             <Route path="*" component={EmptyScreen}/>
           </Route>

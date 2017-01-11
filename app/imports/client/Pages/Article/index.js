@@ -14,6 +14,8 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table'
+import { compose } from 'recompose'
+import { get, find } from 'lodash/fp'
 import {
   RaisedButton,
   TextField,
@@ -42,6 +44,7 @@ import {
 } from '../../Components/Panel'
 
 import container from './container'
+import UserContainer from '/imports/client/Containers/User'
 
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
 
@@ -106,6 +109,9 @@ class Article extends React.Component {
       DOI,
     } = this.props.article || {}
 
+    const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
+    const filteredInformations = informations.filter(info => info.status === 'enabled')
+
     return (
       <div
         style={{
@@ -164,14 +170,28 @@ class Article extends React.Component {
 
         <Panel>
           <PanelHeader title="Summaries">
-            <PanelHeaderButton>
-              Add summary
-            </PanelHeaderButton>
+            {
+              !find({authorId: get('_id', this.props.user), status: 'enabled'}, summaries) ? (
+                <PanelHeaderButton
+                  data-name="add-summary-btn"
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
+                >
+                  Add summary
+                </PanelHeaderButton>
+              ) : null
+            }
           </PanelHeader>
           <PanelBody>
-            {summaries.length > 0 ?
-              summaries.map((summary, i) =>
-                <ArticleSummary key={i} summary={summary} />
+            {filteredSummaries.length > 0 ?
+            filteredSummaries.map((summary, i) =>
+              <ArticleSummary
+                key={i}
+                summary={summary}
+                articleSlug={this.props.params.slug}
+              />
               ) :
               <div
                 style={{
@@ -180,6 +200,10 @@ class Article extends React.Component {
               >
                 <RaisedButton
                   label="Create a new summary"
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/summary-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
                   primary
                 />
               </div>
@@ -200,8 +224,8 @@ class Article extends React.Component {
             </PanelHeaderButton>
           </PanelHeader>
           <PanelBody>
-            {informations.length > 0 ?
-              informations.filter(info => info.status === 'enabled').map((knowledgeBit, i) =>
+            {filteredInformations.length > 0 ?
+              filteredInformations.map((knowledgeBit, i) =>
                 <KnowledgeBit
                   key={i}
                   knowledgeBit={knowledgeBit}
@@ -215,7 +239,11 @@ class Article extends React.Component {
               >
                 <RaisedButton
                   label="Create a new knowledge bit"
-                  primary={true}
+                  onClick={() => requireLoginAndGoTo({
+                    pathname: `/article/information-upsert/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
+                  primary
                 />
               </div>
             }
@@ -299,4 +327,7 @@ class Article extends React.Component {
   }
 }
 
-export default container(Article)
+export default compose(
+  container,
+  UserContainer
+)(Article)

@@ -6,7 +6,13 @@
 // Modules
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { get } from 'lodash/fp'
+import { compose } from 'recompose'
+import { withRouter } from 'react-router'
 import styled from 'styled-components'
+import { FlatButton } from 'material-ui'
+import DeleteIcon from 'material-ui/svg-icons/action/delete'
+import EditIcon from 'material-ui/svg-icons/image/edit'
 import PlusIcon from 'material-ui/svg-icons/content/add'
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up'
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down'
@@ -20,8 +26,16 @@ import {
   grey700,
   grey800,
   red400,
+  red800,
 } from 'material-ui/styles/colors'
 import moment from 'moment'
+import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
+
+// Containers
+import UserContainer from '/imports/client/Containers/User'
+
+// Helpers
+import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
 
 //Styled Components
 const SummaryContent = styled.div`
@@ -57,7 +71,7 @@ const Votes = styled.div`
   text-align: center;
 `
 
-export default class ArticleSummary extends React.Component {
+class ArticleSummary extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -106,7 +120,7 @@ export default class ArticleSummary extends React.Component {
                 fontSize: 13,
               }}
               >
-              Summary by <span style={{color: grey800}}>{summary.author}</span>
+              Summary by <span style={{color: grey800}}>{summary.authorName}</span>
             </span>
             <span
               style={{
@@ -115,7 +129,7 @@ export default class ArticleSummary extends React.Component {
                 fontSize: 13,
               }}
               >
-              {moment(summary.date).format('MMM D, YYYY')}
+              {moment(summary.updatedAt).format('MMM D, YYYY')}
             </span>
           </div>
 
@@ -133,32 +147,77 @@ export default class ArticleSummary extends React.Component {
             height: 50,
           }}
         >
-          <VoteButton>
+          <VoteButton
+            onClick={this.upvote.bind(this)}
+            data-name={`${summary.authorId}-upvote-btn`}
+          >
             <VoteButtonHolder
               title="Upvote"
             >
               <ThumbUp color={green400} />
             </VoteButtonHolder>
 
-            <Votes>
-              64
-            </Votes>
+            <Votes>{summary.upVotes}</Votes>
           </VoteButton>
 
-          <VoteButton>
+          <VoteButton
+            onClick={this.downvote.bind(this)}
+            data-name={`${summary.authorId}-downvote-btn`}
+          >
             <VoteButtonHolder
               title="Downvote"
             >
               <ThumbDown color={red400} />
             </VoteButtonHolder>
-            <Votes>
-              12
-            </Votes>
+            <Votes>{summary.downVotes}</Votes>
           </VoteButton>
+
+
+          { summary.authorId === get('_id', this.props.user) ? (
+              [ 
+                <FlatButton
+                  style={{ marginLeft: 10 }}
+                  icon={<DeleteIcon color={red800}/>}
+                  onClick={() => Meteor.call('article/deleteSummary', {
+                    summary: { authorId: summary.authorId },
+                    articleSlug: this.props.articleSlug,
+                  })}
+                />,
+                <FlatButton
+                  icon={<EditIcon color={green400}/>}
+                  onClick={() => this.props.router.push({
+                    pathname: `/article/summary-upsert/${this.props.articleSlug}`,
+                    state: { modal: true, summary: { content: summary.content } },
+                  })}
+                />
+              ]
+            ) : null
+          }
         </div>
       </div>
     )
   }
+
+  upvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForSummary', {
+        vote: UPVOTE,
+        articleSlug: this.props.articleSlug,
+        authorId: this.props.summary.authorId,
+      })
+    })
+  }
+
+  downvote(){
+    requireLoginBefore(() => {
+      Meteor.call('article/voteForSummary', {
+        vote: DOWNVOTE,
+        articleSlug: this.props.articleSlug,
+        authorId: this.props.summary.authorId,
+      })
+    })
+  }
+
   _toggleContent() {
     const content = ReactDOM.findDOMNode(this.refs.content)
 
@@ -173,3 +232,8 @@ export default class ArticleSummary extends React.Component {
     })
   }
 }
+
+export default compose(
+  UserContainer,
+  withRouter,
+)(ArticleSummary)
