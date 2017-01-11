@@ -156,27 +156,27 @@ export default class RelatedArticleInput extends React.Component {
     if (searchText) {
       this.setState({ isLoading: true })
 
-      //Simulating data fetching
-      Meteor.setTimeout(() => {
-        this.setState({
-          showDropdown: true,
-          searchResults: this.state.searchText ? results : [],
-        })
-      }, 1100)
-    } else {
+    //Simulating data fetching
+    Meteor.setTimeout(() => {
       this.setState({
-        showDropdown: false,
-        searchResults: [],
+        showDropdown: true,
+        searchResults: this.state.searchText ? results : [],
       })
-    }
+    }, 1100)
+  } else {
+    this.setState({
+      showDropdown: false,
+      searchResults: [],
+    })
   }
+}
   _searchFocus() {
     this.setState({ showDropdown: true })
   }
   _searchBlur(event) {
     Meteor.setTimeout(() => {
-      const isBlurred =
-        !ReactDOM.findDOMNode(this.refs.searchInput).matches(':focus')
+      const input = ReactDOM.findDOMNode(this.refs.searchInput)
+      const isBlurred = input && !input.matches(':focus')
 
       isBlurred && this.setState({ showDropdown: false })
     }, 150)
