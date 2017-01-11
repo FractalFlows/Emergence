@@ -7,10 +7,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import {
-  RaisedButton,
-  Snackbar,
-} from 'material-ui'
-import {
   Table,
   TableHeader,
   TableHeaderColumn,
@@ -19,6 +15,11 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 import {
+  RaisedButton,
+  TextField,
+  Snackbar,
+} from 'material-ui'
+import {
   grey200,
   grey300,
   grey400,
@@ -26,6 +27,7 @@ import {
   grey700,
   grey800,
 } from 'material-ui/styles/colors'
+import WarningIcon from 'material-ui/svg-icons/alert/warning'
 
 // Components
 import ArticleSummary from '../../Components/ArticleSummary'
@@ -69,6 +71,15 @@ const ArticleDetail = styled.p`
   }
 `
 
+const ReportArticleButton = styled.div`
+  opacity: .4;
+
+  &:hover {
+    opacity: .8;
+    cursor: pointer;
+  }
+`
+
 export default class Article extends React.Component {
   constructor() {
     super()
@@ -78,6 +89,7 @@ export default class Article extends React.Component {
       snackbarMessage: '',
     }
   }
+
   render() {
     const summaries = [
       {
@@ -140,15 +152,39 @@ export default class Article extends React.Component {
       >
         <Panel>
           <PanelBody>
-            <h1
+            <div
               style={{
-                margin: '0 0 20px 0',
-                color: grey800,
-                fontSize: 23,
+                width: '100%',
+                height: 'auto',
               }}
             >
-              {unescape(this.props.params.slug)}
-            </h1>
+              <h1
+                style={{
+                  color: grey800,
+                  fontSize: 23,
+                  float: 'left',
+                  margin: '0 0 20px 0',
+                  width: '95%',
+                }}
+              >
+                {unescape(this.props.params.slug)}
+              </h1>
+              <ReportArticleButton>
+                <WarningIcon
+                  color={grey600}
+                  style={{
+                    float: 'right',
+                    height : 30,
+                    width: '5%',
+                  }}
+                  onClick={() => this.router.push({
+                    pathname: `/article/report-modal/${this.props.params.slug}`,
+                    state: { modal: true },
+                  })}
+                />
+              </ReportArticleButton>
+            </div>
+            <div className="addthis_inline_share_toolbox"></div>
             <ArticleDetail>
               <b>Authors:</b>
               <div>
@@ -276,9 +312,11 @@ export default class Article extends React.Component {
       </div>
     )
   }
+
   _showAddRelatedArticleInput() {
     this.setState({ isAddingNewRelatedArticle: true })
   }
+
   _hideAddRelatedArticleInput() {
     this.setState({ isAddingNewRelatedArticle: false })
   }
@@ -289,6 +327,7 @@ export default class Article extends React.Component {
       snackbarMessage: message,
     })
   }
+
   _hideSnackbar() {
     this.setState({ snackbarIsOpen: false })
   }

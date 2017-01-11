@@ -13,6 +13,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // Components
 import App from './Components/App'
+import ReportArticle from './Pages/Article/ReportArticle'
 import EmptyScreen from './Components/EmptyScreen'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
@@ -27,6 +28,7 @@ export default function createRoutes() {
         <Router history={browserHistory}>
           <Route path="/" component={App}>
             <IndexRoute component={Home}/>
+            <Route path="/article/report-article/:slug" component={ReportArticle}/>
             <Route path="/article/:slug" component={Article}/>
             <Route path="/dashboard" component={Dashboard}/>
             <Route path="*" component={EmptyScreen}/>
