@@ -37,11 +37,12 @@ const DeleteIcon = styled(SvgDeleteIcon)`
   }
 `
 
-export default class RelatedArticle extends React.Component {
+export default class RelatedArticle extends React.PureComponent {
   propTypes: {
     article: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
   }
+
   render() {
     const { article, user, removeRelated } = this.props
 
