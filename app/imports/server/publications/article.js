@@ -5,7 +5,7 @@ Meteor.publish('articles.bySlug', slug => (
   Articles.find({ slug }, {
     fields: {
       'informations.voters': 0,
-      unappropriatedContentReports: 0,
+      inappropriatedContentReports: 0,
     },
   })
 ))
@@ -17,7 +17,7 @@ Meteor.publish('articles.hasUserReported', function(slug){
     slug,
   }, {
     fields: {
-      'unappropriatedContentReports': {
+      'inappropriatedContentReports': {
         $elemMatch: { authorId: this.userId },
       },
     },

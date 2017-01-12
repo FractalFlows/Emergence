@@ -191,7 +191,7 @@ const schema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  unappropriatedContentReports: {
+  inappropriatedContentReports: {
     type: [ArticleReportSchema],
     optional: true,
   },

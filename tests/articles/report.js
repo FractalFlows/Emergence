@@ -26,9 +26,9 @@ describe('Articles', () => {
 
       const updatedArticle = Articles('findOne', {})
 
-      expect(updatedArticle).to.have.property('unappropriatedContentReports')
-      expect(updatedArticle.unappropriatedContentReports).to.be.an('array')
-      expect(updatedArticle.unappropriatedContentReports[0]).to.have.property('message', formDoc.message)
+      expect(updatedArticle).to.have.property('inappropriatedContentReports')
+      expect(updatedArticle.inappropriatedContentReports).to.be.an('array')
+      expect(updatedArticle.inappropriatedContentReports[0]).to.have.property('message', formDoc.message)
     })
   })
 })
@@ -53,4 +53,5 @@ function fillUpReportForm(){
 
 function clickOnReportBtn(){
   browser.waitForVisible(`[data-name="report-btn"]`)
+  browser.click(`[data-name="report-btn"]`)
 }

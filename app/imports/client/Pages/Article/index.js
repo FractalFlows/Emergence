@@ -86,14 +86,14 @@ class Article extends React.PureComponent {
       informations = [],
       relatedArticles = [],
       DOI,
-      unappropriatedContentReports,
+      inappropriatedContentReports,
     } = this.props.article || {}
 
     const { user } = this.props
 
     const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
     const filteredInformations = informations.filter(info => info.status === 'enabled')
-    const hasUserAlreadyReportedArticle = !isEmpty(unappropriatedContentReports)
+    const hasUserAlreadyReportedArticle = !isEmpty(inappropriatedContentReports)
 
     return (
       <div
