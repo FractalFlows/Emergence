@@ -10,9 +10,7 @@ import {
   Table,
   TableHeader,
   TableHeaderColumn,
-  TableBody,
-  TableRow,
-  TableRowColumn,
+  TableBody, TableRow, TableRowColumn,
 } from 'material-ui/Table'
 import { compose } from 'recompose'
 import { get, find } from 'lodash/fp'
@@ -86,9 +84,10 @@ class Article extends React.PureComponent {
       DOI,
     } = this.props.article || {}
 
+    const { user } = this.props
+
     const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
     const filteredInformations = informations.filter(info => info.status === 'enabled')
-    const filteredRelatedArticles = relatedArticles.filter(relatedArticle => relatedArticle.status === 'enabled')
 
     return (
       <div
@@ -149,19 +148,19 @@ class Article extends React.PureComponent {
         <ArticleSummaries
           summaries={filteredSummaries}
           articleSlug={this.props.params.slug}
-          user={this.props.user}
+          user={user}
         />
 
         <ArticleInformations
           informations={filteredInformations}
           articleSlug={this.props.params.slug}
-          user={this.props.user}
+          user={user}
         />
 
         <ArticleRelatedArticles
-          relatedArticles={filteredRelatedArticles}
+          relatedArticles={relatedArticles}
           articleSlug={this.props.params.slug}
-          user={this.props.user}
+          user={user}
         />
       </div>
     )
