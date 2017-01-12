@@ -66,6 +66,7 @@ export default class RelatedArticleInput extends React.Component {
   propTypes: {
     cancel: React.PropTypes.func,
     showSnackbar: React.PropTypes.func,
+    articleSlug: React.PropTypes.string.isRequired,
   }
   render() {
     return (
@@ -99,10 +100,11 @@ export default class RelatedArticleInput extends React.Component {
               {this.state.searchResults.map(
                 result => <ArticleItem
                   key={result.DOI}
-                  info={result}
+                  article={result}
                   showSnackbar={this.props.showSnackbar}
                   hideInput={this.props.cancel}
                   searchText={this.state.searchText}
+                  addRelatedArticle={this.addRelatedArticle.bind(this)}
                 />
               )}
             </ResultsDropdown>
@@ -123,7 +125,10 @@ export default class RelatedArticleInput extends React.Component {
     if (searchText) {
       this.setState({ isLoading: true })
 
-      Meteor.call('article/search', { searchText }, (error, results) => {
+      Meteor.call('article/searchForRelateds', {
+        searchText,
+        articleSlug: this.props.articleSlug,
+      }, (error, results) => {
         if(error){
           console.warn(error)
           return
@@ -151,5 +156,13 @@ export default class RelatedArticleInput extends React.Component {
 
       isBlurred && this.setState({ showDropdown: false })
     }, 150)
+  }
+  addRelatedArticle(article){
+    Meteor.call('article/addRelated', {
+      DOI: article.DOI,
+      articleSlug: this.props.articleSlug,
+    }, () => {
+      this.search({ target: {value: this.props.searchText} })
+    })
   }
 }

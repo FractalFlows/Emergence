@@ -5,6 +5,7 @@ import {
   withState,
   withProps,
 } from 'recompose'
+import { Meteor } from 'meteor/meteor'
 import {
   RaisedButton,
   Snackbar,
@@ -32,6 +33,8 @@ function ArticleRelatedArticles({
   hideSnackbar,
   isAddingNewRelatedArticle,
   isShowingSnackbar,
+  user,
+  removeRelated,
 }){
   return (
     <Panel>
@@ -52,7 +55,12 @@ function ArticleRelatedArticles({
           <tbody>
             {relatedArticles.length > 0 ?
               relatedArticles.map((relatedArticle, i) =>
-                <RelatedArticle key={i} article={relatedArticle} />
+                <RelatedArticle
+                  key={i}
+                  article={relatedArticle}
+                  user={user}
+                  removeRelated={removeRelated}
+                />
               ) :
               <div
                 style={{
@@ -72,6 +80,7 @@ function ArticleRelatedArticles({
                   <RelatedArticleInput
                     cancel={hideAddNewRelatedArticle}
                     showSnackbar={showSnackbar}
+                    articleSlug={articleSlug}
                   />
                 </td>
               </tr>
@@ -91,13 +100,17 @@ function ArticleRelatedArticles({
 }
 
 export default compose(
-  pure,
   withState('isAddingNewRelatedArticle', 'setAddingNewRelatedArticle', false),
   withState('isShowingSnackbar', 'setSnackbarVisibility', false),
-  withProps(({ setAddingNewRelatedArticle, setSnackbarVisibility }) => ({
+  withProps(({ setAddingNewRelatedArticle, setSnackbarVisibility, articleSlug }) => ({
     showAddNewRelatedArticle: () => setAddingNewRelatedArticle(true),
     hideAddNewRelatedArticle: () => setAddingNewRelatedArticle(false),
     showSnackbar: () => setSnackbarVisibility(true),
     hideSnackbar: () => setSnackbarVisibility(false),
+    removeRelated: ({ DOI }) => () => Meteor.call('article/removeRelated', {
+      articleSlug,
+      DOI,
+    })
   })),
+  pure,
 )(ArticleRelatedArticles)

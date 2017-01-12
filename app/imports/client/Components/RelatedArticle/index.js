@@ -40,9 +40,10 @@ const DeleteIcon = styled(SvgDeleteIcon)`
 export default class RelatedArticle extends React.Component {
   propTypes: {
     article: React.PropTypes.object.isRequired,
+    user: React.PropTypes.object.isRequired,
   }
   render() {
-    const { article } = this.props
+    const { article, user, removeRelated } = this.props
 
     return (
       <RelatedArticleRow
@@ -71,15 +72,20 @@ export default class RelatedArticle extends React.Component {
                 fontSize: 12,
               }}
             >
-              {article.authors.join('; ')}
             </div>
           </Link>
         </td>
-        <td
-          title="Remove related article"
-        >
-          <DeleteIcon />
-        </td>
+        {
+          article.addedById === user._id ? (
+            <td
+              title="Remove related article"
+            >
+              <DeleteIcon
+                onClick={removeRelated(article)}
+              />
+            </td>
+          ) : null
+        }
       </RelatedArticleRow>
     )
   }

@@ -38,16 +38,11 @@ const SaveButton = styled.button`
 `
 
 export default class ArticleItem extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      snackbarIsOpen: false,
-    }
-  }
   render() {
     const {
-      info: article,
+      article,
       searchText,
+      addRelatedArticle,
     } = this.props
 
     const getHighlightedTitle = () => ({
@@ -83,7 +78,7 @@ export default class ArticleItem extends React.Component {
 
           <div>
             <SaveButton
-              onClick={this._addRelatedArticle.bind(this)}
+              onClick={() => addRelatedArticle(article)}
             >
               Add
             </SaveButton>
@@ -91,9 +86,5 @@ export default class ArticleItem extends React.Component {
         </ArticleItemRow>
       </div>
     )
-  }
-  _addRelatedArticle() {
-    this.props.showSnackbar('Related article added to the list')
-    this.props.hideInput()
   }
 }
