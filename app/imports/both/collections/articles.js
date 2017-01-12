@@ -95,6 +95,30 @@ export const ArticleKnowledgeBitSchema = new SimpleSchema({
   },
 })
 
+export const ArticleRelatedArticleSchema = new SimpleSchema({
+  DOI: {
+    type: String,
+  },
+  title: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+  },
+  addedById: {
+    type: SimpleSchema.RegEx.Id,
+  },
+  addedByName: {
+    type: String,
+  },
+  authors: {
+    type: [String],
+  },
+  abstract: {
+    type: String,
+  },
+})
+
 const schema = new SimpleSchema({
   createdAt: {
     type: Date,
@@ -145,7 +169,7 @@ const schema = new SimpleSchema({
     optional: true,
   },
   relatedArticles: {
-    type: [SimpleSchema.RegEx.Id],
+    type: [ArticleRelatedArticleSchema],
     optional: true,
   },
   slug: {
