@@ -6,7 +6,22 @@ const Articles = new Mongo.Collection('articles')
 export const UPVOTE = 1
 export const DOWNVOTE = -1
 
-const ArticleVoteSchema = new SimpleSchema({
+export const ArticleReportSchema = new SimpleSchema({
+  message: {
+    type: String,
+  },
+  authorId: {
+    type: SimpleSchema.RegEx.Id,
+  },
+  authorName: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+  },
+})
+
+export const ArticleVoteSchema = new SimpleSchema({
   vote: {
     type: Number,
     allowedValues: [DOWNVOTE, UPVOTE],
@@ -174,6 +189,10 @@ const schema = new SimpleSchema({
   },
   slug: {
     type: String,
+    optional: true,
+  },
+  unappropriatedContentReports: {
+    type: [ArticleReportSchema],
     optional: true,
   },
 })
