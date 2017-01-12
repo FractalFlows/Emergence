@@ -16,5 +16,28 @@ Meteor.methods({
         $options: 'si',
       },
     }).fetch()
-  }
+  },
+  'article/searchForRelateds'(params){
+    new SimpleSchema({
+      searchText: {
+        type: String,
+      },
+      articleSlug: { type: String }
+    }).validate(params)
+
+    const article = Articles.findOne({
+      slug: params.articleSlug,
+    })
+    const relatedArticles = article.relatedArticles || []
+
+    return Articles.find({
+      title: {
+        $regex: `.*${params.searchText}.*`,
+        $options: 'si',
+      },
+      DOI: {
+        $nin: relatedArticles.map(({ DOI }) => DOI),
+      },
+    }).fetch()
+  },
 })
