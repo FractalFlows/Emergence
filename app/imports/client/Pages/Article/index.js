@@ -123,7 +123,7 @@ class Article extends React.PureComponent {
               <ReportArticleButton
                 onClick={
                   !hasUserAlreadyReportedArticle ? (
-                    requireLoginAndGoTo({
+                    () => requireLoginAndGoTo({
                       pathname: `/article/report-article/${this.props.params.slug}`,
                       state: { modal: true },
                     }) 
