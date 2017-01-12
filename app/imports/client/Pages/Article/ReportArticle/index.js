@@ -1,15 +1,30 @@
 import React from 'react'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import {
+  compose,
+  withProps,
+} from 'recompose'
+import { isEmpty } from 'lodash/fp'
+import validateObject from '/imports/client/Utils/validateObject'
+import {
   RaisedButton,
-  TextField,
 } from 'material-ui'
 import {
   grey400,
   grey800,
 } from 'material-ui/styles/colors'
+import {
+  Field,
+  reduxForm,
+  SubmissionError,
+} from 'redux-form'
+import { TextField } from 'redux-form-material-ui'
 
-export default function ReportArticle(){
+function ReportArticle({
+  onSubmit,
+  submitting,
+  handleSubmit,
+}){
   return (
     <div
       style={{
@@ -42,20 +57,53 @@ export default function ReportArticle(){
           marginTop: 40,
           marginBottom: 40,
         }}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <TextField
+        <Field
           hintText="This article contains a summary that does not fits with the essence of the article, contains graphic content, unappropriated language"
-          multiLine={true}
+          name="message"
           rows={2}
           rowsMax={6}
-          fullWidth={true}
+          component={TextField}
+          fullWidth
+          multiLine
         />
         <RaisedButton
+          type="submit"
           label="Confirm"
-          primary={true}
-          fullWidth={true}
+          disabled={submitting}
+          primary
+          fullWidth
         />
       </form>
     </div>
   )
 }
+
+export default compose(
+  reduxForm({
+    form: 'reportArticle',
+  }),
+  withProps(({ router, params }) => ({
+    onSubmit(values){
+      return new Promise((resolve, reject) => {
+        const errors = validateObject({
+          message: { type: String, min: 20 },
+        }, values)
+
+        if(!isEmpty(errors)){
+          reject(new SubmissionError(errors))
+          return
+        }
+
+        Meteor.call('article/report', {
+          message: values.message,
+          articleSlug: params.slug,
+        }, () => {
+          router.replace(`/article/${params.slug}`)
+          resolve()
+        })
+      })
+    },
+  }))
+)(ReportArticle)
