@@ -13,7 +13,7 @@ import {
   TableBody, TableRow, TableRowColumn,
 } from 'material-ui/Table'
 import { compose } from 'recompose'
-import { get, find } from 'lodash/fp'
+import { isEmpty, get, find } from 'lodash/fp'
 import {
   RaisedButton,
   TextField,
@@ -26,6 +26,7 @@ import {
   grey600,
   grey700,
   grey800,
+  red300,
 } from 'material-ui/styles/colors'
 import WarningIcon from 'material-ui/svg-icons/alert/warning'
 import { Link } from 'react-router'
@@ -82,12 +83,14 @@ class Article extends React.PureComponent {
       informations = [],
       relatedArticles = [],
       DOI,
+      unappropriatedContentReports,
     } = this.props.article || {}
 
     const { user } = this.props
 
     const filteredSummaries = summaries.filter(summary => summary.status === 'enabled')
     const filteredInformations = informations.filter(info => info.status === 'enabled')
+    const hasUserAlreadyReportedArticle = !isEmpty(unappropriatedContentReports)
 
     return (
       <div
@@ -116,20 +119,20 @@ class Article extends React.PureComponent {
               </h1>
               <ReportArticleButton>
                 <WarningIcon
-                  color={grey600}
+                  color={hasUserAlreadyReportedArticle ? red300 : grey600}
                   style={{
                     float: 'right',
                     height : 30,
                     width: '5%',
                   }}
-                  onClick={() => this.props.router.push({
+                  onClick={ !hasUserAlreadyReportedArticle ? () => this.props.router.push({
                     pathname: `/article/report-article/${this.props.params.slug}`,
                     state: { modal: true },
-                  })}
+                  }) : null}
                 />
               </ReportArticleButton>
             </div>
-            <div className="addthis_inline_share_toolbox"></div>
+            <div className="addthis_inline_share_toolbox" />
             <ArticleDetail>
               <b>Authors:</b>
               <div>{authors.join(', ')}</div>

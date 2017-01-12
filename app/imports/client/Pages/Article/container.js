@@ -10,6 +10,9 @@ export default composeWithTracker((props, onData) => {
   const slug = props.params.slug
   const handle = Meteor.subscribe('articles.bySlug', slug)
 
+  // Checks
+  Meteor.subscribe('articles.hasUserReported', slug)
+
   if(handle.ready()){
     onData(null, {
       article: Articles.findOne({ slug }) || {},
