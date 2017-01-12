@@ -45,6 +45,9 @@ import ArticleRelatedArticles from './RelatedArticles'
 import container from './container'
 import UserContainer from '/imports/client/Containers/User'
 
+// Helpers
+import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
+
 //Styled Components
 
 const ArticleDetail = styled.div`
@@ -117,7 +120,17 @@ class Article extends React.PureComponent {
               >
                 {title}
               </h1>
-              <ReportArticleButton>
+              <ReportArticleButton
+                onClick={
+                  !hasUserAlreadyReportedArticle ? (
+                    requireLoginAndGoTo({
+                      pathname: `/article/report-article/${this.props.params.slug}`,
+                      state: { modal: true },
+                    }) 
+                  ) : null
+                }
+                data-name="report-btn"
+              >
                 <WarningIcon
                   color={hasUserAlreadyReportedArticle ? red300 : grey600}
                   style={{
@@ -125,10 +138,6 @@ class Article extends React.PureComponent {
                     height : 30,
                     width: '5%',
                   }}
-                  onClick={ !hasUserAlreadyReportedArticle ? () => this.props.router.push({
-                    pathname: `/article/report-article/${this.props.params.slug}`,
-                    state: { modal: true },
-                  }) : null}
                 />
               </ReportArticleButton>
             </div>

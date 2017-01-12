@@ -30,7 +30,7 @@ describe('Articles', () => {
       })
     })
 
-    describe('Ranking system @watch', () => {
+    describe('Ranking system', () => {
       before(() => {
         server.call('dev/resetDatabase')
         server.call('dev/createArticles')
