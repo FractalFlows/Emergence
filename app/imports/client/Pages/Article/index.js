@@ -141,7 +141,12 @@ class Article extends React.PureComponent {
                 />
               </ReportArticleButton>
             </div>
-            <div className="addthis_inline_share_toolbox" />
+            <div
+              className="addthis_inline_share_toolbox"
+              style={{
+                padding: '10px 0',
+              }}
+            />
             <ArticleDetail>
               <b>Authors:</b>
               <div>{authors.join(', ')}</div>
