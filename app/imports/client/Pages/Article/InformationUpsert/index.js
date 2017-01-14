@@ -46,6 +46,7 @@ function InformationUpsert({
   error,
 }){
   const information = state.information || {}
+  const isEdit = state.isEdit
 
   return (
     <div
@@ -86,6 +87,7 @@ function InformationUpsert({
           name="link"
           component={TextField}
           floatingLabelText="What is the link of it?"
+          disabled={isEdit}
           fullWidth
         />
 

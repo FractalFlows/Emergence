@@ -252,7 +252,14 @@ class KnowledgeBit extends React.Component {
                   icon={<EditIcon color={green400}/>}
                   onClick={() => this.props.router.push({
                     pathname: `/article/information-upsert/${this.props.articleSlug}`,
-                    state: { modal: true, information: knowledgeBit },
+                    state: {
+                      modal: true,
+                      isEdit: true,
+                      information: {
+                        type: knowledgeBit.type,
+                        link: knowledgeBit.link,
+                      },
+                    },
                   })}
                 />
               ]
