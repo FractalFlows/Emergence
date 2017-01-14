@@ -5,6 +5,7 @@ Meteor.publish('articles.bySlug', slug => (
   Articles.find({ slug }, {
     fields: {
       'informations.voters': 0,
+      'summaries.voters': 0,
       inappropriatedContentReports: 0,
     },
   })
