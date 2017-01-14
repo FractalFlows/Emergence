@@ -56,11 +56,13 @@ export default class Users extends React.Component {
         }}
       >
         <Table
-          multiSelectable={true}
+
         >
-          <TableHeader>
+          <TableHeader
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+          >
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
               <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
               <TableHeaderColumn tooltip="The Email">Email</TableHeaderColumn>
             </TableRow>
@@ -68,10 +70,10 @@ export default class Users extends React.Component {
 
           <TableBody
             showRowHover={true}
+            displayRowCheckbox={false}
           >
             {users.map((row, index) => (
               <TableRow key={index} selected={false}>
-                <TableRowColumn>{index}</TableRowColumn>
                 <TableRowColumn>{row.name}</TableRowColumn>
                 <TableRowColumn>{row.email}</TableRowColumn>
               </TableRow>
