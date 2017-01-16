@@ -34,7 +34,7 @@ import moment from 'moment'
 import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
 // Containers
-import UserContainer from '/imports/client/Containers/User'
+import UserContainer from '/imports/client/Pages/User/container'
 
 // Helpers
 import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
