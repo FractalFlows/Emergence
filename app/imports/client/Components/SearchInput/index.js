@@ -60,7 +60,7 @@ const ResultsDropdown = styled.div`
   overflow-y: auto;
 `
 
-export default class Modal extends React.Component {
+export default class SearchInputHolder extends React.Component {
   constructor() {
     super()
     this.state = {
