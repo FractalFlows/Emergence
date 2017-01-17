@@ -5,6 +5,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
+    "api-unanimity": "^1.0.2",
     "bcrypt": "^1.0.1",
     "compose-with-tracker": "^1.0.2",
     "eslint-plugin-jsx-a11y": "^3.0.1",
