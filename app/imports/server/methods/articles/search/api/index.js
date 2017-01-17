@@ -9,6 +9,7 @@ import {
   isNull,
 } from 'lodash/fp'
 import unanimity from 'api-unanimity'
+import striptags from 'striptags'
 import getCrossRefWorkSearcherForParam from'./get_crossref_searcher'
 import getDataCiteSearcher from './get_datacite_searcher'
 
@@ -24,7 +25,11 @@ const ArticleSearcher = unanimity([
       groupBy('DOI'),
       mapValues(sameDOIArticles => {
         const cleanedUpArticles = sameDOIArticles.map(omitBy(isNothing))
-        return Object.assign(...cleanedUpArticles)
+        const unifiedArticle = Object.assign(...cleanedUpArticles)
+        return {
+          ...unifiedArticle,
+          abstract: striptags(unifiedArticle.abstract),
+        }
       }),
       values
     )(results)
