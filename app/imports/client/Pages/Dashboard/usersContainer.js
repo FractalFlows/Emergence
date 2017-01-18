@@ -11,7 +11,7 @@ export default composeWithTracker((props, onData) => {
 
   if(handle.ready()){
     onData(null, {
-      users: Meteor.users.find().fetch() || {},
+      users: Meteor.users.find().fetch(),
     })
   } else {
     onData(null, {
@@ -19,5 +19,5 @@ export default composeWithTracker((props, onData) => {
     })
   }
 }, {
-
+  pure: true,
 })

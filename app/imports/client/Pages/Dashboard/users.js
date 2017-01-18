@@ -17,13 +17,11 @@ import { grey400 } from 'material-ui/styles/colors'
 import { compose } from 'recompose'
 
 //Components
-// import container from './usersContainer'
+import container from './usersContainer'
 
 class Users extends React.Component {
 	render() {
     const { users } = this.props
-
-    console.log(users)
 
 		return (
 			<div
@@ -49,10 +47,10 @@ class Users extends React.Component {
             showRowHover={true}
             displayRowCheckbox={false}
           >
-            {users.map((row, index) => (
+            {users && users.map((row, index) => (
               <TableRow key={index} selected={false}>
-                <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.email}</TableRowColumn>
+                <TableRowColumn>{row.profile.firstName}</TableRowColumn>
+                <TableRowColumn>{row.emails[0].address}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
@@ -62,7 +60,6 @@ class Users extends React.Component {
 	}
 }
 
-export default Users
-// export default compose(
-//   container
-// )(Users)
+export default compose(
+  container
+)(Users)
