@@ -14,39 +14,16 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 import { grey400 } from 'material-ui/styles/colors'
+import { compose } from 'recompose'
 
-export default class Users extends React.Component {
+//Components
+// import container from './usersContainer'
+
+class Users extends React.Component {
 	render() {
-    const users = [
-      {
-        name: 'John Smith',
-        email: 'john.smith@gmail.com',
-      },
-      {
-        name: 'Randal White',
-        email: 'randal.white@gmail.com',
-      },
-      {
-        name: 'Stephanie Sanders',
-        email: 'stephanie.sanders@gmail.com',
-      },
-      {
-        name: 'Steve Brown',
-        email: 'steve.brown@gmail.com',
-      },
-      {
-        name: 'Joyce Whitten',
-        email: 'joyce.whitten@gmail.com',
-      },
-      {
-        name: 'Samuel Roberts',
-        email: 'samuel.roberts@gmail.com',
-      },
-      {
-        name: 'Adam Moore',
-        email: 'adam.moore@gmail.com',
-      },
-    ]
+    const { users } = this.props
+
+    console.log(users)
 
 		return (
 			<div
@@ -84,3 +61,8 @@ export default class Users extends React.Component {
 		)
 	}
 }
+
+export default Users
+// export default compose(
+//   container
+// )(Users)

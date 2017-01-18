@@ -44,7 +44,7 @@ const TabItem = styled(Tab)`
 //*Tabs component requires it
 TabItem.muiName = 'Tab'
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
