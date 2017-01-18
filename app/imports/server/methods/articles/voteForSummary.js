@@ -28,20 +28,35 @@ Meteor.methods({
 
     const hasUserAlreadyDownvoted = Articles.find({
       slug: params.articleSlug,
-      'summaries.authorId': params.authorId,
-      'summaries.status': 'enabled',
-      'summaries.voters.voterId': this.userId,
-      'summaries.voters.vote': DOWNVOTE,
+      summaries: {
+        $elemMatch: {
+          authorId: params.authorId,
+          status: 'enabled',
+          voters: {
+            $elemMatch: {
+              voterId: this.userId,
+              vote: DOWNVOTE,
+            },
+          },
+        },
+      },
     }).count()
 
     const hasUserAlreadyUpvoted = Articles.find({
       slug: params.articleSlug,
-      'summaries.authorId': params.authorId,
-      'summaries.status': 'enabled',
-      'summaries.voters.voterId': this.userId,
-      'summaries.voters.vote': UPVOTE,
+      summaries: {
+        $elemMatch: {
+          authorId: params.authorId,
+          status: 'enabled',
+          voters: {
+            $elemMatch: {
+              voterId: this.userId,
+              vote: UPVOTE,
+            },
+          },
+        },
+      },
     }).count()
-
 
     // Here we need to check if the user has already voted
     // and for what she/he voted for.
@@ -97,6 +112,7 @@ Meteor.methods({
       if(params.vote === UPVOTE) return
     }
 
+    console.log('Including vote', params.vote)
     // Continue to the normal behavior.
     // Just add the respective vote and increases it counter.
     Articles.update({

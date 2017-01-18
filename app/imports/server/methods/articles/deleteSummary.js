@@ -22,6 +22,7 @@ Meteor.methods({
     Articles.update({
       slug: articleSlug,
       'summaries.authorId': this.userId,
+      'summaries.status': 'enabled',
     }, {
       $set: {
         [`summaries.$.status`]: 'disabled',

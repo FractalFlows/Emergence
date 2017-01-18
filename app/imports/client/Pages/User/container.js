@@ -1,11 +1,9 @@
-/*
- * Built by Astrocoders
- * @flow
- */
+import composeWithTracker from 'compose-with-tracker'
+import { Meteor } from 'meteor/meteor'
 
-import { connect } from 'react-redux'
-import * as actionsToProps from './actions'
-
-const stateToProps = ({ user }) => ({ user })
-
-export default connect(stateToProps, actionsToProps)
+export default composeWithTracker((props, onData) => {
+  onData(null, {
+    isLoggingIn: Meteor.loggingIn(),
+    user: Meteor.user() || {},
+  })
+})

@@ -25,7 +25,7 @@ import SearchInput from '../SearchInput'
 import DropdownMenu from '../DropdownMenu'
 
 // Containers
-import UserContainer from '/imports/client/Containers/User'
+import UserContainer from '/imports/client/Pages/User/container'
 
 //Styled Components
 const SearchInputWrapper = styled.div`

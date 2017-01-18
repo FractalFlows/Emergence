@@ -11,7 +11,7 @@ import {
   PanelBody,
   PanelHeaderButton,
 } from '../../Components/Panel'
-import KnowledgeBit from '../../Components/ArticleSummary'
+import KnowledgeBit from '../../Components/KnowledgeBit'
 
 // Helpers
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'

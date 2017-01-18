@@ -34,7 +34,7 @@ import moment from 'moment'
 import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
 // Containers
-import UserContainer from '/imports/client/Containers/User'
+import UserContainer from '/imports/client/Pages/User/container'
 
 // Helpers
 import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
@@ -252,7 +252,14 @@ class KnowledgeBit extends React.Component {
                   icon={<EditIcon color={green400}/>}
                   onClick={() => this.props.router.push({
                     pathname: `/article/information-upsert/${this.props.articleSlug}`,
-                    state: { modal: true, information: knowledgeBit },
+                    state: {
+                      modal: true,
+                      isEdit: true,
+                      information: {
+                        type: knowledgeBit.type,
+                        link: knowledgeBit.link,
+                      },
+                    },
                   })}
                 />
               ]

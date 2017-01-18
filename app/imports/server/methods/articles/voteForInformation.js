@@ -28,18 +28,34 @@ Meteor.methods({
 
     const hasUserAlreadyDownvoted = Articles.find({
       slug: params.articleSlug,
-      'informations.link': params.link,
-      'informations.voters.voterId': this.userId,
-      'informations.voters.vote': DOWNVOTE,
-      'informations.status': 'enabled',
+      informations: {
+        $elemMatch: {
+          link: params.link,
+          status: 'enabled',
+          voters: {
+            $elemMatch: {
+              voterId: this.userId,
+              vote: DOWNVOTE,
+            },
+          },
+        },
+      },
     }).count()
 
     const hasUserAlreadyUpvoted = Articles.find({
       slug: params.articleSlug,
-      'informations.link': params.link,
-      'informations.voters.voterId': this.userId,
-      'informations.voters.vote': UPVOTE,
-      'informations.status': 'enabled',
+      informations: {
+        $elemMatch: {
+          link: params.link,
+          status: 'enabled',
+          voters: {
+            $elemMatch: {
+              voterId: this.userId,
+              vote: UPVOTE,
+            },
+          },
+        },
+      },
     }).count()
 
 
