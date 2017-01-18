@@ -30,9 +30,7 @@ class Users extends React.Component {
           boxShadow: `-1px 1px 2px ${grey400}`,
         }}
       >
-        <Table
-
-        >
+        <Table>
           <TableHeader
             displaySelectAll={false}
             adjustForCheckbox={false}

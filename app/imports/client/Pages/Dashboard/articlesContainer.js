@@ -20,5 +20,5 @@ export default composeWithTracker((props, onData) => {
     })
   }
 }, {
-
+  pure: true,
 })
