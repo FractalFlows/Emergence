@@ -16,6 +16,7 @@
     "moment": "^2.15.1",
     "pure-render-decorator": "^1.2.1",
     "react": "^15.4.1",
+    "react-helmet": "^4.0.0",
     "react-komposer": "^2.0.0",
     "react-motion": "^0.4.7",
     "react-redux": "^5.0.1",
