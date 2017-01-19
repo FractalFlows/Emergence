@@ -22,10 +22,13 @@ import {
 } from 'material-ui/styles/colors'
 import { debounce } from 'lodash'
 
-//Components
+// Containers
+import { redux as SearchContainer } from '/imports/client/Pages/Search/container'
+
+// Components
 import ArticleItem from './article_item'
 
-//Styled Components
+// Styled Components
 const SearchInputWrapper = styled.div`
   background-color: ${grey100};
   padding: 0 16px 0 10px;
@@ -60,20 +63,22 @@ const ResultsDropdown = styled.div`
   overflow-y: auto;
 `
 
-export default class SearchInputHolder extends React.Component {
-  constructor() {
-    super()
+class SearchInputHolder extends React.Component {
+  constructor(props) {
+    super(props)
     this.state = {
-      isFocused: false,
-      isLoading: false,
-      searchText: '',
-      searchResults: [],
       showDropdown: false,
     }
-
-    this.search = debounce(() => this._search(), 1000)
   }
+
   render() {
+    const {
+      searchState,
+      clearSearch,
+      fetchSelectedArticle,
+    } = this.props
+    const { showDropdown } = this.state
+
     return (
       <div
         style={{
@@ -83,7 +88,7 @@ export default class SearchInputHolder extends React.Component {
       >
         <SearchInputWrapper
           ref="searchInputWrapper"
-          className={this.state.isFocused ? 'focus' : ''}
+          className={showDropdown ? 'focus' : ''}
         >
           <SearchIcon
             color={grey500}
@@ -94,83 +99,60 @@ export default class SearchInputHolder extends React.Component {
           <SearchInput
             type="text"
             placeholder="Enter an article DOI, title, author or keywords"
-            ref="searchInput"
-            onInput={this.search}
+            onInput={(event) => this.props.fetchSearch({ searchText: event.target.value })}
             onKeyDown={this._searchSelect.bind(this)}
-            onClick={this._searchFocus.bind(this)}
-            onFocus={this._searchFocus.bind(this)}
-            onBlur={this._searchBlur.bind(this)}
+            onFocus={() => this.setState({ showDropdown: true })}
+            onBlur={() => setTimeout(() => this.setState({ showDropdown: false }), 100)}
+            disabled={searchState.isFetchingSelectedArticle}
           />
           <CircularProgress
             size={17}
             thickness={2}
             color={cyan500}
             style={{
-              visibility: this.state.isLoading ? 'visible' : 'hidden',
+              visibility: ( searchState.isSearching || searchState.isFetchingSelectedArticle )? 'visible' : 'hidden',
               marginRight: 7,
             }}
           />
           <CloseIcon
             color={grey500}
             style={{
-              visibility: this.state.searchText ? 'visible' : 'hidden',
+              visibility: searchState.searchText ? 'visible' : 'hidden',
               cursor: 'pointer',
               height: 25,
               padding: 5,
             }}
-            onClick={this._clearSearch.bind(this)}
+            onClick={this.clearSearch.bind(this)}
           />
         </SearchInputWrapper>
 
         <ResultsDropdown
           className="dropdown-article-list"
           style={{
-            display: this.state.showDropdown ? 'block' : 'none',
+            display: showDropdown ? 'block' : 'none',
           }}
         >
-          {this.state.searchResults.map(
-            result => <ArticleItem
-              key={result.DOI}
-              info={result}
-              searchText={this.state.searchText}
-            />
-          )}
+          {
+            searchState.articlesFromSearch.map(result => (
+              <ArticleItem
+                key={result.DOI}
+                info={result}
+                searchText={searchState.searchText}
+                onClick={() => fetchSelectedArticle({ DOI: result.DOI, source: result.source })}
+              />
+            ))
+          }
         </ResultsDropdown>
       </div>
     )
   }
-  _search() {
-    const searchText = ReactDOM.findDOMNode(this.refs.searchInput).value
-    const results = this.props.results
 
-    this.setState({ searchText })
-
-    if (searchText) {
-      this.setState({ isLoading: true })
-
-      //Simulating data fetching
-      Meteor.call('article/search', { searchText }, (error, results) => {
-        this.setState({
-          isLoading: false,
-          showDropdown: true,
-          searchResults: results,
-        })
-      })
-    } else {
-      this.setState({
-        showDropdown: false,
-        searchResults: [],
-      })
-    }
+  clearSearch(event) {
+    event.target.value = ''
+    this.props.clearSearch()
+    this.setState({ showDropdown: false })
   }
-  _clearSearch() {
-    const searchInput = ReactDOM.findDOMNode(this.refs.searchInput)
 
-    searchInput.value = ''
-    searchInput.focus()
-
-    this.search()
-  }
   _searchSelect({ which: key }) {
     //Arrow Down
     if (key === 40) {
@@ -240,23 +222,6 @@ export default class SearchInputHolder extends React.Component {
       }
     }
   }
-  _searchFocus() {
-    this.setState({
-      isFocused: true,
-      showDropdown: true,
-    })
-  }
-  _searchBlur(event) {
-    Meteor.setTimeout(() => {
-      const isBlurred =
-        !ReactDOM.findDOMNode(this.refs.searchInput).matches(':focus')
-
-      if (isBlurred) {
-         this.setState({
-          isFocused: false,
-          showDropdown: false,
-        })
-      }
-    }, 150)
-  }
 }
+
+export default SearchContainer(SearchInputHolder)
