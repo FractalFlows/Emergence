@@ -9,6 +9,7 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { get } from 'lodash/fp'
 import { compose } from 'recompose'
+import { connect } from 'react-refetch'
 import { withRouter } from 'react-router'
 import { FlatButton } from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
@@ -101,7 +102,8 @@ class KnowledgeBit extends React.Component {
     knowledgeBit: React.PropTypes.object.isRequired,
   }
   render() {
-    const { knowledgeBit } = this.props
+    const { knowledgeBit, commitsFetch } = this.props
+    const commits = commitsFetch.rejected || commitsFetch.pending ? [] : commitsFetch.value
 		const iconStyles = {
 			color: grey500,
 			margin: '0 40px 0 30px',
@@ -167,15 +169,16 @@ class KnowledgeBit extends React.Component {
 									paddingLeft: 20,
 								}}
 							>
-								{(knowledgeBit.commits || []).map((commit, i) => (
+								{commits.map((commit, i) => (
 									<li
 										style={{
 											display: 'block',
 											marginBottom: 3,
 										}}
+                    key={commit.sha}
 									>
-										<HashLink target="_blank">
-											{commit.hash}
+										<HashLink href={commit.html_url} target="_blank">
+											{commit.sha}
 										</HashLink>
 										<span
 											style={{
@@ -184,7 +187,7 @@ class KnowledgeBit extends React.Component {
 												color: grey500,
 											}}
 										>
-											{commit.message}{' - '}
+											{commit.commit.message}{' - '}
 										</span>
 										<span
 											style={{
@@ -193,7 +196,7 @@ class KnowledgeBit extends React.Component {
 												color: grey700,
 											}}
 										>
-											{commit.author}
+											{commit.commit.author.name}
 										</span>
 									</li>
 								))}
@@ -308,6 +311,13 @@ class KnowledgeBit extends React.Component {
 }
 
 export default compose(
+  connect(props => ({
+    commitsFetch: (
+      props.knowledgeBit.type === 'github' ?
+      `https://api.github.com/repos/${props.knowledgeBit.link.replace('https://github.com/', '')}/commits` :
+      ''
+    ),
+  })),
   UserContainer,
   withRouter,
 )(KnowledgeBit)
