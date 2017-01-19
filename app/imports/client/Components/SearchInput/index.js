@@ -104,6 +104,7 @@ class SearchInputHolder extends React.Component {
             onFocus={() => this.setState({ showDropdown: true })}
             onBlur={() => setTimeout(() => this.setState({ showDropdown: false }), 100)}
             disabled={searchState.isFetchingSelectedArticle}
+            innerRef={ref => this.searchInputEl = ref}
           />
           <CircularProgress
             size={17}
@@ -148,7 +149,7 @@ class SearchInputHolder extends React.Component {
   }
 
   clearSearch(event) {
-    event.target.value = ''
+    this.searchInputEl.value = ''
     this.props.clearSearch()
     this.setState({ showDropdown: false })
   }
