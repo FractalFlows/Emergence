@@ -5,6 +5,8 @@ const Articles = new Mongo.Collection('articles')
 
 export const UPVOTE = 1
 export const DOWNVOTE = -1
+export const ELASTIC_SEARCH_INDEX = 'articles'
+export const ELASTIC_SEARCH_TYPE = 'publications'
 
 export const ArticleReportSchema = new SimpleSchema({
   message: {
