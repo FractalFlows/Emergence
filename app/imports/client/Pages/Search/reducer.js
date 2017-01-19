@@ -2,6 +2,8 @@ import {
   FETCH_SEARCH,
   LOAD_SEARCH_RESULTS,
   CLEAR_SEARCH,
+  FETCH_SELECTED_ARTICLE,
+  LOAD_SELECTED_ARTICLE,
 } from './constants'
 
 type Article = {
@@ -14,7 +16,6 @@ type Article = {
 type State = {
   articlesFromSearch: Array<Article>,
   searchText: string,
-  lastSelectedArticleDOI: string,
   isSearch: bool,
 }
 
@@ -22,7 +23,6 @@ const initialState = {
   articlesFromSearch: [],
   searchText: '',
   isSearching: false,
-  lastSelectedArticleDOI: '',
 }
 
 export default function search(state: State = initialState, { type, payload }: Action){
@@ -33,6 +33,12 @@ export default function search(state: State = initialState, { type, payload }: A
         isSearching: true,
         searchText: payload.searchText,
       }
+    case LOAD_SEARCH_RESULTS:
+      return {
+        ...state,
+        isSearching: false,
+        articlesFromSearch: payload.articles,
+      }
     case CLEAR_SEARCH: 
       return {
         ...state,
@@ -40,12 +46,21 @@ export default function search(state: State = initialState, { type, payload }: A
         articlesFromSearch: [],
         isSearching: false,
       }
-    case LOAD_SEARCH_RESULTS:
+    case FETCH_SELECTED_ARTICLE: 
       return {
         ...state,
-        isSearching: false,
-        articlesFromSearch: payload.articles,
+        isFetchingSelectedArticle: true,
       }
-    default: return state
+    case FETCH_SELECTED_ARTICLE: 
+      return {
+        ...state,
+        isFetchingSelectedArticle: true,
+      }
+    case LOAD_SELECTED_ARTICLE: 
+      return {
+        ...state,
+        isFetchingSelectedArticle: false,
+      }
+    default: return { ...state }
   }
 } 
