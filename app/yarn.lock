@@ -88,9 +88,9 @@ ansicolors@~0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ansicolors/-/ansicolors-0.2.1.tgz#be089599097b74a5c9c4a84a0cdbcdb62bd87aef"
 
-api-unanimity@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/api-unanimity/-/api-unanimity-1.0.2.tgz#eeb3eb0361987d99692855fa24264e4b6ede4ca6"
+api-unanimity@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/api-unanimity/-/api-unanimity-1.0.3.tgz#5606a8866ee00d6690f0b755ec551a4be5ca6369"
   dependencies:
     lodash "^4.17.4"
     node-fetch "^1.6.3"
@@ -3926,7 +3926,7 @@ replace-ext@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/replace-ext/-/replace-ext-0.0.1.tgz#29bbd92078a739f0bcce2b4ee41e837953522924"
 
-request@2.76.0:
+request@2.76.0, request@2.x, request@^2.55.0:
   version "2.76.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.76.0.tgz#be44505afef70360a0436955106be3945d95560e"
   dependencies:
@@ -3951,7 +3951,7 @@ request@2.76.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
-request@2.x, request@^2.55.0, request@~2.74.0:
+request@~2.74.0:
   version "2.74.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.74.0.tgz#7693ca768bbb0ea5c8ce08c084a45efa05b892ab"
   dependencies:

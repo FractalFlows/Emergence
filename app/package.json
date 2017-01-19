@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "api-unanimity": "^1.0.2",
+    "api-unanimity": "^1.0.3",
     "bcrypt": "^1.0.1",
     "compose-with-tracker": "^1.0.2",
     "crossref": "^1.1.0",
