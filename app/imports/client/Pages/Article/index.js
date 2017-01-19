@@ -104,8 +104,8 @@ class Article extends React.PureComponent {
         }}
       >
         <Helmet
-          scripts={[
-            src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-587906b430ac8aa4',
+          script={[
+            { src: 'https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-587906b430ac8aa4', type: "text/javascript" }
           ]}
         />
         <Panel>
