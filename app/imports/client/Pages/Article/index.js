@@ -14,6 +14,7 @@ import {
 } from 'material-ui/Table'
 import { compose } from 'recompose'
 import { isEmpty, get, find } from 'lodash/fp'
+import Helmet from 'react-helmet'
 import {
   RaisedButton,
   TextField,
@@ -55,6 +56,7 @@ const ArticleDetail = styled.div`
   margin: 0 0 3px 0;
   font-size: 14px;
   display: flex;
+  width: 100%;
 
   b {
     display: inline-block;
@@ -101,6 +103,11 @@ class Article extends React.PureComponent {
           padding: '40px 150px',
         }}
       >
+        <Helmet
+          scripts={[
+            src: '//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-587906b430ac8aa4',
+          ]}
+        />
         <Panel>
           <PanelBody>
             <div
