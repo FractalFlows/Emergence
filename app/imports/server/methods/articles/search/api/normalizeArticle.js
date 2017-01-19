@@ -8,6 +8,7 @@ export default function normalizeArticle({ source, article }){
         abstract: striptags(article.abstract),
         authors: article.author.map(author => author.literal || `${author.given} ${author.family}`),
         DOI: article.DOI,
+        source,
       }
     },
 
@@ -17,6 +18,7 @@ export default function normalizeArticle({ source, article }){
         abstract: striptags(article.description),
         authors: article.author.map(author => author.literal || `${author.given} ${author.family}`),
         DOI: article.doi,
+        source,
       }
     },
   }
