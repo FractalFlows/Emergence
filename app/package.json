@@ -32,7 +32,7 @@
     "redux-form": "^6.4.3",
     "redux-form-material-ui": "^4.1.2",
     "redux-immutable": "^3.0.8",
-    "redux-logic": "^0.10.1",
+    "redux-logic": "^0.11.4",
     "redux-persist": "^4.0.0-alpha7",
     "reselect": "^2.5.4",
     "rxjs": "^5.0.0-rc.3",
