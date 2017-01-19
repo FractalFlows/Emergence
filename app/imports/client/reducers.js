@@ -6,9 +6,11 @@ import { reducer as form } from 'redux-form'
 // Pages Reducers
 import user from './Pages/User/reducer'
 import article from './Pages/Article/reducer'
+import search from './Pages/Search/reducer'
 
 export default combineReducers({
   user,
   article,
   form,
+  search,
 })
