@@ -1,3 +1,5 @@
+// TODO: Transer searcher/api to npm package
+
 import {
   groupBy,
   flow,

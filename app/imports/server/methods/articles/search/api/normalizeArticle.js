@@ -1,7 +1,7 @@
 import striptags from 'striptags'
 
 const normalizers = {
-  CrossRef(article){
+  CrossRef(article, source){
     return {
       title: article['title'][0] ||article['container-title'][0] || article['original-title'][0],
       abstract: striptags(article.abstract),
@@ -11,7 +11,7 @@ const normalizers = {
     }
   },
 
-  DataCite({ attributes: article }){
+  DataCite({ attributes: article }, source){
     return {
       title: article.title,
       abstract: striptags(article.description),
@@ -23,5 +23,5 @@ const normalizers = {
 }
 
 export default function normalizeArticle({ source, article }){
-  return normalizers[source](article)
+  return normalizers[source](article, source)
 }

@@ -20,7 +20,7 @@ Meteor.methods({
         future.return(results)
       })
       .catch(error => {
-        future.throw(new Meteor.Error(500, error))
+        future.throw(new Meteor.Error(500, error.message))
       })
 
     return future.wait()

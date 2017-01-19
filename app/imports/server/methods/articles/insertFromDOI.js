@@ -16,6 +16,7 @@ Meteor.methods({
       source: {
         type: String,
         allowedValues: ['DataCite', 'CrossRef'],
+        optional: true,
       },
     }).validate(params)
 
