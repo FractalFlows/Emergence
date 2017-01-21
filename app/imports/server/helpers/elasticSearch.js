@@ -4,7 +4,7 @@ import { Meteor } from 'meteor/meteor'
 const { elasticSearch: { user, password } } = Meteor.settings
 
 const client = new elasticSearch.Client({
-  host: `https:\/\/${user}:${password}@4d0208d5dc50761cd2dbaf5460637daa.sa-east-1.aws.found.io:9243`,
+  host: `https://${user}:${password}@e39fe5ed9579d46b459db0fec2cd7c47.us-east-1.aws.found.io:9243`,
   log: 'trace',
 })
 
