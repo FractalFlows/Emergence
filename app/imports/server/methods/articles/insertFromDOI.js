@@ -3,7 +3,10 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Future from 'fibers/future'
 import CrossRef from 'crossref'
 
-import Articles from '/imports/both/collections/articles'
+import Articles, {
+  ELASTIC_SEARCH_INDEX as ARTICLES_INDEX,
+  ELASTIC_SEARCH_TYPE as ARTICLES_INDEX_TYPE,
+} from '/imports/both/collections/articles'
 import elasticSearch from '/imports/server/helpers/elasticSearch'
 import normalizeArticle from './search/api/normalizeArticle'
 
@@ -11,11 +14,10 @@ Meteor.methods({
   'articles/insertFromDOI'(params){
     new SimpleSchema({
       DOI: {
-        type: String,
-      },
+        type: String, },
       source: {
         type: String,
-        allowedValues: ['DataCite', 'CrossRef'],
+        allowedValues: ['DataCite', 'CrossRef', 'ElasticSearch'],
         optional: true,
       },
     }).validate(params)
@@ -39,7 +41,7 @@ Meteor.methods({
 
     const article = fetchArticleFromRightSource(params)
 
-    if(article === null) throw new Meteor.Error(404, `Article not found in ${source}`)
+    if(article === null) throw new Meteor.Error(404, `Article not found in ${params.source}`)
 
     elasticSearch.index({
       index: 'articles',
@@ -78,6 +80,22 @@ function fetchArticleFromRightSource({ DOI, source }){
       break;
     case 'DataCite':
       future.return(null)
+      break;
+    case 'ElasticSearch':
+      elasticSearch.search({
+        index: ARTICLES_INDEX,
+        type: ARTICLES_INDEX_TYPE,
+        size: 1,
+        body: {
+          query: {
+            match: { DOI },
+          },
+        },
+      }).then(response => {
+        const article = response.hits.hits.map(({ _source: article }) => article)[0]
+        console.log(article)
+        future.return(article)
+      })
       break;
     default:
       future.return(null)
