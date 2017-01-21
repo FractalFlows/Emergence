@@ -22,6 +22,9 @@ const schema = new SimpleSchema({
   lastSearchedAt: {
     type: Date,
   },
+  nextUpdate: {
+    type: Date,
+  },
 })
 
 const Searches = new Mongo.Collection('searches')
