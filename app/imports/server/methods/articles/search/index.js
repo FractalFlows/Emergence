@@ -44,7 +44,10 @@ Meteor.methods({
         size: 30,
         body: {
           query: {
-            match: { abstract: params.searchText },
+            multi_match: {
+              query: params.searchText,
+              fields: ['title^3', 'abstract^2', 'DOI', 'authors'],
+            },
           },
         },
       }).then(response => {
