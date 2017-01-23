@@ -25,6 +25,9 @@ import {
 // Components
 import Modal from '../../Components/Modal'
 import SearchInput from '../../Components/SearchInput'
+import MailingListForm from './Components/MailingListForm'
+import FooterColumn from './Components/FooterColumn'
+import FooterTitle from './Components/FooterTitle'
 
 //Styled Components
 const SearchInputWrapper = styled.div`
@@ -47,20 +50,6 @@ const Title = styled.h2`
 	font-size: 22px;
 	color: ${grey800};
 	margin-top: 30px;
-`
-const FooterColumn = styled.div`
-	width: 33.33%;
-	padding: 20px;
-
-	&:not(:last-child) {
-		border-right: 1px solid #DDD;
-	}
-`
-
-const FooterTitle = styled.h4`
-	font-size: 18px;
-	margin-top: 0;
-	color: ${grey800};
 `
 
 const FooterList = styled.ul`
@@ -311,23 +300,7 @@ export default class Home extends React.Component {
 			   					link="mailto:AI@fractalflows.com" />
 			   			</FooterList>
 			   		</FooterColumn>
-			   		<FooterColumn>
-				   		<FooterTitle>
-				   			Interested in what we're doing? Join our mailing list.
-				   		</FooterTitle>
-
-				   		<TextField
-				   			floatingLabelText="Name"
-				   		/>
-				   		<br />
-				   		<TextField
-				   			floatingLabelText="Email"
-				   		/>
-				   		<br />
-				   		<br />
-
-				   		<RaisedButton label="Sign Me Up!" primary={true} />
-				   	</FooterColumn>
+            <MailingListForm/>
 			   	</div>
 			  </div>
 		  </div>
