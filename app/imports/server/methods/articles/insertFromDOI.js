@@ -71,11 +71,11 @@ function fetchArticleFromRightSource({ DOI, source }){
       })
       break;
     case 'DataCite':
-      fetchFromDataCite(article)
+      fetchFromDataCite(DOI)
         .then(article => future.return(normalizeArticle({ article, source: 'DataCite' })))
       break;
     case 'ElasticSearch':
-      fetchFromElastic(article)
+      fetchFromElastic(DOI)
         .then(response => {
           const article = response.hits.hits.map(({ _source: article }) => article)[0]
           future.return(article)
@@ -88,13 +88,13 @@ function fetchArticleFromRightSource({ DOI, source }){
   return future.wait()
 }
 
-function fetchFromDataCite(article){
-  return fetch(`https://api.datacite.org/works/${article.DOI}`)
+function fetchFromDataCite(DOI){
+  return fetch(`https://api.datacite.org/works/${DOI}`)
     .then(response => response.json())
     .then(response => response.data)
 }
 
-function fetchFromElastic(article){
+function fetchFromElastic(DOI){
   return elasticSearch.search({
     index: ARTICLES_INDEX,
     type: ARTICLES_INDEX_TYPE,
