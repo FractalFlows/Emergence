@@ -1,4 +1,5 @@
 import { Accounts } from 'meteor/accounts-base'
+import { Meteor } from 'meteor/meteor'
 
 Accounts.emailTemplates.siteName = 'Competipedia'
 
