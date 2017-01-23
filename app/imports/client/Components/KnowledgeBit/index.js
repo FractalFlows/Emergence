@@ -187,7 +187,7 @@ class KnowledgeBit extends React.Component {
 												color: grey500,
 											}}
 										>
-											{commit.commit.message}{' - '}
+											{commit.commit.message.split('\n')[0]}{' - '}
 										</span>
 										<span
 											style={{
