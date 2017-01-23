@@ -99,7 +99,14 @@ class SearchInputHolder extends React.Component {
           <SearchInput
             type="text"
             placeholder="Enter an article DOI, title, author or keywords"
-            onInput={(event) => this.props.fetchSearch({ searchText: event.target.value })}
+            onInput={(event) => {
+              const val = event.target.value
+              if(!val){
+                this.props.clearSearch()
+              } else {
+                this.props.fetchSearch({ searchText: val })
+              } 
+            }}
             onKeyDown={this._searchSelect.bind(this)}
             onFocus={() => this.setState({ showDropdown: true })}
             onBlur={() => setTimeout(() => this.setState({ showDropdown: false }), 100)}
