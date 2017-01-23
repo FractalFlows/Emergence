@@ -31,5 +31,9 @@
     "clientId": "",
     "secret": ""
   },
-  "reCAPTCHAPrivateKey": ""
+  "reCAPTCHAPrivateKey": "",
+  "elasticSearch": {
+    "user": "elastic",
+    "password": "DdLjC1Rtk9SoQCJRBJ56kdOk"
+  }
 }

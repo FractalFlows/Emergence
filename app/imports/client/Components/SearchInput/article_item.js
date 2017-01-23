@@ -7,6 +7,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import styled from 'styled-components'
+import { withRouter } from 'react-router'
 import {
   grey100,
   grey200,
@@ -45,37 +46,35 @@ const ArticleDetail = styled.p`
   }
 `
 
-export default class ArticleItem extends React.Component {
+class ArticleItem extends React.Component {
   propTypes: {
     info: React.PropTypes.object.isRequired,
     searchText: React.PropTypes.string,
   }
+
   render() {
     const {
       info: article,
       searchText,
+      onClick,
     } = this.props
-
-    const getHighlightedTitle = () => ({
-      __html: article.title.replace(
-        new RegExp(`(${searchText})`, 'gi'), '<b>$1</b>')
-    })
 
     return (
       <ArticleItemLink
         className="dropdown-article-item"
         onMouseOver={this._removeResultsFocus}
       >
-        <Link
-          to={`/article/${article.title}`}
+        <div
           style={{
             padding: 15,
             display: 'block',
             textDecoration: 'none',
+            cursor: 'pointer',
           }}
+          onClick={onClick}
         >
           <ArticleName
-            dangerouslySetInnerHTML={getHighlightedTitle()}
+            dangerouslySetInnerHTML={this.getHighlightedTitle()}
           />
           <ArticleDetail>
             <b>Authors:</b> <div>{article.authors.join('; ')}</div>
@@ -91,10 +90,11 @@ export default class ArticleItem extends React.Component {
               article.abstract
             }</div>
           </ArticleDetail>
-        </Link>
+        </div>
       </ArticleItemLink>
     )
   }
+
   _removeResultsFocus() {
     const selectedResult =
       document.querySelector('.dropdown-article-item.hover')
@@ -103,4 +103,13 @@ export default class ArticleItem extends React.Component {
       selectedResult.classList.remove('hover')
     }
   }
+
+  getHighlightedTitle(){
+    const { info: article, searchText } = this.props
+    return {
+      __html: article.title.replace(new RegExp(`(${searchText})`, 'gi'), '<b>$1</b>'),
+    }
+  }
 }
+
+export default withRouter(ArticleItem)

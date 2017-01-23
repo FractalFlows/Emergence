@@ -294,6 +294,11 @@ class KnowledgeBit extends React.Component {
   }
 
   _toggleContent() {
+    if(this.props.knowledgeBit.type === 'pdf'){
+      window.open(this.props.knowledgeBit.link, '_blank')
+      return
+    }
+
     const content = ReactDOM.findDOMNode(this.refs.content)
 
 		if (!content) return

@@ -7,6 +7,7 @@
 import React from 'react'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
+import { syncHistoryWithStore } from 'react-router-redux'
 import store from './store'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
@@ -26,11 +27,13 @@ import Dashboard from './Pages/Dashboard'
 
 injectTapEventPlugin()
 
+const historyWithRedux = syncHistoryWithStore(browserHistory, store)
+
 export default function createRoutes() {
   return (
     <MuiThemeProvider>
       <Provider store={store}>
-        <Router history={browserHistory}>
+        <Router history={historyWithRedux}>
           <Route path="/" component={App}>
             <IndexRoute component={Home}/>
             <Route path="/login" component={SignIn}/>
