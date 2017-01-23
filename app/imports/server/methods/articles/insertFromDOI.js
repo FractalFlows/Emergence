@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Future from 'fibers/future'
 import CrossRef from 'crossref'
+import fetch from 'node-fetch'
 
 import Articles, {
   ELASTIC_SEARCH_INDEX as ARTICLES_INDEX,
@@ -49,7 +50,7 @@ Meteor.methods({
     const articleId = Articles.insert({
       authors: article.authors,
       title: article.title,
-      abstract: article.abstract,
+      abstract: article.abstract || 'No abstract information',
       DOI: article.DOI,
     })
 
