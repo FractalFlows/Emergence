@@ -25,7 +25,7 @@ export default function Footer(props) {
       		fontSize: 15,
       	}}
       >
-      	Copyright ©{new Date().getFullYear()} Fractal Flows. All Rights Reserved.
+      	Copyright © {new Date().getFullYear()} Fractal Flows. All Rights Reserved.
       </p>
     </div>
   )
