@@ -7,8 +7,13 @@ describe('Login', () => {
   })
 
   it('when clicking on "login" should open a modal', () => {
-    browser.click('a[data-name=header-login-btn]')
+    hitLoginButton()
     browser.waitForVisible('div.modal')
+
+    function hitLoginButton(){
+      browser.waitForVisible('a[data-name=header-login-btn]')
+      browser.click('a[data-name=header-login-btn]')
+    }
   })
 
   it('user should be able to login using email', () => {
