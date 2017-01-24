@@ -62,6 +62,7 @@ export default class Dashboard extends React.Component {
           <TabsList
             onChange={this._handleTabChange.bind(this)}
             value={this.state.slideIndex}
+            data-name="dashboard-tabs-list"
           >
             <TabItem label="Users" value={0} />
             <TabItem label="Articles" value={1} />

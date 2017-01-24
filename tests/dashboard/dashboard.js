@@ -19,11 +19,16 @@ describe('Dashboard', () => {
   })
 
   it('dashboard page should contain two tabs', () => {
+    const tabs = browser.elements('[data-name=dashboard-tabs-list] > div:not(:last-child)')
 
+    expect(tabs.value.length).to.be.equal(2)
   })
 
   it('should list users and articles', () => {
-    
+    const users = browser.elements('[role=listbox] [role=option]:first-child tbody tr')
+    const articles = browser.elements('[role=listbox] [role=option]:last-child tbody tr')
+
+    expect(users.value.length && articles.value.length).to.be.ok
   })
 })
 
