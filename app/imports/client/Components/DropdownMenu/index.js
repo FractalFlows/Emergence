@@ -71,6 +71,7 @@ export default class DropdownMenu extends React.Component {
 			<Dropdown
 				tabIndex={1}
 				pullLeft={this.props.pullLeft}
+				data-name={this.props.name}
 			>
 				<DropdownLabel>
 					{this.props.label}

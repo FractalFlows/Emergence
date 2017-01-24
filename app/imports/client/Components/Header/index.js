@@ -73,7 +73,7 @@ class Header extends React.Component {
 						<SearchInput />
 					</SearchInputWrapper>
 
-          { isEmpty(user) ? 
+          { isEmpty(user) ?
             (
             <Link
               to={{
@@ -116,9 +116,16 @@ class Header extends React.Component {
                   />
                 }
                 pullLeft
+								name="header-dropdown"
               >
                 <Link to="/dashboard">Dashboard</Link>
-                <Link to="#" onClick={this.logoutUser}>Logout</Link>
+                <Link
+									to="#"
+									onClick={this.logoutUser}
+									data-name="logout-button"
+								>
+									Logout
+								</Link>
               </DropdownMenu>
             ) : null
           }
