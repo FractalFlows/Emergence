@@ -118,7 +118,12 @@ class Header extends React.Component {
                 pullLeft
 								name="header-dropdown"
               >
-                <Link to="/dashboard">Dashboard</Link>
+                <Link
+									to="/dashboard"
+									data-name="dashboard-button"
+								>
+									Dashboard
+								</Link>
                 <Link
 									to="#"
 									onClick={this.logoutUser}
