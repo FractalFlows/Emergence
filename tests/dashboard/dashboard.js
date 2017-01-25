@@ -5,7 +5,7 @@ const host = 'http://localhost:3000'
 describe('Dashboard', () => {
   before(() => {
     server.call('dev/resetDatabase')
-    server.call('dev/createUsers')
+    server.call('dev/createArticles')
     browser.url(host)
     asAnUser()
   })

@@ -52,6 +52,6 @@ function fillUpReportForm(){
 }
 
 function clickOnReportBtn(){
-  browser.waitForVisible(`[data-name="report-btn"]`)
-  browser.click(`[data-name="report-btn"]`)
+  browser.waitForVisible('[data-name="report-btn"]')
+  browser.click('[data-name="report-btn"]')
 }

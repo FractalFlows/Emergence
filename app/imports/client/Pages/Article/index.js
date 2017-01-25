@@ -133,17 +133,21 @@ class Article extends React.PureComponent {
                     () => requireLoginAndGoTo({
                       pathname: `/article/report-article/${this.props.params.slug}`,
                       state: { modal: true },
-                    }) 
+                    })
                   ) : null
                 }
                 data-name="report-btn"
+                style={{
+                  float: 'right',
+                  height : 30,
+                  width: 30,
+                }}
               >
                 <WarningIcon
                   color={hasUserAlreadyReportedArticle ? red300 : grey600}
                   style={{
-                    float: 'right',
                     height : 30,
-                    width: '5%',
+                    width: 30,
                   }}
                 />
               </ReportArticleButton>
