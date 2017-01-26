@@ -25,7 +25,7 @@ import {
 	cyan400,
   grey800,
   red500,
-} from 'material-ui/styles/colors' 
+} from 'material-ui/styles/colors'
 // Components
 import SignIn from '/imports/client/Components/SignIn'
 import renderField from '/imports/client/Components/Form/renderField'
@@ -91,6 +91,7 @@ class SignUp extends PureComponent {
           />
           <Field
             name="email"
+            data-name="email-signUp"
             floatingLabelText="Your email"
             component={renderField}
             fullWidth

@@ -3,6 +3,7 @@ const host = 'http://localhost:3000'
 describe('Login', () => {
   before(() => {
     server.call('dev/resetDatabase')
+    server.call('dev/createUsers')
     browser.url(host)
   })
 
@@ -18,18 +19,18 @@ describe('Login', () => {
 
   it('user should be able to login using email', () => {
     fillupLoginForm({
-      email: 'johndoe@gmail.com',
+      email: 'normal@gmail.com',
     })
     hitLoginFormSubmit()
     checkIfUserIsLoggedIn()
 
     function fillupLoginForm({ email }) {
-      browser.waitForVisible('input[name=email]')
-      browser.setValue('input[name=email]', email)
+      browser.waitForVisible('input[data-name=email-login]')
+      browser.setValue('input[data-name=email-login]', email)
     }
 
     function hitLoginFormSubmit(){
-      browser.click('form button[type=submit]')
+      browser.click('form[data-name=form-login] button[type=submit]')
     }
 
     function checkIfUserIsLoggedIn(){

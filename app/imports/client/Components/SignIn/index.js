@@ -90,9 +90,11 @@ class SignIn extends PureComponent {
             marginBottom: 40,
           }}
           onSubmit={handleSubmit(this.submitLoginUser.bind(this))}
+          data-name="form-login"
         >
           <Field
             name="email"
+            data-name="email-login"
             floatingLabelText="Your email"
             component={renderField}
             fullWidth
