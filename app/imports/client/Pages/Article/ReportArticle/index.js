@@ -58,6 +58,7 @@ function ReportArticle({
           marginBottom: 40,
         }}
         onSubmit={handleSubmit(onSubmit)}
+        data-name="form-reportArticle"
       >
         <Field
           hintText="This article contains a summary that does not fits with the essence of the article, contains graphic content, unappropriated language"

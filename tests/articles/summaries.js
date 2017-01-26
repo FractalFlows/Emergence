@@ -1,9 +1,15 @@
-import asAnUser from '../helpers/asAnUser'
-import Articles from '../helpers/articles'
-import sleep from '../helpers/sleep'
-import fillUpForm from '../helpers/fillUpForm'
+import {
+  Articles,
+  asAnUser,
+  fillUpForm,
+  hitButton,
+  navigateToArticle,
+  sleep,
+  submitForm,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
+
 describe('Articles', () => {
   describe('Summaries', () => {
     describe('Upsert modal', () => {
@@ -17,14 +23,12 @@ describe('Articles', () => {
         const article = Articles('findOne', {})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnAddSummary()
-        fillUpForm('form[data-name=form-article-summary]', {
+        navigateToArticle(host, article)
+        hitButton('button[data-name="add-summary-btn"]')
+        fillUpForm('form[data-name=form-articleSummary]', {
           content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
         })
-
-        // Send form
-        browser.click('button[type="submit"]')
+        submitForm('form[data-name=form-articleSummary]')
         sleep(2000)
 
         const updatedArticle = Articles('findOne', {_id: article._id})
@@ -44,8 +48,8 @@ describe('Articles', () => {
         const article = Articles('findOne', {'summaries.upVotes': 0})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnUpvoteBtnFor(article.summaries[0])
+        navigateToArticle(host, article)
+        hitUpvoteButton(article.summaries[0])
 
         // Hang a sec to wait ops complete
         sleep(2000)
@@ -61,8 +65,8 @@ describe('Articles', () => {
         const article = Articles('findOne', {'summaries.upVotes': 1})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnDownvoteBtnFor(article.summaries[0])
+        navigateToArticle(host, article)
+        hitDownvoteButton(article.summaries[0])
 
         // Hang a sec to wait ops complete
         sleep(2000)
@@ -78,10 +82,10 @@ describe('Articles', () => {
         const article = Articles('findOne', {'summaries.downVotes': 1})
 
         asAnUser()
-        navigateToArticle(article)
+        navigateToArticle(host, article)
 
         // As last test already downvoted clicking again will undo it
-        clickOnDownvoteBtnFor(article.summaries[0])
+        hitDownvoteButton(article.summaries[0])
         // Hang a sec to wait ops complete
         sleep(2000)
 
@@ -95,13 +99,12 @@ describe('Articles', () => {
         const article = Articles('findOne', {'summaries.upVotes': 0})
 
         asAnUser()
-        navigateToArticle(article)
-
-        clickOnUpvoteBtnFor(article.summaries[0])
+        navigateToArticle(host, article)
+        hitUpvoteButton(article.summaries[0])
         // Hang a sec to wait ops complete
         sleep(2000)
         // Click again to undo
-        clickOnUpvoteBtnFor(article.summaries[0])
+        hitUpvoteButton(article.summaries[0])
         // Hang a sec to wait ops complete
         sleep(2000)
 
@@ -114,21 +117,10 @@ describe('Articles', () => {
   })
 })
 
-function navigateToArticle(article){
-  browser.url(`${host}/article/${article.slug}`)
+function hitUpvoteButton(summary){
+  hitButton(`[data-name="${summary.authorId}-upvote-btn"]`)
 }
 
-function clickOnAddSummary(){
-  browser.waitForVisible('button[data-name="add-summary-btn"]')
-  browser.click('button[data-name="add-summary-btn"]')
-}
-
-function clickOnUpvoteBtnFor(summary){
-  browser.waitForVisible(`[data-name="${summary.authorId}-upvote-btn"]`)
-  browser.click(`[data-name="${summary.authorId}-upvote-btn"]`)
-}
-
-function clickOnDownvoteBtnFor(summary){
-  browser.waitForVisible(`[data-name="${summary.authorId}-downvote-btn"]`)
-  browser.click(`[data-name="${summary.authorId}-downvote-btn"]`)
+function hitDownvoteButton(summary){
+  hitButton(`[data-name="${summary.authorId}-downvote-btn"]`)
 }

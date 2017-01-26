@@ -66,6 +66,7 @@ function InformationUpsert({
 
       <form
         onSubmit={handleSubmit(onSubmit)}
+        data-name="form-knowledgeBit"
       >
         <Field
           name="type"

@@ -1,9 +1,15 @@
-import asAnUser from '../helpers/asAnUser'
-import Articles from '../helpers/articles'
-import setFieldWithReduxForm from '../helpers/setFieldWithReduxForm'
-import sleep from '../helpers/sleep'
+import {
+  Articles,
+  asAnUser,
+  hitButton,
+  navigateToArticle,
+  setFieldWithReduxForm,
+  sleep,
+  submitForm,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
+
 describe('Articles', () => {
   describe('Knowledge Bits', () => {
     describe('Upsert modal', () => {
@@ -17,12 +23,10 @@ describe('Articles', () => {
         const article = Articles('findOne', {})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnAddKnowledgeProduct()
+        navigateToArticle(host, article)
+        hitButton('button[data-name="add-knowledge-btn"]')
         fillUpKnowledgeProductForm()
-
-        // Send form
-        browser.click('button[type="submit"]')
+        submitForm('form[data-name=form-knowledgeBit]')
         sleep(2000)
 
         const updatedArticle = Articles('findOne', {_id: article._id})
@@ -42,8 +46,8 @@ describe('Articles', () => {
         const article = Articles('findOne', {'informations.upVotes': 0})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnUpvoteBtnFor(article.informations[0])
+        navigateToArticle(host, article)
+        hitUpvoteButton(article.informations[0])
 
         // Hang a sec to wait ops complete
         sleep(2000)
@@ -59,8 +63,8 @@ describe('Articles', () => {
         const article = Articles('findOne', {'informations.upVotes': 1})
 
         asAnUser()
-        navigateToArticle(article)
-        clickOnDownvoteBtnFor(article.informations[0])
+        navigateToArticle(host, article)
+        hitDownvoteButton(article.informations[0])
 
         // Hang a sec to wait ops complete
         sleep(2000)
@@ -76,10 +80,10 @@ describe('Articles', () => {
         const article = Articles('findOne', {'informations.downVotes': 1})
 
         asAnUser()
-        navigateToArticle(article)
+        navigateToArticle(host, article)
 
         // As last test already downvoted clicking again will undo it
-        clickOnDownvoteBtnFor(article.informations[0])
+        hitDownvoteButton(article.informations[0])
         // Hang a sec to wait ops complete
         sleep(2000)
 
@@ -93,13 +97,13 @@ describe('Articles', () => {
         const article = Articles('findOne', {'informations.upVotes': 0})
 
         asAnUser()
-        navigateToArticle(article)
+        navigateToArticle(host, article)
 
-        clickOnUpvoteBtnFor(article.informations[0])
+        hitUpvoteButton(article.informations[0])
         // Hang a sec to wait ops complete
         sleep(2000)
         // Click again to undo
-        clickOnUpvoteBtnFor(article.informations[0])
+        hitUpvoteButton(article.informations[0])
         // Hang a sec to wait ops complete
         sleep(2000)
 
@@ -111,15 +115,6 @@ describe('Articles', () => {
     })
   })
 })
-
-function navigateToArticle(article){
-  browser.url(`${host}/article/${article.slug}`)
-}
-
-function clickOnAddKnowledgeProduct(){
-  browser.waitForVisible('button[data-name="add-knowledge-btn"]')
-  browser.click('button[data-name="add-knowledge-btn"]')
-}
 
 function fillUpKnowledgeProductForm(){
   browser.waitForVisible('[name="type"]')
@@ -136,12 +131,10 @@ function fillUpKnowledgeProductForm(){
   browser.setValue('[name="link"]', 'https://github.com/FractalFlows/Emergence')
 }
 
-function clickOnUpvoteBtnFor(knowledgeBit){
-  browser.waitForVisible(`[data-name="${knowledgeBit.link}-upvote-btn"]`)
-  browser.click(`[data-name="${knowledgeBit.link}-upvote-btn"]`)
+function hitUpvoteButton(knowledgeBit){
+  hitButton(`[data-name="${knowledgeBit.link}-upvote-btn"]`)
 }
 
-function clickOnDownvoteBtnFor(knowledgeBit){
-  browser.waitForVisible(`[data-name="${knowledgeBit.link}-downvote-btn"]`)
-  browser.click(`[data-name="${knowledgeBit.link}-downvote-btn"]`)
+function hitDownvoteButton(knowledgeBit){
+  hitButton(`[data-name="${knowledgeBit.link}-downvote-btn"]`)
 }

@@ -1,4 +1,10 @@
-import asAnUser from '../helpers/asAnUser'
+import {
+  asAnUser,
+  ensureThatUserIsLoggedIn,
+  ensureThatUserIsNotLoggedIn,
+  hitButton,
+  userIsLoggedIn,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
 
@@ -11,30 +17,9 @@ describe('Logout', () => {
 
   it('user should be able to logout', () => {
     asAnUser()
-
-    browser.waitUntil(
-      userIsLoggedIn,
-      5000,
-      'expected user to be logged in'
-    )
-
-    hitLogoutButton()
-    expect(userIsLoggedIn()).to.be.false
+    ensureThatUserIsLoggedIn()
+    hitButton('div[data-name=header-dropdown]')
+    hitButton('a[data-name=logout-button]')
+    ensureThatUserIsNotLoggedIn()
   })
 })
-
-function hitLogoutButton(){
-  browser.waitForVisible('div[data-name=header-dropdown]')
-  browser.click('div[data-name=header-dropdown]')
-  browser.waitForVisible('a[data-name=logout-button]')
-  browser.click('a[data-name=logout-button]')
-}
-
-function userIsLoggedIn(){
-  const isLoggedIn = browser
-    .execute(() => {
-      return !!Meteor.user()
-    }).value
-
-  return isLoggedIn
-}

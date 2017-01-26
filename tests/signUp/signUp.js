@@ -1,4 +1,9 @@
-import fillUpForm from '../helpers/fillUpForm'
+import {
+  ensureThatUserIsLoggedIn,
+  hitButton,
+  fillUpForm,
+  submitForm,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
 
@@ -9,36 +14,13 @@ describe('Sign up', () => {
   })
 
   it('should be able to go to sign up modal through login one', () => {
-    accessSignUpForm()
+    hitButton('a[data-name=header-login-btn]')
+    hitButton('a[data-name=sign-in-register-link]')
     fillUpForm('form[data-name=form-signUp]', {
       fullName: 'John Doe',
       email: 'johndoe@gmail.com',
     })
-    hitSignUpFormSubmit()
-
-    browser.waitUntil(() => {
-      const doesUserExist = browser
-        .execute(() => {
-          return !!Meteor.user()
-        }).value
-
-      return doesUserExist
-    }, 5000, 'expected Meteor.user() to be not null')
-
-
-    function accessSignUpForm(){
-      // Wait `Login` button on header to be visible
-      browser.waitForVisible('a[data-name=header-login-btn]')
-      // Open the modal
-      browser.click('a[data-name=header-login-btn]')
-      // Wait `Register` link to be visible
-      browser.waitForVisible('a[data-name=sign-in-register-link]')
-      // Open the register modal
-      browser.click('a[data-name=sign-in-register-link]')
-    }
-
-    function hitSignUpFormSubmit(){
-      browser.click('form[data-name=form-signUp] button[type=submit]')
-    }
+    submitForm('form[data-name=form-signUp]')
+    ensureThatUserIsLoggedIn()
   })
 })

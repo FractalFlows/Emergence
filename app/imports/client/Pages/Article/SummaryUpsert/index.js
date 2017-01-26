@@ -63,7 +63,7 @@ function SummaryUpsert({
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        data-name="form-article-summary"
+        data-name="form-articleSummary"
       >
         <Field
           name="content"

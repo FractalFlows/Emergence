@@ -1,4 +1,7 @@
-import asAnUser from '../helpers/asAnUser'
+import {
+  asAnUser,
+  hitButton,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
 
@@ -11,7 +14,8 @@ describe('Dashboard', () => {
   })
 
   it('should redirect user to /dashboard via header button', () => {
-    hitDashboardButton()
+    hitButton('div[data-name=header-dropdown]')
+    hitButton('a[data-name=dashboard-button]')
 
     browser.waitUntil(() => {
       return browser.getUrl() === `${host}/dashboard`
@@ -31,10 +35,3 @@ describe('Dashboard', () => {
     expect(users.value.length && articles.value.length).to.be.ok
   })
 })
-
-function hitDashboardButton(){
-  browser.waitForVisible('div[data-name=header-dropdown]')
-  browser.click('div[data-name=header-dropdown]')
-  browser.waitForVisible('a[data-name=dashboard-button]')
-  browser.click('a[data-name=dashboard-button]')
-}

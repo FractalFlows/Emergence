@@ -1,9 +1,15 @@
-import asAnUser from '../helpers/asAnUser'
-import Articles from '../helpers/articles'
-import setFieldWithReduxForm from '../helpers/setFieldWithReduxForm'
-import sleep from '../helpers/sleep'
+import {
+  Articles,
+  asAnUser,
+  hitButton,
+  navigateToArticle,
+  setFieldWithReduxForm,
+  sleep,
+  submitForm,
+} from '../helpers'
 
 const host = 'http://localhost:3000'
+
 describe('Articles', () => {
   describe('Report @watch', () => {
     before(() => {
@@ -16,11 +22,10 @@ describe('Articles', () => {
       const article = Articles('findOne', {})
 
       asAnUser()
-      navigateToArticle(article)
-      clickOnReportBtn()
+      navigateToArticle(host, article)
+      hitButton('[data-name=report-btn]')
       const formDoc = fillUpReportForm()
-
-      browser.click('button[type="submit"]')
+      submitForm('[data-name=form-reportArticle]')
 
       sleep(2000)
 
@@ -32,10 +37,6 @@ describe('Articles', () => {
     })
   })
 })
-
-function navigateToArticle(article){
-  browser.url(`${host}/article/${article.slug}`)
-}
 
 function fillUpReportForm(){
   const doc = {
@@ -49,9 +50,4 @@ function fillUpReportForm(){
   })
 
   return doc
-}
-
-function clickOnReportBtn(){
-  browser.waitForVisible('[data-name="report-btn"]')
-  browser.click('[data-name="report-btn"]')
 }
