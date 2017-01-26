@@ -1,3 +1,5 @@
+import fillUpForm from '../helpers/fillUpForm'
+
 const host = 'http://localhost:3000'
 
 describe('Login', () => {
@@ -18,16 +20,11 @@ describe('Login', () => {
   })
 
   it('user should be able to login using email', () => {
-    fillupLoginForm({
+    fillUpForm('form[data-name=form-login]', {
       email: 'normal@gmail.com',
     })
     hitLoginFormSubmit()
     checkIfUserIsLoggedIn()
-
-    function fillupLoginForm({ email }) {
-      browser.waitForVisible('input[data-name=email-login]')
-      browser.setValue('input[data-name=email-login]', email)
-    }
 
     function hitLoginFormSubmit(){
       browser.click('form[data-name=form-login] button[type=submit]')

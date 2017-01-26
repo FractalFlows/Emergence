@@ -1,3 +1,5 @@
+import fillUpForm from '../helpers/fillUpForm'
+
 const host = 'http://localhost:3000'
 
 describe('Sign up', () => {
@@ -8,8 +10,8 @@ describe('Sign up', () => {
 
   it('should be able to go to sign up modal through login one', () => {
     accessSignUpForm()
-    fillupSignUpForm({
-      name: 'John Doe',
+    fillUpForm('form[data-name=form-signUp]', {
+      fullName: 'John Doe',
       email: 'johndoe@gmail.com',
     })
     hitSignUpFormSubmit()
@@ -35,14 +37,8 @@ describe('Sign up', () => {
       browser.click('a[data-name=sign-in-register-link]')
     }
 
-    function fillupSignUpForm({ name, email }){
-      browser.waitForVisible('input[name=fullName]')
-      browser.setValue('input[name=fullName]', name)
-      browser.setValue('input[name=email]', email)
-    }
-
     function hitSignUpFormSubmit(){
-      browser.click('form button[type=submit]')
+      browser.click('form[data-name=form-signUp] button[type=submit]')
     }
   })
 })

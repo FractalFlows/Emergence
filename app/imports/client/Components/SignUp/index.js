@@ -82,6 +82,7 @@ class SignUp extends PureComponent {
             marginBottom: 40,
           }}
           onSubmit={handleSubmit(this.submitCreateUser.bind(this))}
+          data-name="form-signUp"
         >
           <Field
             name="fullName"
@@ -91,7 +92,6 @@ class SignUp extends PureComponent {
           />
           <Field
             name="email"
-            data-name="email-signUp"
             floatingLabelText="Your email"
             component={renderField}
             fullWidth

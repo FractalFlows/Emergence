@@ -94,7 +94,6 @@ class SignIn extends PureComponent {
         >
           <Field
             name="email"
-            data-name="email-login"
             floatingLabelText="Your email"
             component={renderField}
             fullWidth
