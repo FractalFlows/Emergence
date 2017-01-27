@@ -8,15 +8,11 @@ import { Meteor } from 'meteor/meteor'
 import Articles from '/imports/both/collections/articles'
 
 export default composeWithTracker((props, onData) => {
-  const slug = props.params.slug
-  const handle = Meteor.subscribe('articles.bySlug', slug)
-
-  // Checks
-  Meteor.subscribe('articles.hasUserReported', slug)
+  const handle = Meteor.subscribe('articles.all')
 
   if(handle.ready()){
     onData(null, {
-      article: Articles.findOne({ slug }) || {},
+      articles: Articles.find().fetch(),
     })
   } else {
     onData(null, {
@@ -24,6 +20,5 @@ export default composeWithTracker((props, onData) => {
     })
   }
 }, {
-  propsToWatch: 'params',
   pure: true,
 })

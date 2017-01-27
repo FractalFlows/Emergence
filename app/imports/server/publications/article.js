@@ -1,6 +1,16 @@
 import { Meteor } from 'meteor/meteor'
 import Articles from '/imports/both/collections/articles'
 
+Meteor.publish('articles.all', function(){
+  if(this.userId){
+    return Articles.find({}, {
+      title: 1,
+      authors: 1,
+      DOI: 1,
+    })
+  }
+})
+
 Meteor.publish('articles.bySlug', slug => (
   Articles.find({ slug }, {
     fields: {
