@@ -162,10 +162,8 @@ const schema = new SimpleSchema({
   },
   title: {
     label: 'Article name',
-    index: true,
     type: String,
     max: 150,
-    unique: true,
   },
   authors: {
     type: [String],
