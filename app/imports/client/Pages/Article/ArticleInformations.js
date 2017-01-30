@@ -37,7 +37,7 @@ function ArticleInformations({
         {informations.length > 0 ?
           informations.map((knowledgeBit, i) =>
             <KnowledgeBit
-              key={i}
+              key={knowledgeBit.link}
               knowledgeBit={knowledgeBit}
               articleSlug={articleSlug}
             />
