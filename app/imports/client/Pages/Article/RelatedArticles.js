@@ -18,8 +18,8 @@ import {
   PanelBody,
   PanelHeaderButton,
 } from '../../Components/Panel'
-import RelatedArticle from '../../Components/RelatedArticle'
-import RelatedArticleInput from '../../Components/RelatedArticleInput'
+import RelatedArticle from './RelatedArticle'
+import RelatedArticleInput from './RelatedArticleInput/index'
 
 // Helpers
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'
@@ -78,6 +78,7 @@ function ArticleRelatedArticles({
               <tr>
                 <td colSpan="2">
                   <RelatedArticleInput
+                    currentRelatedArticlesDOIs={relatedArticles.map(({ DOI }) => DOI)}
                     cancel={hideAddNewRelatedArticle}
                     showSnackbar={showSnackbar}
                     articleSlug={articleSlug}

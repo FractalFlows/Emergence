@@ -52,11 +52,13 @@ export default class ArticleItem extends React.Component {
 
     return (
       <div>
-        <ArticleItemRow>
+        <ArticleItemRow
+          onClick={() => addRelatedArticle(article)}
+        >
           <div
             style={{
               flexGrow: 9999,
-              paddingLeft: 5
+              paddingLeft: 5,
             }}
           >
             <div
@@ -77,9 +79,7 @@ export default class ArticleItem extends React.Component {
           </div>
 
           <div>
-            <SaveButton
-              onClick={() => addRelatedArticle(article)}
-            >
+            <SaveButton>
               Add
             </SaveButton>
           </div>
