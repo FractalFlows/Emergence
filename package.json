@@ -11,8 +11,8 @@
     "dev-db": "source ./config/development/env.sh && cd app && meteor --settings ../config/development/settings.json",
     "prod": "source ./config/production/env.sh && cd app && meteor --verbose --production --settings ../config/production/settings.json",
     "debug": "meteor debug --verbose --settings ../config/development/settings.json",
-    "deploy-staging": "cd app && DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy competipedia.io --settings ../config/development/settings.json",
-    "deploy-prod": "cd app && DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy competipedia.io --settings ../config/production/settings.json",
+    "deploy-staging": "cd app && DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy fractalflows.com --settings ../config/development/settings.json",
+    "deploy-prod": "cd app && DEPLOY_HOSTNAME=eu-west-1.galaxy-deploy.meteor.com meteor deploy fractalflows.com --settings ../config/production/settings.json",
     "test": "cd app && rm -rf ./node_modules/jest-cli/.haste_cache && jest",
     "test:watch": "cd app && jest --watch",
     "test:coverage": "cd app && jest --coverage",
@@ -32,5 +32,14 @@
     "react-refetch": "^1.0.0",
     "react-router-redux": "^4.0.7",
     "striptags": "^2.2.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^18.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.22.0",
+    "babel-polyfill": "^6.22.0",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
+    "enzyme": "^2.7.1",
+    "jest": "^18.1.0"
   }
 }

@@ -135,7 +135,8 @@ class SignUp extends PureComponent {
 
         Meteor.loginWithPassword(values.email, 'defaultpassword')
 
-        if(this.props.location.state.redirTo){
+        const redirTo = this.props.location.state.redirTo
+        if(redirTo){
           return this.props.router.replace(redirTo)
         }
 

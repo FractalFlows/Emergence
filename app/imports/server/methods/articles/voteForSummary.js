@@ -4,6 +4,12 @@ import Articles, {
   UPVOTE,
   DOWNVOTE,
 } from '/imports/both/collections/articles'
+import {
+  hasUserAlreadyDownvoted,
+  hasUserAlreadyUpvoted,
+  undoDownvote,
+  undoUpvote,
+} from './votingSystemHelpers/summaries'
 
 Meteor.methods({
   'article/voteForSummary'(params){
@@ -26,38 +32,6 @@ Meteor.methods({
       throw new Meteor.Error(401, 'Unauthorized')
     }
 
-    const hasUserAlreadyDownvoted = Articles.find({
-      slug: params.articleSlug,
-      summaries: {
-        $elemMatch: {
-          authorId: params.authorId,
-          status: 'enabled',
-          voters: {
-            $elemMatch: {
-              voterId: this.userId,
-              vote: DOWNVOTE,
-            },
-          },
-        },
-      },
-    }).count()
-
-    const hasUserAlreadyUpvoted = Articles.find({
-      slug: params.articleSlug,
-      summaries: {
-        $elemMatch: {
-          authorId: params.authorId,
-          status: 'enabled',
-          voters: {
-            $elemMatch: {
-              voterId: this.userId,
-              vote: UPVOTE,
-            },
-          },
-        },
-      },
-    }).count()
-
     // Here we need to check if the user has already voted
     // and for what she/he voted for.
     //
@@ -70,55 +44,30 @@ Meteor.methods({
     // Case 4: If the user has upvoted we need and is trying to
     // upvote again this time we need to remove the upvote do nothing.
 
-    if(hasUserAlreadyDownvoted){
-      Articles.update({
-        slug: params.articleSlug,
-        'summaries.authorId': params.authorId,
-        'summaries.status': 'enabled',
-      }, {
-        $inc: {
-          'summaries.$.downVotes': -1,
-        },
-        $pull: {
-          'summaries.$.voters': {
-            vote: DOWNVOTE,
-            voterId: this.userId,
-          },
-        },
-      })
+    if( hasUserAlreadyDownvoted({ userId: this.userId, params }) ){
+      undoDownvote({ userId: this.userId, params })
 
       // Case 3
       if(params.vote === DOWNVOTE) return
     }
 
-    if(hasUserAlreadyUpvoted){
-      Articles.update({
-        slug: params.articleSlug,
-        'summaries.authorId': params.authorId,
-        'summaries.status': 'enabled',
-      }, {
-        $inc: {
-          'summaries.$.upVotes': -1,
-        },
-        $pull: {
-          'summaries.$.voters': {
-            vote: UPVOTE,
-            voterId: this.userId,
-          },
-        },
-      })
+    if(hasUserAlreadyUpvoted({ userId: this.userId, params })){
+      undoUpvote({ userId: this.userId, params })
 
       // Case 4
       if(params.vote === UPVOTE) return
     }
 
-    console.log('Including vote', params.vote)
     // Continue to the normal behavior.
     // Just add the respective vote and increases it counter.
     Articles.update({
       slug: params.articleSlug,
-      'summaries.authorId': params.authorId,
-      'summaries.status': 'enabled',
+      summaries: {
+        $elemMatch: {
+          authorId: params.authorId,
+          status: 'enabled',
+        },
+      },
     }, {
       $inc: {
         ...( params.vote === UPVOTE ? {'summaries.$.upVotes': 1} : {} ),

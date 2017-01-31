@@ -52,7 +52,7 @@ export default class RelatedArticle extends React.PureComponent {
       >
         <td>
           <Link
-            to={`/article/${article.title}`}
+            to={`/article/${article.slug}`}
             style={{
               padding: '7px 0',
               display: 'inline-block',

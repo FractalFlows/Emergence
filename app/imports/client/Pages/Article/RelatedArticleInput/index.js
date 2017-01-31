@@ -7,6 +7,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import styled from 'styled-components'
+import {
+  compose,
+} from 'recompose'
+import { isEmpty } from 'lodash/fp'
 import { RaisedButton } from 'material-ui'
 import {
   white,
@@ -15,9 +19,11 @@ import {
   red300,
   red400,
 } from 'material-ui/styles/colors'
+import { debounce } from 'lodash'
+import { redux as ArticleReduxContainer } from '../container'
 
-//Components
-import ArticleItem from './article_item'
+// Components
+import ArticleItem from './ArticleItem'
 
 //Styled Components
 const Input = styled.input`
@@ -54,21 +60,29 @@ const ResultsDropdown = styled.div`
   overflow-y: auto;
 `
 
-export default class RelatedArticleInput extends React.Component {
+class RelatedArticleInput extends React.Component {
   constructor() {
     super()
     this.state = {
-      searchText: '',
-      searchResults: [],
       showDropdown: false,
     }
   }
+
   propTypes: {
     cancel: React.PropTypes.func,
     showSnackbar: React.PropTypes.func,
     articleSlug: React.PropTypes.string.isRequired,
   }
+
   render() {
+    const { showDropdown } = this.state
+    const {
+      currentRelatedArticlesDOIs,
+      articleState: { relatedArticles },
+    } = this.props
+    const filteredRelatedArticlesResult = relatedArticles
+      .filter(({ DOI }) => !currentRelatedArticlesDOIs.includes(DOI))
+
     return (
       <div>
         <div
@@ -87,24 +101,38 @@ export default class RelatedArticleInput extends React.Component {
               type="text"
               placeholder="Search for a related article"
               autoFocus={true}
-              onChange={this.search.bind(this)}
-              onBlur={this.searchBlur.bind(this)}
-              onFocus={this.searchFocus.bind(this)}
+              onInput={(event) => {
+                const val = event.target.value
+                if(!val){
+                  this.props.clearRelatedsSearch()
+                } else {
+                  this.props.searchRelatedArticles({
+                    articleSlug: this.props.articleSlug,
+                    searchText: val,
+                  })
+                } 
+              }}
+              onBlur={this.hideSearchResults.bind(this)}
+              onFocus={this.showSearchResults.bind(this)}
             />
 
             <ResultsDropdown
               style={{
-                display: this.state.showDropdown ? 'block' : 'none',
+                display: (!isEmpty(relatedArticles) && showDropdown) ? 'block' : 'none',
               }}
             >
-              {this.state.searchResults.map(
+              {filteredRelatedArticlesResult.map(
                 result => <ArticleItem
                   key={result.DOI}
                   article={result}
                   showSnackbar={this.props.showSnackbar}
                   hideInput={this.props.cancel}
                   searchText={this.state.searchText}
-                  addRelatedArticle={this.addRelatedArticle.bind(this)}
+                  addRelatedArticle={({ DOI, source }) => this.props.addRelatedArticle({
+                    DOI,
+                    source,
+                    sourceArticleSlug: this.props.articleSlug,
+                  })}
                 />
               )}
             </ResultsDropdown>
@@ -118,51 +146,18 @@ export default class RelatedArticleInput extends React.Component {
       </div>
     )
   }
-  search(event) {
-    const searchText = event.target.value
-    this.setState({ searchText })
 
-    if (searchText) {
-      this.setState({ isLoading: true })
-
-      Meteor.call('article/searchForRelateds', {
-        searchText,
-        articleSlug: this.props.articleSlug,
-      }, (error, results) => {
-        if(error){
-          console.warn(error)
-          return
-        }
-
-        this.setState({
-          showDropdown: true,
-          searchResults: results,
-        })
-      })
-    } else {
-      this.setState({
-        showDropdown: false,
-        searchResults: [],
-      })
-    }
-  }
-  searchFocus() {
+  showSearchResults() {
     this.setState({ showDropdown: true })
   }
-  searchBlur(event) {
-    Meteor.setTimeout(() => {
-      const input = event.target.value
-      const isBlurred = input && !input.matches(':focus')
 
-      isBlurred && this.setState({ showDropdown: false })
+  hideSearchResults() {
+    setTimeout(() => {
+      this.setState({ showDropdown: false })
     }, 150)
   }
-  addRelatedArticle(article){
-    Meteor.call('article/addRelated', {
-      DOI: article.DOI,
-      articleSlug: this.props.articleSlug,
-    }, () => {
-      this.search({ target: {value: this.props.searchText} })
-    })
-  }
 }
+
+export default compose(
+  ArticleReduxContainer,
+)(RelatedArticleInput)

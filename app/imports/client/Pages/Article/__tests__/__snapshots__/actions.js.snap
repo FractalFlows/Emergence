@@ -1,0 +1,23 @@
+exports[`test loadRelatedsSearchResult should return the proper action object 1`] = `
+Object {
+  "payload": Object {
+    "result": Array [
+      Object {
+        "DOI": "0000/000",
+        "name": "Something",
+      },
+    ],
+  },
+  "type": "articles/LOAD_RELATED_ARTICLES_RESULT",
+}
+`;
+
+exports[`test searchRelatedArticles should return the proper action object 1`] = `
+Object {
+  "payload": Object {
+    "articleSlug": "some-slug",
+    "searchText": "some text",
+  },
+  "type": "articles/SEARCH_RELATED_ARTICLES",
+}
+`;

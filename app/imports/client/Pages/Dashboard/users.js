@@ -14,39 +14,14 @@ import {
   TableRowColumn,
 } from 'material-ui/Table'
 import { grey400 } from 'material-ui/styles/colors'
+import { compose } from 'recompose'
 
-export default class Users extends React.Component {
+//Components
+import container from './usersContainer'
+
+class Users extends React.Component {
 	render() {
-    const users = [
-      {
-        name: 'John Smith',
-        email: 'john.smith@gmail.com',
-      },
-      {
-        name: 'Randal White',
-        email: 'randal.white@gmail.com',
-      },
-      {
-        name: 'Stephanie Sanders',
-        email: 'stephanie.sanders@gmail.com',
-      },
-      {
-        name: 'Steve Brown',
-        email: 'steve.brown@gmail.com',
-      },
-      {
-        name: 'Joyce Whitten',
-        email: 'joyce.whitten@gmail.com',
-      },
-      {
-        name: 'Samuel Roberts',
-        email: 'samuel.roberts@gmail.com',
-      },
-      {
-        name: 'Adam Moore',
-        email: 'adam.moore@gmail.com',
-      },
-    ]
+    const { users } = this.props
 
 		return (
 			<div
@@ -55,12 +30,12 @@ export default class Users extends React.Component {
           boxShadow: `-1px 1px 2px ${grey400}`,
         }}
       >
-        <Table
-          multiSelectable={true}
-        >
-          <TableHeader>
+        <Table>
+          <TableHeader
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+          >
             <TableRow>
-              <TableHeaderColumn tooltip="The ID">ID</TableHeaderColumn>
               <TableHeaderColumn tooltip="The Name">Name</TableHeaderColumn>
               <TableHeaderColumn tooltip="The Email">Email</TableHeaderColumn>
             </TableRow>
@@ -68,12 +43,12 @@ export default class Users extends React.Component {
 
           <TableBody
             showRowHover={true}
+            displayRowCheckbox={false}
           >
-            {users.map((row, index) => (
+            {users && users.map((row, index) => (
               <TableRow key={index} selected={false}>
-                <TableRowColumn>{index}</TableRowColumn>
-                <TableRowColumn>{row.name}</TableRowColumn>
-                <TableRowColumn>{row.email}</TableRowColumn>
+                <TableRowColumn>{row.profile.firstName}</TableRowColumn>
+                <TableRowColumn>{row.emails[0].address}</TableRowColumn>
               </TableRow>
             ))}
           </TableBody>
@@ -82,3 +57,7 @@ export default class Users extends React.Component {
 		)
 	}
 }
+
+export default compose(
+  container
+)(Users)
