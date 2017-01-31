@@ -43,7 +43,7 @@ import ArticleSummaries from './ArticleSummaries'
 import ArticleInformations from './ArticleInformations'
 import ArticleRelatedArticles from './RelatedArticles'
 
-import container from './container'
+import { meteor as container } from './container'
 import UserContainer from '/imports/client/Pages/User/container'
 
 // Helpers
