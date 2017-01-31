@@ -98,13 +98,14 @@ class SearchInputHolder extends React.Component {
           <SearchInput
             type="text"
             placeholder="Enter an article DOI, title, author or keywords"
+            data-name="input-search"
             onInput={(event) => {
               const val = event.target.value
               if(!val){
                 this.props.clearSearch()
               } else {
                 this.props.fetchSearch({ searchText: val })
-              } 
+              }
             }}
             onKeyDown={this._searchSelect.bind(this)}
             onFocus={() => this.setState({ showDropdown: true })}
@@ -116,6 +117,7 @@ class SearchInputHolder extends React.Component {
             size={17}
             thickness={2}
             color={cyan500}
+            data-name="spinner-search"
             style={{
               visibility: ( searchState.isSearching || searchState.isFetchingSelectedArticle )? 'visible' : 'hidden',
               marginRight: 7,
@@ -135,6 +137,7 @@ class SearchInputHolder extends React.Component {
 
         <ResultsDropdown
           className="dropdown-article-list"
+          data-name="dropdown-search"
           style={{
             display: showDropdown ? 'block' : 'none',
           }}
