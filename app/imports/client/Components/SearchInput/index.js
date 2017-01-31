@@ -20,7 +20,6 @@ import {
   grey500,
   grey800,
 } from 'material-ui/styles/colors'
-import { debounce } from 'lodash'
 
 // Containers
 import { redux as SearchContainer } from '/imports/client/Pages/Search/container'
