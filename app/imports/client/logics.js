@@ -9,6 +9,7 @@ import search from './Pages/Search/logic'
 
 const logics = [
   ...search,
+  ...articles,
 ]
 
 export default logics
