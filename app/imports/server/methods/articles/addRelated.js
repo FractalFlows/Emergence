@@ -3,13 +3,12 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Articles from '/imports/both/collections/articles'
 
 Meteor.methods({
-  'article/addRelated'(params){
+  'articles/addRelated'(params){
     new SimpleSchema({
-      DOI: {
+      articleSlug: {
         type: String,
       },
-
-      articleSlug: {
+      relatedArticleDOI: {
         type: String,
       },
     }).validate(params)
@@ -19,7 +18,7 @@ Meteor.methods({
     }
 
     const relatedArticle = Articles.findOne({
-      DOI: params.DOI,
+      DOI: params.relatedArticleDOI,
     }, {
       fields: { title: 1, authors: 1, abstract: 1 },
     })
@@ -34,7 +33,7 @@ Meteor.methods({
       $addToSet: {
         relatedArticles: {
           title: relatedArticle.title,
-          DOI: params.DOI, 
+          DOI: params.relatedArticleDOI, 
           createdAt: new Date(),
           addedById: this.userId,
           addedByName: Meteor.user().profile.firstName,

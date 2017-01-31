@@ -16,7 +16,8 @@ Meteor.methods({
   'articles/insertFromDOI'(params){
     new SimpleSchema({
       DOI: {
-        type: String, },
+        type: String,
+      },
       source: {
         type: String,
         allowedValues: ['DataCite', 'CrossRef', 'ElasticSearch'],
