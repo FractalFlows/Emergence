@@ -1,0 +1,19 @@
+exports[`test should handle CLEAR_RELATEDS_SEARCH action 1`] = `
+Object {
+  "isSearchingForRelatedArticles": false,
+  "relatedArticles": Array [],
+}
+`;
+
+exports[`test should handle LOAD_RELATED_ARTICLES_RESULT action 1`] = `
+Object {
+  "isSearchingForRelatedArticles": false,
+  "relatedArticles": Array [],
+}
+`;
+
+exports[`test should handle SEARCH_RELATED_ARTICLES action 1`] = `
+Object {
+  "isSearchingForRelatedArticles": true,
+}
+`;
