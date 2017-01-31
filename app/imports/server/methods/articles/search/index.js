@@ -83,27 +83,22 @@ Meteor.methods({
     return future.wait()
   },
 
-  'article/searchForRelateds'(params){
-    new SimpleSchema({
-      searchText: {
-        type: String,
-      },
-      articleSlug: { type: String }
-    }).validate(params)
-
+  'articles/searchForRelateds'(params){
     const article = Articles.findOne({
       slug: params.articleSlug,
+    }, {
+      fields: {
+        DOI: 1,
+        relatedArticles: 1,
+      },
     })
-    const relatedArticles = article.relatedArticles || []
 
-    return Articles.find({
-      title: {
-        $regex: `.*${params.searchText}.*`,
-        $options: 'si',
-      },
-      DOI: {
-        $nin: relatedArticles.map(({ DOI }) => DOI),
-      },
-    }).fetch()
+    const normalSearchResults = Meteor.call('article/search', {
+      searchText: params.searchText,
+    })
+
+    const excludedDOIs = [article.DOI, ...(article.relatedArticles || [])]
+
+    return normalSearchResults.filter(({ DOI }) => !excludedDOIs.includes(DOI))
   },
 })
