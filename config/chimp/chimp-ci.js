@@ -15,14 +15,18 @@ module.exports = {
   },
 
   // - - - - MOCHA  - - - -
-  mocha: false,
-  // mochaTags and mochaGrep only work when watch is false (disabled)
-  mochaTags: '',
-  mochaGrep: null,
-  // 'path: './tests',
-  mochaTimeout: 60000,
-  mochaReporter: 'spec',
-  mochaSlow: 10000,
+
+  mochaConfig: {
+    mocha: false,
+    // mochaTags and mochaGrep only work when watch is false (disabled)
+    mochaTags: '',
+    mochaGrep: null,
+    // 'path: './tests',
+    mochaTimeout: 60000,
+    mochaReporter: 'spec',
+    mochaSlow: 10000,
+  },
+
 
   // - - - - METEOR  - - - -
   ddp: false,
