@@ -91,6 +91,17 @@ const HashLink = styled.a`
 	}
 `
 
+const CommitListItemMessage = styled.li`
+  fontSize: 12px;
+  lineHeight: 12px;
+  color: grey500;
+  textOverflow: ellipsis;
+  overflow: hidden;
+  maxWidth: 70%;
+  whiteSpace: nowrap;
+  padding: 5px 0;
+`
+
 class KnowledgeBit extends React.Component {
   constructor() {
     super()
@@ -172,23 +183,19 @@ class KnowledgeBit extends React.Component {
 								{commits.map((commit, i) => (
 									<li
 										style={{
-											display: 'block',
-											marginBottom: 3,
+											display: 'flex',
+											marginBottom: 5,
+                      maxWidth: '60%',
+                      alignItems: 'center',
 										}}
                     key={commit.sha}
 									>
 										<HashLink href={commit.html_url} target="_blank">
-											{commit.sha}
+											{commit.sha.slice(0, 8)}
 										</HashLink>
-										<span
-											style={{
-												fontSize: 12,
-												lineHeight: '12px',
-												color: grey500,
-											}}
-										>
+										<CommitListItemMessage>
 											{commit.commit.message.split('\n')[0]}{' - '}
-										</span>
+										</CommitListItemMessage>
 										<span
 											style={{
 												fontSize: 12,
@@ -196,7 +203,7 @@ class KnowledgeBit extends React.Component {
 												color: grey700,
 											}}
 										>
-											{commit.commit.author.name}
+											&nbsp;{commit.commit.author.name}
 										</span>
 									</li>
 								))}

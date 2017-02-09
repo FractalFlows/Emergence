@@ -66,6 +66,7 @@ const ArticleDetail = styled.div`
 
   div {
     margin-right: 25px;
+    word-break: break-word;
   }
 `
 
@@ -100,7 +101,7 @@ class Article extends React.PureComponent {
     return (
       <div
         style={{
-          padding: '40px 150px',
+          padding: '5vh 8vw',
         }}
       >
         <Helmet
