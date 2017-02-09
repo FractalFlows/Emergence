@@ -21,7 +21,8 @@
     "test:chimp": "chimp config/chimp/chimp-ci.js --ddp http://localhost:3000/ --path=tests --mocha",
     "test:chimp:watch": "npm run test:chimp -- --watch",
     "test:chimp:phantomjs": "npm run test:chimp -- --browser=phantomjs",
-    "test:chimp:ci": "node ./scripts/ci"
+    "test:chimp:ci": "node ./scripts/ci",
+    "prepush": "npm run test:chimp"
   },
   "dependencies": {
     "chimp": "^0.45.1",
@@ -34,6 +35,7 @@
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "enzyme": "^2.7.1",
+    "husky": "^0.13.1",
     "jest": "^18.1.0"
   }
 }
