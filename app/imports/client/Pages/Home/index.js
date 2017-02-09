@@ -132,14 +132,14 @@ export default class Home extends React.Component {
 		  	<Hero>
 		  		<div
 		  			style={{
-			  			padding: '5vw 12vw',
+			  			padding: '5vh 12vw',
 		  			}}
 		  		>
 				  	<h1
 				  		style={{
 				  			color: white,
 				  			margin: 0,
-				  			fontSize: '3em',
+				  			fontSize: '3.4em',
 				  			textTransform: 'uppercase',
 				  		}}
 				  	>
@@ -164,7 +164,7 @@ export default class Home extends React.Component {
 			  	<p
 			  		style={{
 			  			color: white,
-			  			padding: '3vw 12vw',
+			  			padding: '8vh 12vw',
 			  		}}
 			  	>
 			    	<b>Knowledge bits</b> are numerical bits, files,
@@ -180,7 +180,7 @@ export default class Home extends React.Component {
 
 			  <div
 			  	style={{
-            padding: '3vw 12vw',
+            padding: '5vh 12vw',
 			  	}}
 			  >
 					<IntroExplainContainer>
