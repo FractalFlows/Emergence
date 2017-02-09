@@ -45,7 +45,7 @@ describe('Articles', () => {
         clickOnUpvoteBtnFor(article.summaries[0])
 
         // Hang a sec to wait ops complete
-        sleep(2000)
+        sleep(3000)
 
         const updatedArticle = Articles('findOne', {_id: article._id})
 
@@ -62,7 +62,7 @@ describe('Articles', () => {
         clickOnDownvoteBtnFor(article.summaries[0])
 
         // Hang a sec to wait ops complete
-        sleep(2000)
+        sleep(3000)
 
         const updatedArticle = Articles('findOne', {_id: article._id})
 
@@ -80,7 +80,7 @@ describe('Articles', () => {
         // As last test already downvoted clicking again will undo it
         clickOnDownvoteBtnFor(article.summaries[0])
         // Hang a sec to wait ops complete
-        sleep(2000)
+        sleep(3000)
 
         const updatedArticle = Articles('findOne', {_id: article._id})
 
