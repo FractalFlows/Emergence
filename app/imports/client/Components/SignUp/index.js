@@ -82,6 +82,7 @@ class SignUp extends PureComponent {
             marginBottom: 40,
           }}
           onSubmit={handleSubmit(this.submitCreateUser.bind(this))}
+          data-name="signUp"
         >
           <Field
             name="fullName"
@@ -135,6 +136,7 @@ class SignUp extends PureComponent {
         Meteor.loginWithPassword(values.email, 'defaultpassword')
 
         const redirTo = this.props.location.state.redirTo
+        console.log(redirTo, this.props.location)
         if(redirTo){
           return this.props.router.replace(redirTo)
         }
