@@ -24,6 +24,8 @@ import SignIn from '../SignIn'
 import SignUp from '../SignUp'
 import SearchInput from '../SearchInput'
 import DropdownMenu from '../DropdownMenu'
+import HeaderContent from './HeaderContent'
+import HeaderActions from './HeaderActions'
 
 // Containers
 import UserContainer from '/imports/client/Pages/User/container'
@@ -46,20 +48,7 @@ class Header extends React.Component {
 
 		return (
 			<div>
-				<div
-		      style={{
-		      	position: 'fixed',
-		      	top: 0,
-		      	zIndex: 500,
-		      	boxSizing: 'border-box',
-		      	width: '100%',
-		      	padding: '7px 150px',
-		      	backgroundColor: white,
-		      	boxShadow: `0 1px 4px ${grey400}`,
-		      	display: 'flex',
-		      	alignItems: 'center',
-		      }}
-		    >
+				<HeaderContent>
 					<Link to="/">
 			    	<EventSeatIcon
 			    		color={cyan400}
@@ -75,6 +64,7 @@ class Header extends React.Component {
 						<SearchInput />
 					</SearchInputWrapper>
 
+          <HeaderActions>
           { isEmpty(user) ? 
             (
             <Link
@@ -86,7 +76,6 @@ class Header extends React.Component {
                 },
               }}
               style={{
-                marginLeft: 50,
                 color: cyan400,
                 textDecoration: 'none',
               }}
@@ -124,10 +113,12 @@ class Header extends React.Component {
               </DropdownMenu>
             ) : null
           }
-		    </div>
+          </HeaderActions>
+		    </HeaderContent>
 			</div>
 		)
 	}
+
   logoutUser(e) {
     e.preventDefault()
     Meteor.logout()
