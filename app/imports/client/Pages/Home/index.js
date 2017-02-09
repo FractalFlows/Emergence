@@ -28,6 +28,7 @@ import SearchInput from '../../Components/SearchInput'
 import MailingListForm from './Components/MailingListForm'
 import FooterColumn from './Components/FooterColumn'
 import FooterTitle from './Components/FooterTitle'
+import FooterContainer from './Components/FooterContainer'
 
 //Styled Components
 const SearchInputWrapper = styled.div`
@@ -249,12 +250,7 @@ export default class Home extends React.Component {
 				    </div>
 			   	</div>
 
-			   	<div
-			   		style={{
-			   			display: 'flex',
-			   			marginTop: 90,
-			   		}}
-			   	>
+			   	<FooterContainer>
 			   		<FooterColumn>
 			   			<FooterTitle>Developers resources</FooterTitle>
 
@@ -307,7 +303,7 @@ export default class Home extends React.Component {
 			   			</FooterList>
 			   		</FooterColumn>
             <MailingListForm/>
-			   	</div>
+			   	</FooterContainer>
 			  </div>
 		  </div>
 		)
