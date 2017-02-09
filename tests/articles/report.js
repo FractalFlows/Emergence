@@ -5,7 +5,7 @@ import sleep from '../helpers/sleep'
 
 const host = 'http://localhost:3000'
 describe('Articles', () => {
-  describe('Report @watch', () => {
+  describe('Report', () => {
     before(() => {
       server.call('dev/resetDatabase')
       server.call('dev/createArticles')
@@ -52,6 +52,7 @@ function fillUpReportForm(){
 }
 
 function clickOnReportBtn(){
-  browser.waitForVisible(`[data-name="report-btn"]`)
-  browser.click(`[data-name="report-btn"]`)
+  browser.waitForVisible("div[data-name='report-btn']")
+  sleep(1000)
+  browser.selectorExecute('div[data-name="report-btn"]', (divs) => divs[0].click())
 }
