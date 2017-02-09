@@ -8,6 +8,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import { isEmpty } from 'lodash'
 import styled from 'styled-components'
+import { compose } from 'recompose'
 import EventSeatIcon from 'material-ui/svg-icons/action/event-seat'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import {
@@ -26,6 +27,7 @@ import DropdownMenu from '../DropdownMenu'
 
 // Containers
 import UserContainer from '/imports/client/Pages/User/container'
+import { withRouter } from 'react-router'
 
 //Styled Components
 const SearchInputWrapper = styled.div`
@@ -80,6 +82,7 @@ class Header extends React.Component {
                 pathname: '/login',
                 state: {
                   modal: true,
+                  redirTo: this.props.location.pathname,
                 },
               }}
               style={{
@@ -103,8 +106,7 @@ class Header extends React.Component {
             )
           }
 
-          { !isEmpty(user) ?
-            (
+          { !isEmpty(user) ?  (
               <DropdownMenu
                 label={
                   <MoreVertIcon
@@ -132,4 +134,7 @@ class Header extends React.Component {
   }
 }
 
-export default UserContainer(Header)
+export default compose(
+  UserContainer,
+  withRouter
+)(Header)
