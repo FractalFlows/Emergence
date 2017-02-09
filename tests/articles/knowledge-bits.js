@@ -117,8 +117,8 @@ function navigateToArticle(article){
 }
 
 function clickOnAddKnowledgeProduct(){
-  browser.waitForVisible('button[data-name="add-knowledge-btn"]')
-  browser.click('button[data-name="add-knowledge-btn"]')
+  browser.waitForVisible('[data-name="add-knowledge-btn"]')
+  browser.click('[data-name="add-knowledge-btn"]')
 }
 
 function fillUpKnowledgeProductForm(){
