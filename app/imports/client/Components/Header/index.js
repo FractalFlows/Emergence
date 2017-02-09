@@ -26,19 +26,11 @@ import SearchInput from '../SearchInput'
 import DropdownMenu from '../DropdownMenu'
 import HeaderContent from './HeaderContent'
 import HeaderActions from './HeaderActions'
+import SearchInputWrapper from './SearchInputWrapper'
 
 // Containers
 import UserContainer from '/imports/client/Pages/User/container'
 import { withRouter } from 'react-router'
-
-//Styled Components
-const SearchInputWrapper = styled.div`
-	flex-grow: 100000;
-
-	@media (max-width: 780px) {
-		display: none;
-	}
-`
 
 class Header extends React.Component {
 	render() {

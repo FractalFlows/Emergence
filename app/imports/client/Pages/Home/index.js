@@ -39,6 +39,28 @@ const SearchInputWrapper = styled.div`
 	}
 `
 
+const IntroExplainContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+
+	@media (max-width: 780px) {
+    flex-direction: column;
+  }
+`
+
+const IntroductionColumn = styled.div`
+  width: 45%;
+  box-sizing: border-box;
+
+  &:last-child {
+    margin-left: auto;
+  }
+
+	@media (max-width: 780px) {
+    width: 100%;
+  }
+`
+
 const P = styled.p`
 	text-align: justify;
 	color: ${grey700};
@@ -109,14 +131,14 @@ export default class Home extends React.Component {
 		  	<Hero>
 		  		<div
 		  			style={{
-		  				padding: '50px 150px 40px 150px',
+			  			padding: '5vw 12vw',
 		  			}}
 		  		>
 				  	<h1
 				  		style={{
 				  			color: white,
 				  			margin: 0,
-				  			fontSize: 55,
+				  			fontSize: '3em',
 				  			textTransform: 'uppercase',
 				  		}}
 				  	>
@@ -141,7 +163,7 @@ export default class Home extends React.Component {
 			  	<p
 			  		style={{
 			  			color: white,
-			  			padding: '20px 150px 50px 150px',
+			  			padding: '3vw 12vw',
 			  		}}
 			  	>
 			    	<b>Knowledge bits</b> are numerical bits, files,
@@ -157,21 +179,11 @@ export default class Home extends React.Component {
 
 			  <div
 			  	style={{
-			  		padding: '30px 150px',
+            padding: '3vw 12vw',
 			  	}}
 			  >
-					<div
-						style={{
-							display: 'flex',
-						}}
-					>
-						<div
-							style={{
-								paddingRight: 20,
-								width: '50%',
-								boxSizing: 'border-box',
-							}}
-						>
+					<IntroExplainContainer>
+						<IntroductionColumn>
 					    <Title>The problem</Title>
 					    <P>
 					    	Every year there are over <u>2 million</u> articles that are
@@ -187,14 +199,8 @@ export default class Home extends React.Component {
 					      which saturates the attention of engineers, reduces the speed of scientific
 					      progress and waste an enormous amount of time and money for society.
 					    </P>
-						</div>
-						<div
-							style={{
-								paddingLeft: 20,
-								width: '50%',
-								boxSizing: 'border-box',
-							}}
-						>
+						</IntroductionColumn>
+						<IntroductionColumn>
 					    <Title>The solution</Title>
 					    <P>
 					    	We, at <strong>FractalFlows</strong>, are developing a decentralized web
@@ -206,8 +212,8 @@ export default class Home extends React.Component {
 					      article, allowing to create an impactful utility for an article beyond
 					      the number of citations it received. <em>Emergence</em> is integrated with external web Apps/Services such as Github.
 				    	</P>
-						</div>
-					</div>
+						</IntroductionColumn>
+					</IntroExplainContainer>
 
 			    <div
 			    	style={{
