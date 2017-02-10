@@ -102,6 +102,19 @@ const CommitListItemMessage = styled.li`
   padding: 5px 0;
 `
 
+const KnowledgeBitBarItem = styled.div`
+  flex-grow: 9999;
+  @media (max-width: 780px){
+    flex-grow: 2;
+    max-width: 70%;
+
+    & ~ div {
+      min-width: 30%;
+      flex-grow: 1;
+    }
+  }
+`
+
 class KnowledgeBit extends React.Component {
   constructor() {
     super()
@@ -127,11 +140,7 @@ class KnowledgeBit extends React.Component {
           display: 'flex',
         }}
       >
-        <div
-          style={{
-            flexGrow: 9999,
-          }}
-        >
+        <KnowledgeBitBarItem>
           <div
             style={{
               backgroundColor: grey100,
@@ -157,7 +166,7 @@ class KnowledgeBit extends React.Component {
                 fontSize: 13,
               }}
             >
-              {knowledgeBit.label}
+              {knowledgeBit.label}&nbsp;
             </span>
             <span
               style={{
@@ -166,7 +175,7 @@ class KnowledgeBit extends React.Component {
                 fontSize: 13,
               }}
             >
-              {knowledgeBit.addedByName}
+              by {knowledgeBit.addedByName}
             </span>
           </div>
 
@@ -210,7 +219,7 @@ class KnowledgeBit extends React.Component {
 	            </ul>
 	          </SummaryContent>
 					}
-        </div>
+        </KnowledgeBitBarItem>
 
         <div
           style={{

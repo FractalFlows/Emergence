@@ -79,6 +79,14 @@ const ReportArticleButton = styled.div`
   }
 `
 
+const ArticleContent = styled.div`
+  padding: 5vh 8vw;
+
+  @media (max-width: 780px) {
+    padding: 0;
+  }
+`
+
 class Article extends React.PureComponent {
   render() {
     const {
@@ -99,11 +107,7 @@ class Article extends React.PureComponent {
     const hasUserAlreadyReportedArticle = !isEmpty(inappropriatedContentReports)
 
     return (
-      <div
-        style={{
-          padding: '5vh 8vw',
-        }}
-      >
+      <ArticleContent>
         <Helmet
           script={[
             { src: 'https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-587906b430ac8aa4', type: "text/javascript" }
@@ -187,7 +191,7 @@ class Article extends React.PureComponent {
           articleSlug={this.props.params.slug}
           user={user}
         />
-      </div>
+      </ArticleContent>
     )
   }
 }
