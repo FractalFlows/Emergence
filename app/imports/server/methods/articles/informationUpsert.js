@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import Articles from '/imports/both/collections/articles'
 import { findLastIndex } from 'lodash/fp'
+import url from 'url'
 
 Meteor.methods({
   'article/informationUpsert'({ information, articleSlug }){
@@ -58,7 +59,7 @@ Meteor.methods({
             upVotes: 0,
             downVotes: 0,
             status: 'enabled',
-            label: 'Emergence',
+            label: url.parse(information.link).pathname.match(/[a-zA-Z0-9_-]+$/g)[0],
           },
         },
       })
