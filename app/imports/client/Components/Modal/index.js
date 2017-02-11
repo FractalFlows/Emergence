@@ -34,7 +34,7 @@ const Content = styled.div`
   height: auto;
   justify-content: center;
   overflow-x: hidden;
-  padding: 26.25px 150px;
+  padding: 2vh 10vw;
   width: auto;
 `
 
