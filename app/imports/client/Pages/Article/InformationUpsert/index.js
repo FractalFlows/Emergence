@@ -116,6 +116,11 @@ export default compose(
         const syncValidationErrors = validateObject({
           link: {
             type: SimpleSchema.RegEx.Url,
+            custom(){
+              if(!values.link.includes('github.com') && values.type === 'github'){
+                return 'Must be a valid GitHub link'
+              }
+            },
           },
           type: {
             type: String,
