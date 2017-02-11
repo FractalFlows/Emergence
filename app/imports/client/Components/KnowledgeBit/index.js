@@ -107,10 +107,21 @@ const KnowledgeBitBarItem = styled.div`
   @media (max-width: 780px){
     flex-grow: 2;
     max-width: 70%;
+  }
+`
 
-    & ~ div {
-      min-width: 30%;
-      flex-grow: 1;
+const ActionButtons = styled.div`
+  display: flex;
+  alignItems: center;
+  height: 50px;
+  flex-wrap: wrap;
+
+  @media (max-width: 780px){
+    min-width: 30%;
+    flex-grow: 1;
+
+    & .information-delete-btn, & button.information-edit-btn {
+      display: none !important;
     }
   }
 `
@@ -221,13 +232,7 @@ class KnowledgeBit extends React.Component {
 					}
         </KnowledgeBitBarItem>
 
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            height: 50,
-          }}
-        >
+        <ActionButtons>
           <VoteButton
             data-name={`${knowledgeBit.link}-upvote-btn`}
             onClick={this.upvote.bind(this)}
@@ -260,8 +265,8 @@ class KnowledgeBit extends React.Component {
           { knowledgeBit.addedById === get('_id', this.props.user) ? (
               [ 
                 <FlatButton
-                  style={{ marginLeft: 10 }}
                   icon={<DeleteIcon color={red800}/>}
+                  className="information-delete-btn"
                   onClick={() => Meteor.call('article/deleteInformation', {
                     information: { link: knowledgeBit.link },
                     articleSlug: this.props.articleSlug,
@@ -269,6 +274,7 @@ class KnowledgeBit extends React.Component {
                 />,
                 <FlatButton
                   icon={<EditIcon color={green400}/>}
+                  className="information-edit-btn"
                   onClick={() => this.props.router.push({
                     pathname: `/article/information-upsert/${this.props.articleSlug}`,
                     state: {
@@ -280,11 +286,12 @@ class KnowledgeBit extends React.Component {
                       },
                     },
                   })}
-                />
+                />,
+                
               ]
             ) : null
           }
-        </div>
+        </ActionButtons>
       </div>
     )
   }
