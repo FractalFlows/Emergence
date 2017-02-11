@@ -31,7 +31,7 @@ Meteor.methods({
       fields: { informations: 1 },
     })
 
-    const existingInformationIndex = findLastIndex({ link: information.link }, article.informations)
+    const existingInformationIndex = findLastIndex({ link: information.link, status: 'enabled' }, article.informations)
 
     if(existingInformationIndex !== -1){
       if(article.informations[existingInformationIndex].addedById !== this.userId){
@@ -52,6 +52,7 @@ Meteor.methods({
         $addToSet: {
           informations: {
             ...information,
+            link: information.type === 'github' ? cleanUpGithubLink(information.link) : information.link,
             updatedAt: new Date(),
             createdAt: new Date(),
             addedById: this.userId,
@@ -59,7 +60,7 @@ Meteor.methods({
             upVotes: 0,
             downVotes: 0,
             status: 'enabled',
-            label: url.parse(information.link).pathname.match(/[a-zA-Z0-9_-]+$/g)[0],
+            label: getLinkLabelName(information.link),
           },
         },
       })
@@ -68,3 +69,11 @@ Meteor.methods({
     return true
   },
 })
+
+function cleanUpGithubLink(repoUrl){
+  return `https://github.com${url.parse(repoUrl).pathname}`
+}
+
+function getLinkLabelName(repoUrl){
+  return url.parse(repoUrl).pathname.match(/[.a-zA-Z0-9_-]+$/g)[0]
+}
