@@ -126,6 +126,17 @@ const ActionButtons = styled.div`
   }
 `
 
+const InformationLabel = styled.div`
+  color: ${grey700};
+  flexGrow: 1;
+  fontSize: 13;
+
+  @media (max-width: 780px){
+    max-width: 100px;
+    word-wrap: break-word;
+  }
+`
+
 class KnowledgeBit extends React.Component {
   constructor() {
     super()
@@ -170,7 +181,7 @@ class KnowledgeBit extends React.Component {
 							<PdfIcon style={iconStyles} /> :
 							<RepositoryIcon style={iconStyles} />
 						}
-            <span
+            <InformationLabel
               style={{
                 color: grey700,
                 flexGrow: 1,
@@ -178,7 +189,7 @@ class KnowledgeBit extends React.Component {
               }}
             >
               {knowledgeBit.label}&nbsp;
-            </span>
+            </InformationLabel>
             <span
               style={{
                 color: grey500,
