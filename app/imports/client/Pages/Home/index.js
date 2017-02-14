@@ -91,7 +91,7 @@ const FooterListItemLink = styled.a`
 `
 
 const Hero = styled.div`
-	background-image: url(images/background.png);
+	background-image: url(/images/background.png);
 	overflow: hidden;
 	height: auto;
 `
@@ -120,12 +120,6 @@ class FooterListItem extends React.Component {
 }
 
 export default class Home extends React.Component {
-	constructor() {
-		super()
-		this.state = {
-			isWatchTourModalOpen: false,
-		}
-	}
 	render() {
 		return (
 			<div>
