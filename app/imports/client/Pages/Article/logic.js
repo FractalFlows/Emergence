@@ -12,6 +12,7 @@ import {
 import {
   loadRelatedsSearchResult,
 } from './actions'
+import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
 
 export const searchRelatedArticlesLogic = createLogic({
   type: SEARCH_RELATED_ARTICLES,
@@ -38,15 +39,17 @@ export const addRelatedArticleLogic = createLogic({
   latest: true,
   debounce: 200,
   process({ getState, action }, dispatch, done) {
-    const { payload: { DOI, source } } = action
-    Meteor.call('articles/insertFromDOI', {
-      DOI,
-      source,
-    }, (error, slug) => {
-      Meteor.call('articles/addRelated', {
-        articleSlug: action.payload.sourceArticleSlug,
-        relatedArticleDOI: DOI,
-      }, () => done())
+    requireLoginBefore(() => {
+      const { payload: { DOI, source } } = action
+      Meteor.call('articles/insertFromDOI', {
+        DOI,
+        source,
+      }, (error, slug) => {
+        Meteor.call('articles/addRelated', {
+          articleSlug: action.payload.sourceArticleSlug,
+          relatedArticleDOI: DOI,
+        }, () => done())
+      })
     })
   },
 })
