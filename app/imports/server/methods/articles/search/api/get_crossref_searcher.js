@@ -5,8 +5,7 @@ export default function getCrossRefWorkSearcherForParam({ param }){
     url: `https://api.crossref.org/works?${param}`,
     queryHandler: ({ search, url }) => `${url}=${search.replace(/\s+/, '+').toLowerCase()}&rows=10&filter=has-abstract:true`,
     responseHandler(data){
-      if(data.status === 'failed'){
-        console.log(data)
+      if(!data.message || !data.message.items){
         return []
       }
 
