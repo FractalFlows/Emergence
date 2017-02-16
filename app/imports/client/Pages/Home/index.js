@@ -83,6 +83,7 @@ const Hero = styled.div`
 	background-image: url(/images/background.png);
 	overflow: hidden;
 	height: auto;
+  padding-top: 80px;
 `
 
 class FooterListItem extends React.Component {

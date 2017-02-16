@@ -80,10 +80,10 @@ const ReportArticleButton = styled.div`
 `
 
 const ArticleContent = styled.div`
-  padding: 5vh 8vw;
+  padding: 100px 20vh 8vw 8vw;
 
   @media (max-width: 780px) {
-    padding: 0;
+    padding: 120px 0 0 0;
   }
 `
 

@@ -56,7 +56,7 @@ export default class Dashboard extends React.Component {
 			<div>
         <div
           style={{
-            padding: '30px 150px',
+            padding: '80px 150px',
           }}
         >
           <TabsList

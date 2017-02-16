@@ -33,7 +33,6 @@ export default class App extends PureComponent {
         <Header />
         <div
           style={{
-            marginTop: 65,
             minHeight: '100vh',
           }}
         >
