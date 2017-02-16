@@ -1,7 +1,10 @@
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 
-export default function validateObject(schema, obj){
-  const context = new SimpleSchema(schema).newContext()
+export default function validateObject(schema, obj, customMessages = {}){
+  const ss = new SimpleSchema(schema)
+  const context = ss.newContext()
+
+  ss.messages(customMessages)
 
   if(context.validate(obj)) return {}
 
