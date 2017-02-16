@@ -118,14 +118,16 @@ export default compose(
             type: SimpleSchema.RegEx.Url,
             custom(){
               if(!values.link.includes('github.com') && values.type === 'github'){
-                return 'Must be a valid GitHub link'
+                return 'invalidLink'
               }
             },
           },
           type: {
             type: String,
           },
-        }, values)
+        }, values, {
+          invalidLink: 'Must be a valid GitHub link',
+        })
 
         if(!isEmpty(syncValidationErrors)){
           return reject(new SubmissionError(syncValidationErrors))
