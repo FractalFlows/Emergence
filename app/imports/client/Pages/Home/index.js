@@ -24,21 +24,10 @@ import {
 
 // Components
 import Modal from '../../Components/Modal'
-import SearchInput from '../../Components/SearchInput'
 import MailingListForm from './Components/MailingListForm'
 import FooterColumn from './Components/FooterColumn'
 import FooterTitle from './Components/FooterTitle'
 import FooterContainer from './Components/FooterContainer'
-
-//Styled Components
-const SearchInputWrapper = styled.div`
-	width: 100%;
-	display: none;
-
-	@media (max-width: 780px) {
-		display: initial;
-	}
-`
 
 const IntroExplainContainer = styled.div`
   display: flex;
@@ -126,14 +115,14 @@ export default class Home extends React.Component {
 		  	<Hero>
 		  		<div
 		  			style={{
-			  			padding: '5vh 12vw',
+			  			padding: '7vh 12vw',
 		  			}}
 		  		>
 				  	<h1
 				  		style={{
 				  			color: white,
 				  			margin: 0,
-				  			fontSize: '3.4em',
+				  			fontSize: '3.2em',
 				  			textTransform: 'uppercase',
 				  		}}
 				  	>
@@ -150,10 +139,6 @@ export default class Home extends React.Component {
 				  		from <b>Fractal Flows</b>
 				  	</h3>
 			  	</div>
-
-					<SearchInputWrapper>
-						<SearchInput />
-					</SearchInputWrapper>
 
 			  	<p
 			  		style={{
