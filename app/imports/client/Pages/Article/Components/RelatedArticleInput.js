@@ -20,10 +20,11 @@ import {
   red400,
 } from 'material-ui/styles/colors'
 import { debounce } from 'lodash'
+import { flow, uniqBy, filter } from 'lodash/fp'
 import { redux as ArticleReduxContainer } from '../container'
 
 // Components
-import ArticleItem from './ArticleItem'
+import ArticleItem from './DropdownRelatedItem'
 
 //Styled Components
 const Input = styled.input`
@@ -80,8 +81,10 @@ class RelatedArticleInput extends React.Component {
       currentRelatedArticlesDOIs,
       articleState: { relatedArticles },
     } = this.props
-    const filteredRelatedArticlesResult = relatedArticles
-      .filter(({ DOI }) => !currentRelatedArticlesDOIs.includes(DOI))
+    const filteredRelatedArticlesResult = flow(
+      uniqBy('DOI'),
+      filter(({ DOI }) => !currentRelatedArticlesDOIs.includes(DOI)),
+    )(relatedArticles)
 
     return (
       <div>

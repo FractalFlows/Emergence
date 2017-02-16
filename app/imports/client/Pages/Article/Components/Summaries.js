@@ -11,8 +11,8 @@ import {
   PanelHeader,
   PanelBody,
   PanelHeaderButton,
-} from '../../Components/Panel'
-import ArticleSummary from '../../Components/ArticleSummary'
+} from '/imports/client/Components/Panel'
+import ArticleSummary from './SummaryBar'
 
 // Helpers
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'

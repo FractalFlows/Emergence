@@ -17,9 +17,9 @@ import {
   PanelHeader,
   PanelBody,
   PanelHeaderButton,
-} from '../../Components/Panel'
+} from '/imports/client/Components/Panel'
 import RelatedArticle from './RelatedArticle'
-import RelatedArticleInput from './RelatedArticleInput/index'
+import RelatedArticleInput from './RelatedArticleInput'
 
 // Helpers
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'

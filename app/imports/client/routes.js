@@ -14,15 +14,15 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 
 // Components
 import App from './Components/App'
-import ReportArticle from './Pages/Article/ReportArticle'
+import ReportArticle from './Pages/Article/Components/Report'
 import EmptyScreen from './Components/EmptyScreen'
 import SignUp from './Components/SignUp'
 import SignIn from './Components/SignIn'
 import TutorialVideo from './Components/TutorialVideo'
 import Home from './Pages/Home'
 import Article from './Pages/Article'
-import InformationUpsert from './Pages/Article/InformationUpsert'
-import SummaryUpsert from './Pages/Article/SummaryUpsert'
+import InformationUpsert from './Pages/Article/Components/InformationUpsert'
+import SummaryUpsert from './Pages/Article/Components/SummaryUpsert'
 import Dashboard from './Pages/Dashboard'
 
 injectTapEventPlugin()

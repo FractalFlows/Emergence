@@ -10,8 +10,8 @@ import {
   PanelHeader,
   PanelBody,
   PanelHeaderButton,
-} from '../../Components/Panel'
-import KnowledgeBit from '../../Components/KnowledgeBit'
+} from '/imports/client/Components/Panel'
+import KnowledgeBit from '/imports/client/Components/KnowledgeBit'
 
 // Helpers
 import requireLoginAndGoTo from '/imports/client/Utils/requireLoginAndGoTo'

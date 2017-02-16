@@ -39,9 +39,9 @@ import {
   PanelHeaderButton,
   PanelBody,
 } from '../../Components/Panel'
-import ArticleSummaries from './ArticleSummaries'
-import ArticleInformations from './ArticleInformations'
-import ArticleRelatedArticles from './RelatedArticles'
+import ArticleSummaries from './Components/Summaries'
+import ArticleInformations from './Components/Informations'
+import ArticleRelatedArticles from './Components/Relateds'
 
 import { meteor as container } from './container'
 import UserContainer from '/imports/client/Pages/User/container'
