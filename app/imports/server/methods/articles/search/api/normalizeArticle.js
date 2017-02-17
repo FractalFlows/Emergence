@@ -1,5 +1,5 @@
 import striptags from 'striptags'
-import { escape, map } from 'lodash/fp'
+import { unescape, map } from 'lodash/fp'
 
 const normalizers = {
   CrossRef(article, source){
@@ -28,7 +28,7 @@ function normalizeAuthors(authors){
 }
 
 function normalizeAbstract(abstract){
-  return striptags(escape(abstract))
+  return striptags(unescape(abstract))
 }
 
 export default function normalizeArticle({ source, article }){
