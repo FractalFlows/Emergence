@@ -181,19 +181,12 @@ class KnowledgeBit extends React.Component {
 							<PdfIcon style={iconStyles} /> :
 							<RepositoryIcon style={iconStyles} />
 						}
-            <InformationLabel
-              style={{
-                color: grey700,
-                flexGrow: 1,
-                fontSize: 13,
-              }}
-            >
+            <InformationLabel>
               {knowledgeBit.label}&nbsp;
             </InformationLabel>
             <span
               style={{
                 color: grey500,
-                width: 300,
                 fontSize: 13,
               }}
             >
