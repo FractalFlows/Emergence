@@ -98,6 +98,9 @@ class Header extends React.Component {
                 <p
                   style={{
                     marginLeft: 50,
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
                   }}
                   data-name="header-login-btn"
                 >
