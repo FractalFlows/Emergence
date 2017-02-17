@@ -8,7 +8,12 @@ import React from 'react'
 import { Link } from 'react-router'
 import { isEmpty } from 'lodash'
 import styled from 'styled-components'
-import { compose } from 'recompose'
+import {
+  compose,
+  pure,
+  withState,
+  withProps,
+} from 'recompose'
 import EventSeatIcon from 'material-ui/svg-icons/action/event-seat'
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
 import {
@@ -50,101 +55,112 @@ const HeaderWrapper = styled.div`
   boxSizing: border-box;
 `
 
-class Header extends React.Component {
-	render() {
-    const {
-      user,
-    } = this.props
+function Header({
+  user,
+  location,
+  isSearchFocused,
+  logoutUser,
+  searchInputFocusedHandler,
+  searchInputBlurredHandler,
+}){
+  return (
+    <HeaderWrapper>
+      <ShowOnScrollTop
+        lock={isSearchFocused}
+      >
+        <HeaderContent>
+          <Link to="/">
+            <EventSeatIcon
+              color={cyan400}
+              style={{
+                marginRight: 20,
+                height: 40,
+                width: 40,
+              }}
+            />
+          </Link>
 
-		return (
-      <HeaderWrapper>
-        <ShowOnScrollTop>
-          <HeaderContent>
-            <Link to="/">
-              <EventSeatIcon
-                color={cyan400}
-                style={{
-                  marginRight: 20,
-                  height: 40,
-                  width: 40,
-                }}
-              />
+          <SearchInputWrapper>
+            <SearchInput
+              onFocus={searchInputFocusedHandler}
+              onBlur={searchInputBlurredHandler}
+            />
+          </SearchInputWrapper>
+
+          <HeaderActions>
+          { isEmpty(user) ? 
+            (
+            <Link
+              to={{
+                pathname: '/login',
+                state: {
+                  modal: true,
+                  redirTo: location.pathname,
+                },
+              }}
+              style={{
+                color: cyan400,
+                textDecoration: 'none',
+              }}
+              data-name="header-login-btn"
+            >
+              Login
             </Link>
-
-            <SearchInputWrapper>
-              <SearchInput />
-            </SearchInputWrapper>
-
-            <HeaderActions>
-            { isEmpty(user) ? 
-              (
-              <Link
-                to={{
-                  pathname: '/login',
-                  state: {
-                    modal: true,
-                    redirTo: this.props.location.pathname,
-                  },
-                }}
+            ) : (
+              <p
                 style={{
-                  color: cyan400,
-                  textDecoration: 'none',
+                  marginLeft: 50,
+                  textOverflow: 'ellipsis',
+                  overflow: 'hidden',
+                  whiteSpace: 'nowrap',
                 }}
                 data-name="header-login-btn"
               >
-                Login
-              </Link>
-              ) : (
-                <p
-                  style={{
-                    marginLeft: 50,
-                    textOverflow: 'ellipsis',
-                    overflow: 'hidden',
-                    whiteSpace: 'nowrap',
-                  }}
-                  data-name="header-login-btn"
-                >
-                  Welcome, {this.props.user.profile.firstName}
-                </p>
-              )
-            }
+                Welcome, {user.profile.firstName}
+              </p>
+            )
+          }
 
-            { !isEmpty(user) ?  (
-                <DropdownMenu
-                  label={
-                    <MoreVertIcon
-                      color={grey800}
-                      style={{
-                        marginLeft: 15,
-                        height: 20,
-                      }}
-                    />
-                  }
-                  pullLeft
-                >
-                  <Link to="/dashboard">Dashboard</Link>
-                  <Link to="#" onClick={this.logoutUser}>Logout</Link>
-                </DropdownMenu>
-              ) : null
-            }
-            </HeaderActions>
-          </HeaderContent>
+          { !isEmpty(user) ?  (
+              <DropdownMenu
+                label={
+                  <MoreVertIcon
+                    color={grey800}
+                    style={{
+                      marginLeft: 15,
+                      height: 20,
+                    }}
+                  />
+                }
+                pullLeft
+              >
+                <Link to="/dashboard">Dashboard</Link>
+                <Link to="#" onClick={logoutUser}>Logout</Link>
+              </DropdownMenu>
+            ) : null
+          }
+          </HeaderActions>
+        </HeaderContent>
 
-          <SearchInputMobileWrapper>
-            <SearchInput />
-          </SearchInputMobileWrapper>
-        </ShowOnScrollTop>
-			</HeaderWrapper>
-		)
-	}
-
-  logoutUser(e) {
-    e.preventDefault()
-    Meteor.logout()
-  }
+        <SearchInputMobileWrapper>
+          <SearchInput />
+        </SearchInputMobileWrapper>
+      </ShowOnScrollTop>
+    </HeaderWrapper>
+  )
 }
 
 export default compose(
   UserContainer,
-  withRouter
+  withRouter,
+  withState('isSearchFocused', 'setIsSearchFocused', false),
+  withProps(({ setIsSearchFocused }) => ({
+    logoutUser: e => {
+      e.preventDefault()
+      Meteor.logout()
+    },
+    searchInputFocusedHandler: () => setIsSearchFocused(true),
+    searchInputBlurredHandler: () => setIsSearchFocused(false),
+  })),
+  pure,
 )(Header)
