@@ -106,9 +106,9 @@ class SearchInputHolder extends React.Component {
                 this.props.fetchSearch({ searchText: val })
               } 
             }}
-            onKeyDown={this._searchSelect.bind(this)}
-            onFocus={() => this.setState({ showDropdown: true })}
-            onBlur={() => setTimeout(() => this.setState({ showDropdown: false }), 100)}
+            onKeyDown={this._searchSelect}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
             disabled={searchState.isFetchingSelectedArticle}
             innerRef={ref => this.searchInputEl = ref}
           />
@@ -154,13 +154,23 @@ class SearchInputHolder extends React.Component {
     )
   }
 
+  onBlur = (event) => {
+    this.props.onBlur && this.props.onBlur(event)
+    setTimeout(() => this.setState({ showDropdown: false }), 100)
+  }
+
+  onFocus = (event) => {
+    this.props.onFocus && this.props.onFocus(event)
+    this.setState({ showDropdown: true })
+  }
+
   clearSearch(event) {
     this.searchInputEl.value = ''
     this.props.clearSearch()
     this.setState({ showDropdown: false })
   }
 
-  _searchSelect({ which: key }) {
+  _searchSelect = ({ which: key }) => {
     //Arrow Down
     if (key === 40) {
       const hoveredResult =
