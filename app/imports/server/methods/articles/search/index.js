@@ -13,6 +13,7 @@ import moment from 'moment'
 
 Meteor.methods({
   'article/search'(params){
+    this.unblock()
     const future = new Future()
 
     new SimpleSchema({
@@ -84,6 +85,8 @@ Meteor.methods({
   },
 
   'articles/searchForRelateds'(params){
+    this.unblock()
+
     const article = Articles.findOne({
       slug: params.articleSlug,
     }, {
