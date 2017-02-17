@@ -11,6 +11,7 @@ import {
   white,
   grey800,
 } from 'material-ui/styles/colors'
+import { once } from 'lodash'
 
 //Animations
 const OpacityTransition = keyframes`
@@ -85,7 +86,7 @@ class Modal extends React.PureComponent {
                 top: 20,
                 width: 30,
               }}
-              onClick={() => this.props.router.goBack()}
+              onClick={this.closeModal}
             />
           </CloseButton>
           <Content
@@ -99,6 +100,10 @@ class Modal extends React.PureComponent {
       </div>
     )
   }
+
+  closeModal = once(() => {
+    this.props.router.goBack
+  })
 
   setBodyOverflow(state) {
     document.body.style.overflowY = state
