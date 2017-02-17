@@ -68,6 +68,33 @@ const Votes = styled.div`
   text-align: center;
 `
 
+const Label = styled.div`
+  color: ${grey700};
+  flexGrow: 1;
+  fontSize: 13;
+
+  @media (max-width: 780px){
+    max-width: 100px;
+    word-wrap: break-word;
+  }
+`
+
+const ActionButtons = styled.div`
+  display: flex;
+  alignItems: center;
+  height: 50px;
+  flex-wrap: wrap;
+
+  @media (max-width: 780px){
+    min-width: 30%;
+    flex-grow: 1;
+
+    & .summary-delete-btn, & button.summary-edit-btn {
+      display: none !important;
+    }
+  }
+`
+
 class ArticleSummary extends React.PureComponent {
   constructor() {
     super()
@@ -110,7 +137,7 @@ class ArticleSummary extends React.PureComponent {
                 margin: '0 40px 0 30px',
               }}
               />
-            <span
+            <Label
               style={{
                 color: grey600,
                 flexGrow: 1,
@@ -118,15 +145,14 @@ class ArticleSummary extends React.PureComponent {
               }}
               >
               Summary by <span style={{color: grey800}}>{summary.authorName}</span>
-            </span>
+            </Label>
             <span
               style={{
                 color: grey500,
-                width: 300,
                 fontSize: 13,
               }}
               >
-              {moment(summary.updatedAt).format('MMM D, YYYY')}
+              {moment(summary.updatedAt).format('MMM D, YYYY')}&nbsp;
             </span>
           </div>
 
@@ -137,13 +163,7 @@ class ArticleSummary extends React.PureComponent {
           </SummaryContent>
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            height: 50,
-          }}
-        >
+        <ActionButtons>
           <VoteButton
             onClick={this.upvote.bind(this)}
             data-name={`${summary.authorId}-upvote-btn`}
@@ -174,6 +194,7 @@ class ArticleSummary extends React.PureComponent {
               [ 
                 <FlatButton
                   style={{ marginLeft: 10 }}
+                  className="summary-delete-btn"
                   icon={<DeleteIcon color={red800}/>}
                   onClick={() => Meteor.call('article/deleteSummary', {
                     summary: { authorId: summary.authorId },
@@ -182,6 +203,7 @@ class ArticleSummary extends React.PureComponent {
                 />,
                 <FlatButton
                   icon={<EditIcon color={green400}/>}
+                  className="summary-edit-btn"
                   onClick={() => this.props.router.push({
                     pathname: `/article/summary-upsert/${this.props.articleSlug}`,
                     state: { modal: true, summary: { content: summary.content } },
@@ -190,7 +212,7 @@ class ArticleSummary extends React.PureComponent {
               ]
             ) : null
           }
-        </div>
+        </ActionButtons>
       </div>
     )
   }
