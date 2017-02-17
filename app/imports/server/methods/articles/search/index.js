@@ -1,5 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
+import { escape } from 'lodash/fp'
 import ArticleSearcher from './api'
 import Future from 'fibers/future'
 import Articles, {
@@ -78,6 +79,7 @@ Meteor.methods({
           future.return(results)
         })
         .catch(error => {
+          console.log(error.stack)
           future.throw(new Meteor.Error(500, error.message))
         })
     }
