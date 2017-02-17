@@ -8,17 +8,11 @@ import {
 	white,
 	grey700,
 } from 'material-ui/styles/colors'
+import FooterWrapper from './Wrapper'
 
 export default function Footer(props) {
   return (
-    <div
-    	style={{
-    		backgroundColor: white,
-    		marginTop: 30,
-    		padding: '40px 150px',
-    		textAlign: 'center',
-    	}}
-    >
+    <FooterWrapper>
       <p
       	style={{
       		color: grey700,
@@ -27,6 +21,6 @@ export default function Footer(props) {
       >
       	Copyright © {new Date().getFullYear()} Fractal Flows. All Rights Reserved.
       </p>
-    </div>
+    </FooterWrapper>
   )
 }
