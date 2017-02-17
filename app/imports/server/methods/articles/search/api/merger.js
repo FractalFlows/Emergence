@@ -7,6 +7,7 @@ import {
   omitBy,
   isUndefined,
   isNull,
+  uniqBy
 } from 'lodash/fp'
 
 const isNothing = v => isUndefined(v) || isNull(v)
@@ -18,6 +19,7 @@ export default function merger(results){
       const cleanedUpArticles = sameDOIArticles.map(omitBy(isNothing))
       return Object.assign(...cleanedUpArticles)
     }),
-    values
+    values,
+    uniqBy('DOI')
   )(results)
 }
