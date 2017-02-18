@@ -102,7 +102,7 @@ class Modal extends React.PureComponent {
   }
 
   closeModal = once(() => {
-    this.props.router.goBack
+    this.props.router.goBack()
   })
 
   setBodyOverflow(state) {
