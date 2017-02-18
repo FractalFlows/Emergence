@@ -9,7 +9,6 @@ import Articles, {
   ELASTIC_SEARCH_TYPE as ARTICLES_INDEX_TYPE,
 } from '/imports/both/collections/articles'
 import elasticSearch from '/imports/server/helpers/elasticSearch'
-import indexArticleToElastic from '/imports/server/helpers/articles/indexToElastic'
 import normalizeArticle from './search/api/normalizeArticle'
 
 Meteor.methods({
@@ -46,8 +45,6 @@ Meteor.methods({
 
     if(article === null) throw new Meteor.Error(404, `Article not found in ${params.source}`)
 
-    indexArticleToElastic(article)
-
     const articleId = Articles.insert({
       authors: article.authors,
       title: article.title,
@@ -63,6 +60,8 @@ Meteor.methods({
   },
 })
 
+// We refetch the article from the source because maybe the 
+// indexing of the results in article/search wasn't completed yet
 function fetchArticleFromRightSource({ DOI, source }){
   const future = new Future()
   switch(source){
