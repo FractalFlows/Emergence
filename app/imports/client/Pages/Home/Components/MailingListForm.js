@@ -64,7 +64,7 @@ export default compose(
     form: 'homeMailingList',
   }),
   withState('wasSent', 'setWasSent', false),
-  withProps(({ reset, setIsSent }) => ({
+  withProps(({ reset, setWasSent }) => ({
     onSubmit(values){
       return new Promise((resolve, reject) => {
         // Validate the data first
