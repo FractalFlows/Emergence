@@ -62,6 +62,11 @@ const ResultsDropdown = styled.div`
   overflow-y: auto;
 `
 
+const NoResults = styled.div`
+  padding: 15px;
+  display: block;
+`
+
 class SearchInputHolder extends React.Component {
   constructor(props) {
     super(props)
@@ -129,7 +134,7 @@ class SearchInputHolder extends React.Component {
               height: 25,
               padding: 5,
             }}
-            onClick={this.clearSearch.bind(this)}
+            onClick={this.clearSearch}
           />
         </SearchInputWrapper>
 
@@ -149,6 +154,12 @@ class SearchInputHolder extends React.Component {
               />
             ))
           }
+
+          {(searchState.searchText && searchState.articlesFromSearch.length === 0 && !searchState.isSearching) && (
+            <NoResults>
+              <h5>No results</h5>
+            </NoResults>
+          )}
         </ResultsDropdown>
       </div>
     )
@@ -164,7 +175,7 @@ class SearchInputHolder extends React.Component {
     this.setState({ showDropdown: true })
   }
 
-  clearSearch(event) {
+  clearSearch = (event) => {
     this.searchInputEl.value = ''
     this.props.clearSearch()
     this.setState({ showDropdown: false })
