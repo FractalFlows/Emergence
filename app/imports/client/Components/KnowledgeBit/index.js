@@ -9,7 +9,6 @@ import ReactDOM from 'react-dom'
 import styled from 'styled-components'
 import { get } from 'lodash/fp'
 import { compose } from 'recompose'
-import { connect } from 'react-refetch'
 import { withRouter } from 'react-router'
 import { FlatButton } from 'material-ui'
 import DeleteIcon from 'material-ui/svg-icons/action/delete'
@@ -36,6 +35,7 @@ import { UPVOTE, DOWNVOTE } from '/imports/both/collections/articles'
 
 // Containers
 import UserContainer from '/imports/client/Pages/User/container'
+import CommitsContainer from './CommitsContainer'
 
 // Helpers
 import requireLoginBefore from '/imports/client/Utils/requireLoginBefore'
@@ -188,6 +188,7 @@ class KnowledgeBit extends React.Component {
               style={{
                 color: grey500,
                 fontSize: 13,
+                paddingRight: 5,
               }}
             >
               by {knowledgeBit.addedByName}
@@ -343,13 +344,7 @@ class KnowledgeBit extends React.Component {
 }
 
 export default compose(
-  connect(props => ({
-    commitsFetch: (
-      props.knowledgeBit.type === 'github' ?
-      `https://api.github.com/repos/${props.knowledgeBit.link.replace('https://github.com/', '')}/commits` :
-      ''
-    ),
-  })),
+  CommitsContainer,
   UserContainer,
   withRouter,
 )(KnowledgeBit)
