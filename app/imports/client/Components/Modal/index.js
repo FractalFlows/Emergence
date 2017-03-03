@@ -11,7 +11,7 @@ import {
   white,
   grey800,
 } from 'material-ui/styles/colors'
-import { once } from 'lodash'
+import { throttle } from 'lodash'
 
 //Animations
 const OpacityTransition = keyframes`
@@ -101,7 +101,7 @@ class Modal extends React.PureComponent {
     )
   }
 
-  closeModal = once(() => {
+  closeModal = throttle(() => {
     this.props.router.goBack()
   })
 
