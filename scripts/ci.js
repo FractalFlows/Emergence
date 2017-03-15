@@ -1,8 +1,8 @@
 // Inspired from: https://github.com/xolvio/qualityfaster/blob/master/.scripts/
 const { exec } = require('child_process')
 
-const meteorCommand = 'npm run ci-start'
-const chimpCommand = 'npm run test:chimp:phantomjs'
+const meteorCommand = 'npm run dev'
+const chimpCommand = 'npm run test:chimp'
 
 const meteorProcess = exec(meteorCommand) // 'npm start'
 
