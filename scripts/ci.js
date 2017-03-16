@@ -4,7 +4,7 @@ const { exec } = require('child_process')
 const meteorCommand = 'npm run dev'
 const chimpCommand = 'npm run test:chimp'
 
-const meteorProcess = exec(meteorCommand) // 'npm start'
+const meteorProcess = exec(meteorCommand)
 
 meteorProcess.stdout.pipe(process.stdout)
 meteorProcess.stderr.pipe(process.stderr)
@@ -12,7 +12,7 @@ meteorProcess.stderr.pipe(process.stderr)
 // Wait until Meteor is started and the start the chimp tests
 meteorProcess.stdout.on('data', (data) => {
   if (data.toString().match('App running at')) {
-    const chimpProcess = exec(chimpCommand) // 'npm run test:chimp:phantomjs'
+    const chimpProcess = exec(chimpCommand)
 
     chimpProcess.stdout.pipe(process.stdout)
     chimpProcess.stderr.pipe(process.stderr)

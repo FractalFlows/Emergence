@@ -5,7 +5,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "init": "cd app && meteor npm install --only=production",
+    "init": "cd app && meteor npm install",
     "start": "npm run dev",
     "dev": "cd app && meteor --settings ../config/development/settings.json",
     "dev-db": "source ./config/development/env.sh && cd app && meteor --settings ../config/development/settings.json",
